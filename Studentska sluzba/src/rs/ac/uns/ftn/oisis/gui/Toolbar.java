@@ -13,8 +13,8 @@ import javax.swing.SwingConstants;
 
 public class Toolbar extends JToolBar{
 	
-	
-	
+	private static final long serialVersionUID = -2522240199851802643L;
+
 	public Toolbar() {
 		super(SwingConstants.HORIZONTAL);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
