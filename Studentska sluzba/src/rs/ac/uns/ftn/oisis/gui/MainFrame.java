@@ -46,6 +46,11 @@ public class MainFrame extends JFrame{
 		add(tabbedPane, BorderLayout.CENTER);
 		
 		
+		//menu_bar
+		MenuBar meni = new MenuBar();
+		this.setJMenuBar(meni);
+		
+		
 		
 		
 		
