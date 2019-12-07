@@ -5,9 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
+
 
 
 public class MainFrame extends JFrame{
@@ -33,22 +32,21 @@ public class MainFrame extends JFrame{
 		setResizable(false);
 		
 		setLayout(new BorderLayout());
-				
+			
+		//menu_bar
+		MenuBar meni = new MenuBar();
+		this.setJMenuBar(meni);
+		
 		//Toolbar
 		Toolbar toolbar = new Toolbar();
 		add(toolbar, BorderLayout.NORTH);
 	
 		// TabbedPane
-		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.addTab("Studenti", new ImageIcon("images/student_tab.png"),null, "");
-		tabbedPane.addTab("Predmeti", new ImageIcon("images/predmet_tab.png"),null, "");
-		tabbedPane.addTab("Profesori", new ImageIcon("images/profesor_tab.png"),null, "");
+		TabbedPane tabbedPane = new TabbedPane();
 		add(tabbedPane, BorderLayout.CENTER);
 		
 		
-		//menu_bar
-		MenuBar meni = new MenuBar();
-		this.setJMenuBar(meni);
+		
 		
 		
 		
