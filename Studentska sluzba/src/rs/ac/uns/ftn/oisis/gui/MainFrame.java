@@ -5,14 +5,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+
 import javax.swing.JFrame;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import rs.ac.uns.ftn.oisis.listeners.MainFrameListener;
 
 
-public class MainFrame extends JFrame{
+
+public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = -6400016063430161422L;
 		 
@@ -35,11 +38,11 @@ public class MainFrame extends JFrame{
 		
 		setLayout(new BorderLayout());
 			
-		//menu_bar
+		// menu_bar
 		MenuBar meni = new MenuBar();
 		this.setJMenuBar(meni);
 		
-		//Toolbar
+		// Toolbar
 		Toolbar toolbar = new Toolbar(Tip.STUDENT);
 		add(toolbar, BorderLayout.NORTH);
 		
@@ -55,26 +58,16 @@ public class MainFrame extends JFrame{
 		});
 		
 		
+		// Status bar
 		
 		
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		// ClosingListener
+		addWindowListener(new MainFrameListener());		
 	}
+
+
+	
 }
