@@ -7,13 +7,15 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 
 
 public class MainFrame extends JFrame{
 	
 	private static final long serialVersionUID = -6400016063430161422L;
-
-	
+		 
 	public MainFrame () {
 		super();
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -29,7 +31,7 @@ public class MainFrame extends JFrame{
 		Color bg = new Color(210, 210, 210);
 		getContentPane().setBackground(bg);
 		
-		setResizable(false);
+		setResizable(true);
 		
 		setLayout(new BorderLayout());
 			
@@ -38,14 +40,19 @@ public class MainFrame extends JFrame{
 		this.setJMenuBar(meni);
 		
 		//Toolbar
-		Toolbar toolbar = new Toolbar();
+		Toolbar toolbar = new Toolbar(Tip.STUDENT);
 		add(toolbar, BorderLayout.NORTH);
-	
+		
 		// TabbedPane
 		TabbedPane tabbedPane = new TabbedPane();
 		add(tabbedPane, BorderLayout.CENTER);
-		
-		
+		tabbedPane.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				 toolbar.paintComponents(Tip.getTip(tabbedPane.getSelectedIndex()));
+			}
+		});
 		
 		
 		
