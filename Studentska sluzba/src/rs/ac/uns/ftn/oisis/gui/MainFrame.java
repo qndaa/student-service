@@ -59,7 +59,9 @@ public class MainFrame extends JFrame {
 		
 		
 		// Status bar
+		StatusBar bar= new StatusBar();
 		
+		add(bar, BorderLayout.SOUTH);
 		
 		
 		
