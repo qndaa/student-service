@@ -11,6 +11,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import rs.ac.uns.ftn.oisis.controller.MainFrameListener;
+import rs.ac.uns.ftn.oisis.gui.StatusBar;
 
 
 
@@ -19,7 +20,10 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = -6400016063430161422L;
 	
 	private static MainFrame instance = null;
-	private Toolbar toolbar;
+	private MenuBar meni = null;
+	private Toolbar toolbar = null;
+	private TabbedPane tabbedPane = null;
+	private StatusBar bar = null;
 	
 	// Singlton obrazac
 	public static MainFrame getInstance() {
@@ -49,19 +53,26 @@ public class MainFrame extends JFrame {
 		setLayout(new BorderLayout());
 		
 		// menu_bar
-		MenuBar meni = new MenuBar();
-		this.setJMenuBar(meni);
+		dodajMeni();
 		
 		// toolbar
 		dodajToolbar();
 		// tabbedPane
 		dodajTabbedPane();
 		
+		// Status bar
+		dodajStatusBar();
+		
 		// windows listener
 		addWindowListener(new MainFrameListener());	
+		
 		setVisible(true);
 	}
 	
+	private void dodajMeni() {
+		meni = new MenuBar();
+		this.setJMenuBar(meni);
+	}
 	
 	private void dodajToolbar() {
 		toolbar = Toolbar.getInstance();
@@ -69,7 +80,7 @@ public class MainFrame extends JFrame {
 		toolbar.setVisible(true);
 	}
 	
-	TabbedPane tabbedPane;
+	
 	private void dodajTabbedPane() {
 		// TabbedPane
 		tabbedPane = new TabbedPane();
@@ -81,9 +92,12 @@ public class MainFrame extends JFrame {
 				 toolbar.paintComponents(Tip.getTip(tabbedPane.getSelectedIndex()));
 			}
 		});
-	
 	}
 
+	private void dodajStatusBar() {
+		bar = new StatusBar();
+		this.add(bar, BorderLayout.SOUTH);
+	}
 
 	
 }
