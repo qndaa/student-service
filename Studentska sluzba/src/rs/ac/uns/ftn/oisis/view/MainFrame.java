@@ -4,15 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
-
 import javax.swing.JFrame;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import rs.ac.uns.ftn.oisis.controller.MainFrameListener;
-import rs.ac.uns.ftn.oisis.gui.StatusBar;
-
+import rs.ac.uns.ftn.oisis.controller.TabbedPaneListener;
 
 
 public class MainFrame extends JFrame {
@@ -21,7 +15,7 @@ public class MainFrame extends JFrame {
 	
 	private static MainFrame instance = null;
 	private MenuBar meni = null;
-	private Toolbar toolbar = null;
+	private ToolBar toolBar = null;
 	private TabbedPane tabbedPane = null;
 	private StatusBar bar = null;
 	
@@ -48,8 +42,7 @@ public class MainFrame extends JFrame {
 		Color bg = new Color(210, 210, 210);
 		getContentPane().setBackground(bg);
 		
-		setResizable(true);
-		
+		setResizable(false);
 		setLayout(new BorderLayout());
 		
 		// menu_bar
@@ -57,6 +50,7 @@ public class MainFrame extends JFrame {
 		
 		// toolbar
 		dodajToolbar();
+		
 		// tabbedPane
 		dodajTabbedPane();
 		
@@ -75,23 +69,15 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void dodajToolbar() {
-		toolbar = Toolbar.getInstance();
-		this.add(toolbar, BorderLayout.NORTH);
-		toolbar.setVisible(true);
+		toolBar = ToolBar.getInstance();
+		this.add(toolBar, BorderLayout.NORTH);
+		toolBar.setVisible(true);
 	}
 	
-	
 	private void dodajTabbedPane() {
-		// TabbedPane
 		tabbedPane = new TabbedPane();
 		this.add(tabbedPane, BorderLayout.CENTER);
-		tabbedPane.addChangeListener(new ChangeListener() {
-			
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				 toolbar.paintComponents(Tip.getTip(tabbedPane.getSelectedIndex()));
-			}
-		});
+		tabbedPane.addChangeListener(new TabbedPaneListener());
 	}
 
 	private void dodajStatusBar() {

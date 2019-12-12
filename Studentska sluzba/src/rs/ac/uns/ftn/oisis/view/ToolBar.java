@@ -11,23 +11,25 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
-enum Tip {
-	STUDENT, PREDMET, PROFESOR;
-	static Tip getTip(int i) {
-		Tip t = null;
-		if (i == 0)
-			t = Tip.STUDENT;
-		else if (i == 2)
-			t = Tip.PROFESOR;
-		else if (i == 1)
-			t = Tip.PREDMET;
-		return t;
-	}
-};
-
-public class Toolbar extends JToolBar {
+public class ToolBar extends JToolBar {
 
 	private static final long serialVersionUID = -2522240199851802643L;
+	
+	enum Tip {
+		STUDENT, PREDMET, PROFESOR;
+		static Tip getTip(int i) {
+			Tip t = null;
+			if (i == 0)
+				t = Tip.STUDENT;
+			else if (i == 2)
+				t = Tip.PROFESOR;
+			else if (i == 1)
+				t = Tip.PREDMET;
+			return t;
+		}
+	};
+	
+	
 	private JToggleButton addStudentBtn;
 	private JToggleButton addPredmetBtn;
 	private JToggleButton addProfesorBtn;
@@ -38,16 +40,16 @@ public class Toolbar extends JToolBar {
 	
 	private JToggleButton addStudentNaPredmetBtn;
 	private JButton searchBtn;
-	public static Toolbar instance = null;
-	public static Toolbar getInstance() {
+	public static ToolBar instance = null;
+	public static ToolBar getInstance() {
 		if (instance == null) {
-			instance = new Toolbar(Tip.STUDENT);
+			instance = new ToolBar(Tip.STUDENT);
 		}
 		return instance;
 		
 	}
 	
-	private Toolbar(Tip tip) {
+	private ToolBar(Tip tip) {
 		super(SwingConstants.HORIZONTAL);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 		
@@ -55,7 +57,7 @@ public class Toolbar extends JToolBar {
 		setFloatable(false);
 	}
 
-	void paintComponents(Tip tip) {
+	public void paintComponents(Tip tip) {
 		
 		removeAll();
 		if ( tip == Tip.STUDENT) {
@@ -130,10 +132,7 @@ public class Toolbar extends JToolBar {
 		
 	}
 	
-	static Toolbar getToolbar() {
-		return instance;
+	public Tip getTip(int i) {
+		return Tip.getTip(i);
 	}
-	
-	
-
 }

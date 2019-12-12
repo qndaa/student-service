@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.oisis.gui;
+package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.Dimension;
 import java.text.DateFormat;
