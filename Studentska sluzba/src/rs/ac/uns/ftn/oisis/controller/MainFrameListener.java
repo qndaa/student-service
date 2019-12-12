@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.oisis.listeners;
+package rs.ac.uns.ftn.oisis.controller;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;

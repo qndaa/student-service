@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.oisis.gui;
+package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,19 +7,29 @@ import java.awt.Toolkit;
 
 
 import javax.swing.JFrame;
-
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import rs.ac.uns.ftn.oisis.listeners.MainFrameListener;
+import rs.ac.uns.ftn.oisis.controller.MainFrameListener;
 
 
 
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = -6400016063430161422L;
-		 
-	public MainFrame () {
+	
+	private static MainFrame instance = null;
+	private Toolbar toolbar;
+	
+	// Singlton obrazac
+	public static MainFrame getInstance() {
+		if(instance == null) {
+			instance = new MainFrame();
+		}
+		return instance;
+	}
+	
+	private  MainFrame () {
 		super();
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -37,18 +47,33 @@ public class MainFrame extends JFrame {
 		setResizable(true);
 		
 		setLayout(new BorderLayout());
-			
+		
 		// menu_bar
 		MenuBar meni = new MenuBar();
 		this.setJMenuBar(meni);
 		
-		// Toolbar
-		Toolbar toolbar = new Toolbar(Tip.STUDENT);
-		add(toolbar, BorderLayout.NORTH);
+		// toolbar
+		dodajToolbar();
+		// tabbedPane
+		dodajTabbedPane();
 		
+		// windows listener
+		addWindowListener(new MainFrameListener());	
+		setVisible(true);
+	}
+	
+	
+	private void dodajToolbar() {
+		toolbar = Toolbar.getInstance();
+		this.add(toolbar, BorderLayout.NORTH);
+		toolbar.setVisible(true);
+	}
+	
+	TabbedPane tabbedPane;
+	private void dodajTabbedPane() {
 		// TabbedPane
-		TabbedPane tabbedPane = new TabbedPane();
-		add(tabbedPane, BorderLayout.CENTER);
+		tabbedPane = new TabbedPane();
+		this.add(tabbedPane, BorderLayout.CENTER);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			
 			@Override
@@ -56,16 +81,7 @@ public class MainFrame extends JFrame {
 				 toolbar.paintComponents(Tip.getTip(tabbedPane.getSelectedIndex()));
 			}
 		});
-		
-		
-		// Status bar
-		
-		
-		
-		
-		
-		// ClosingListener
-		addWindowListener(new MainFrameListener());		
+	
 	}
 
 

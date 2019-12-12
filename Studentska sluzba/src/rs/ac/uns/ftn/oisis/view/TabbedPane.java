@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.oisis.gui;
+package rs.ac.uns.ftn.oisis.view;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTabbedPane;

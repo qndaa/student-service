@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.oisis.gui;
+package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;

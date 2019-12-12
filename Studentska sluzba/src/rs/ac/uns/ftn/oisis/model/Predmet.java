@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.oisis.entiteti;
+package rs.ac.uns.ftn.oisis.model;
 
 import java.util.ArrayList;
 

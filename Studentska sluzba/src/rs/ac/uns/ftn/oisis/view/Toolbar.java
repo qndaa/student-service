@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.oisis.gui;
+package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -6,7 +6,6 @@ import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
@@ -29,7 +28,6 @@ enum Tip {
 public class Toolbar extends JToolBar {
 
 	private static final long serialVersionUID = -2522240199851802643L;
-	private JPanel panel;
 	private JToggleButton addStudentBtn;
 	private JToggleButton addPredmetBtn;
 	private JToggleButton addProfesorBtn;
@@ -40,16 +38,21 @@ public class Toolbar extends JToolBar {
 	
 	private JToggleButton addStudentNaPredmetBtn;
 	private JButton searchBtn;
+	public static Toolbar instance = null;
+	public static Toolbar getInstance() {
+		if (instance == null) {
+			instance = new Toolbar(Tip.STUDENT);
+		}
+		return instance;
+		
+	}
 	
-	public Toolbar(Tip tip) {
+	private Toolbar(Tip tip) {
 		super(SwingConstants.HORIZONTAL);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
-		panel = new JPanel();
-		panel.setLayout(new FlowLayout());
+		
 		paintComponents(Tip.STUDENT);
 		setFloatable(false);
-		panel.setVisible(false);
-
 	}
 
 	void paintComponents(Tip tip) {
@@ -126,5 +129,11 @@ public class Toolbar extends JToolBar {
 		add(searchBtn);
 		
 	}
+	
+	static Toolbar getToolbar() {
+		return instance;
+	}
+	
+	
 
 }
