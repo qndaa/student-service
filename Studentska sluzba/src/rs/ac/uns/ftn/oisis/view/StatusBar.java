@@ -23,7 +23,7 @@ public class StatusBar extends JPanel implements Runnable{
 	public StatusBar() {
 		setPreferredSize(new Dimension(100,20));
 		add(new JLabel("Studentska sluzba"));
-		add(Box.createHorizontalStrut(780));
+		add(Box.createHorizontalStrut(768));
 		
 		time= new JLabel();
 		add(time);
@@ -45,9 +45,9 @@ public class StatusBar extends JPanel implements Runnable{
 		try {
 				do {
 			
-					DateFormat datum= new SimpleDateFormat("HH:mm dd.MM.yyyy");
-					Calendar kalendar = Calendar.getInstance();
-					time.setText(datum.format(kalendar.getTime()));
+					DateFormat date= new SimpleDateFormat("HH:mm dd.MM.yyyy");
+					Calendar cal = Calendar.getInstance();
+					time.setText(date.format(cal.getTime()));
 					Thread.sleep(1000);
 					
 				}while(th.isAlive());

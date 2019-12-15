@@ -107,7 +107,7 @@ public class ToolBar extends JToolBar {
 		addSeparator();
 		
 		if (tip == Tip.STUDENT || tip == Tip.PROFESOR) {
-			add(Box.createHorizontalStrut(550));
+			add(Box.createHorizontalStrut(350));
 		} else if (tip == Tip.PREDMET) {
 			addStudentNaPredmetBtn = new JToggleButton();
 			addStudentNaPredmetBtn.setToolTipText("Dodaj novog studenta/profesora na predmet.");

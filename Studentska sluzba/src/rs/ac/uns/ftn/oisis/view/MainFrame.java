@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
 		Dimension screenSize = kit.getScreenSize();
 		int screenWidth = screenSize.width;
 		int screenHeight = screenSize.height;
-		
+		System.out.println(screenHeight);
 		setSize(screenWidth*3/4, screenHeight*3/4);
 		setTitle("Studentska sluzba");
 		setLocationRelativeTo(null);
