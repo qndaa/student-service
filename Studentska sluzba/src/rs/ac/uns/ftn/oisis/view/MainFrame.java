@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+
+
 import rs.ac.uns.ftn.oisis.controller.MainFrameListener;
 import rs.ac.uns.ftn.oisis.controller.TabbedPaneListener;
 
@@ -18,6 +20,8 @@ public class MainFrame extends JFrame {
 	private ToolBar toolBar = null;
 	private TabbedPane tabbedPane = null;
 	private StatusBar bar = null;
+	public static int screenWidth = 0;
+	public static int screenHeight = 0;
 	
 	// Singlton obrazac
 	public static MainFrame getInstance() {
@@ -31,10 +35,10 @@ public class MainFrame extends JFrame {
 		super();
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
-		int screenWidth = screenSize.width;
-		int screenHeight = screenSize.height;
-		
+		screenWidth = screenSize.width;
+		screenHeight = screenSize.height;
 		setSize(screenWidth*3/4, screenHeight*3/4);
+		System.out.println(screenHeight + " " + screenWidth);
 		setTitle("Studentska sluzba");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
