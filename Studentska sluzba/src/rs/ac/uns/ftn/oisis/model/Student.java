@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.oisis.model;
 
+
 import java.util.ArrayList;
 
 enum GodinaStudija {I , II, III, IV};
