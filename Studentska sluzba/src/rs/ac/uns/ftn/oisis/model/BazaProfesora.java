@@ -13,7 +13,7 @@ public class BazaProfesora {
 		return instance;
 	}
 
-	static int brojUnetihProfesora = 0;
+	private static int brojUnetihProfesora = 0;
 
 	private ArrayList<String> naziviKolona;
 	private ArrayList<Profesor> profesori;
