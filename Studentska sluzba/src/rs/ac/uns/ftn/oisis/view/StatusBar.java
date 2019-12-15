@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.oisis.view;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +25,8 @@ public class StatusBar extends JPanel implements Runnable {
 		add(new JLabel("Studentska sluzba"));
 		
 		time= new JLabel();
-
+		setOpaque(true);
+		setBackground(new Color(210,210,210));
 		add(Box.createHorizontalStrut(780));
 
 

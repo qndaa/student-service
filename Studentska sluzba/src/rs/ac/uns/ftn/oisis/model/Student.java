@@ -3,8 +3,8 @@ package rs.ac.uns.ftn.oisis.model;
 
 import java.util.ArrayList;
 
-enum GodinaStudija {I , II, III, IV};
-	enum Status {B,S};
+enum GodinaStudija {I , II, III, IV}
+	enum Status {B,S}
 
 public class Student extends Osoba{
 	private String brIndeksa;
@@ -86,6 +86,40 @@ public class Student extends Osoba{
 	public void setSpisakPredmeta(ArrayList<Predmet> spisakPredmeta) {
 		this.spisakPredmeta = spisakPredmeta;
 	}
+	
+	public String getStatusS() {
+		switch (statusStudenta) {
+		case B:
+			return "B";
+		case S:
+			return "S";
+		default:
+			return null;
+		}
+	}
+		
+	public String getGodinaS() {
+		switch (godStudija) {
+		case I:
+			return "I";
+		case II:
+			return "II";
+		case III:
+			return "III";
+		case IV:
+			return "IV";
+		default:
+			return null;
+		}
+	}
+	
+	
+	public String getProsekS() {
+		String a= Double.toString(prosek);
+		return a;
+	}
+	
+		
 	
 	
 	
