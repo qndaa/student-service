@@ -1,6 +1,5 @@
 package rs.ac.uns.ftn.oisis.view;
 
-
 import java.awt.Color;
 import java.awt.Component;
 
@@ -8,18 +7,16 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-
-
-public class ProfesoriTable extends JTable {
+public class PredmetiTable extends JTable {
 	
-	private static final long serialVersionUID = 6534430224487357381L;
+	private static final long serialVersionUID = 1473484278510522821L;
 
-	public ProfesoriTable() {
+	public PredmetiTable() {
 		this.setRowSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractProfesoriTable());
+		this.setModel(new AbstractPredmetTable());
 		this.setRowHeight(20);
-		//this.
+		
 	}
 	
 	@Override
@@ -34,5 +31,4 @@ public class ProfesoriTable extends JTable {
 		}
 		return c;
 	}
-	
 }
