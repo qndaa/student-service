@@ -8,7 +8,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
 public class PredmetiTable extends JTable {
-	
+
 	private static final long serialVersionUID = 1473484278510522821L;
 
 	public PredmetiTable() {
@@ -16,19 +16,28 @@ public class PredmetiTable extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractPredmetTable());
 		this.setRowHeight(20);
-		
+
 	}
-	
+
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
 		// selektovani red ce imati drugaciju boju od ostalih
+		if (isRowSelected(row)) {
+			c.setBackground(Color.GRAY);
 		
-		if (row % 2 == 0) {
-			c.setBackground(new Color(224, 235, 255));
 		} else {
-			c.setBackground(Color.WHITE);
+			if (row % 2 == 0) {
+			
+				c.setBackground(new Color(224, 235, 255));
+			} else {
+				c.setBackground(Color.WHITE);
+		
+			}
 		}
+			
+			
+			
 		return c;
 	}
 }

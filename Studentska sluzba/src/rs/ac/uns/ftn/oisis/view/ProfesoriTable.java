@@ -27,10 +27,17 @@ public class ProfesoriTable extends JTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 		// selektovani red ce imati drugaciju boju od ostalih
 		
-		if (row % 2 == 0) {
-			c.setBackground(new Color(224, 235, 255));
+		if (isRowSelected(row)) {
+			c.setBackground(Color.GRAY);
+		
 		} else {
-			c.setBackground(Color.WHITE);
+			if (row % 2 == 0) {
+			
+				c.setBackground(new Color(224, 235, 255));
+			} else {
+				c.setBackground(Color.WHITE);
+		
+			}
 		}
 		return c;
 	}
