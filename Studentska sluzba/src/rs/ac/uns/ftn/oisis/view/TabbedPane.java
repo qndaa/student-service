@@ -9,7 +9,6 @@ public class TabbedPane extends JTabbedPane {
 
 	private static final long serialVersionUID = 6085217537142043863L;
 	private	ProfesoriTablePane profesoriTablePane = new ProfesoriTablePane();
-
 	private StudentiTablePane studentiTablePane = new StudentiTablePane();
 	private PredmetiTablePane predmetiTablePane = new PredmetiTablePane();
 	

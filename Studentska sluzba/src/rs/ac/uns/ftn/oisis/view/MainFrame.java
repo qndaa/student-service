@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
-
+import javax.swing.text.TabExpander;
 
 import rs.ac.uns.ftn.oisis.controller.MainFrameListener;
 import rs.ac.uns.ftn.oisis.controller.TabbedPaneListener;
@@ -22,6 +22,7 @@ public class MainFrame extends JFrame {
 	private StatusBar bar = null;
 	public static int screenWidth = 0;
 	public static int screenHeight = 0;
+	
 	
 	// Singlton obrazac
 	public static MainFrame getInstance() {
@@ -70,7 +71,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void dodajMeni() {
-		meni = new MenuBar();
+		meni=MenuBar.getInstance();
 		this.setJMenuBar(meni);
 	}
 	
@@ -91,5 +92,4 @@ public class MainFrame extends JFrame {
 		this.add(bar, BorderLayout.SOUTH);
 	}
 
-	
 }
