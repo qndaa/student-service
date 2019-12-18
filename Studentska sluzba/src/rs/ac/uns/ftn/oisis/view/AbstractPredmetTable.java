@@ -16,20 +16,22 @@ public class AbstractPredmetTable extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		if(rowCount == BazaPredmeta.getBrojUnetihPredmeta()) {
-			return ++rowCount;
-		}
+		if(BazaPredmeta.getBrojUnetihPredmeta() > 17)
+			rowCount = BazaPredmeta.getBrojUnetihPredmeta();
+		else 
+			rowCount = 17;
 		return rowCount;
-		
 	}
+
+	
 
 	@Override
 	public Object getValueAt(int row, int column) {
 		return BazaPredmeta.getInstance().getValueAt(row, column);
 	}
-	
+
 	public String getColumnName(int column) {
 		return BazaPredmeta.getInstance().getNazivKolona().get(column);
 	}
-	
+
 }

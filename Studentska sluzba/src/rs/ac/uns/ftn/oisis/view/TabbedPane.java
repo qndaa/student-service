@@ -12,6 +12,8 @@ public class TabbedPane extends JTabbedPane {
 	private StudentiTablePane studentiTablePane = new StudentiTablePane();
 	private PredmetiTablePane predmetiTablePane = new PredmetiTablePane();
 	
+	public static int activeTab = 0;
+	
 	public TabbedPane() {
 		
 		

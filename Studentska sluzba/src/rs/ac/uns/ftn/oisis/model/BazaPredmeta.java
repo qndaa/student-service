@@ -93,6 +93,11 @@ public class BazaPredmeta {
 		return true;
 		
 	}
+
+	public void obrisiPredmet(int index) {
+		predmeti.remove(index);
+		brojUnetihPredmeta--;
+	}
 	
 
 }
