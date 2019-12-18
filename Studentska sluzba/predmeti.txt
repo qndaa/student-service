@@ -1,0 +1,3 @@
+ma1 - Matematika 1 - Zimski - I - [] - []
+pr1 - Programski jezik C - Zimski - I - [] - []
+l1 - Engleski jezik - Zimski - I - [] - []

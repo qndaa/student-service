@@ -6,7 +6,7 @@ import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 
 public class AbstractPredmetTable extends AbstractTableModel {
 
-
+	private int rowCount = 17;
 	private static final long serialVersionUID = 3147616286287644448L;
 
 	@Override
@@ -16,7 +16,11 @@ public class AbstractPredmetTable extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 17;
+		if(rowCount == BazaPredmeta.getBrojUnetihPredmeta()) {
+			return ++rowCount;
+		}
+		return rowCount;
+		
 	}
 
 	@Override

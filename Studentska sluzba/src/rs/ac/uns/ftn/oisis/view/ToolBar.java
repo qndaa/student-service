@@ -11,6 +11,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import rs.ac.uns.ftn.oisis.controller.DodavanjePredmetaListener;
+
 public class ToolBar extends JToolBar {
 
 	private static final long serialVersionUID = -2522240199851802643L;
@@ -61,6 +63,7 @@ public class ToolBar extends JToolBar {
 		addPredmetBtn = new JToggleButton();
 		addPredmetBtn.setToolTipText("Dodaj novi predmet.");
 		addPredmetBtn.setIcon(new ImageIcon("images/add.png"));
+		addPredmetBtn.addActionListener(new DodavanjePredmetaListener());
 
 		addProfesorBtn = new JToggleButton();
 		addProfesorBtn.setToolTipText("Dodaj novog profesora");
@@ -151,5 +154,17 @@ public class ToolBar extends JToolBar {
 
 	public Tip getTip(int i) {
 		return Tip.getTip(i);
+	}
+	
+	public void setSelectedButton() {
+		addPredmetBtn.setSelected(false);
+		addStudentBtn.setSelected(false);
+		addPredmetBtn.setSelected(false);;
+		addProfesorBtn.setSelected(false);;
+
+		changeBtn.setSelected(false);;
+		deleteBtn.setSelected(false);;
+
+		addStudentNaPredmetBtn.setSelected(false);;
 	}
 }

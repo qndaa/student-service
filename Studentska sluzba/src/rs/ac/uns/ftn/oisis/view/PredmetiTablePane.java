@@ -3,9 +3,12 @@ package rs.ac.uns.ftn.oisis.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 
 public class PredmetiTablePane extends JPanel {
 
@@ -43,7 +46,17 @@ public class PredmetiTablePane extends JPanel {
 		add(left, BorderLayout.WEST);
 		add(right, BorderLayout.EAST);
 		
-		predmetiTable = new PredmetiTable();
+		predmetiTable = PredmetiTable.getInstance();
+		
+		// ucitava postojece podatke iz predmeti.txt
+		try {
+			PredmetiController.getInstance().loadData();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		scrollPane = new JScrollPane(predmetiTable);
 		add(scrollPane, BorderLayout.CENTER);
 		

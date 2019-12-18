@@ -19,24 +19,19 @@ public class ProfesoriTable extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractProfesoriTable());
 		this.setRowHeight(20);
-		//this.
 	}
 	
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
-		// selektovani red ce imati drugaciju boju od ostalih
 		
 		if (isRowSelected(row)) {
 			c.setBackground(Color.GRAY);
-		
 		} else {
 			if (row % 2 == 0) {
-			
 				c.setBackground(new Color(224, 235, 255));
 			} else {
 				c.setBackground(Color.WHITE);
-		
 			}
 		}
 		return c;

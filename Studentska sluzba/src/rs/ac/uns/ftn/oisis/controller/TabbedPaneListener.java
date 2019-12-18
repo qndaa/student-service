@@ -13,7 +13,7 @@ public class TabbedPaneListener implements ChangeListener {
 		TabbedPane tabbedPane = (TabbedPane) e.getSource();
 		ToolBar toolBar = ToolBar.getInstance();
 		toolBar.paintComponents(toolBar.getTip(tabbedPane.getSelectedIndex()));
-
+		
 	}
 
 }

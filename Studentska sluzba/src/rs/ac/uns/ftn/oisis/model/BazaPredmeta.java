@@ -78,5 +78,21 @@ public class BazaPredmeta {
 			return null;
 		}
 	}
+	
+	public boolean dodajPredmet(String kolone[]) {
+		brojUnetihPredmeta++;
+		String key = kolone[0];
+		for (Predmet p : predmeti) {
+			if(key.equals(p.getSifra())) {
+				return false;
+			}
+		}
+		
+		Predmet newPredmet = new Predmet(kolone[0], kolone[1], kolone[2], kolone[3]);
+		predmeti.add(newPredmet);
+		return true;
+		
+	}
+	
 
 }
