@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 
 import rs.ac.uns.ftn.oisis.controller.BrisanjeListener;
 import rs.ac.uns.ftn.oisis.controller.DodavanjePredmetaListener;
+import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
 
 public class ToolBar extends JToolBar {
 
@@ -43,7 +44,7 @@ public class ToolBar extends JToolBar {
 
 	private JToggleButton addStudentNaPredmetBtn;
 	private JButton searchBtn;
-	public static ToolBar instance = null;
+	private static ToolBar instance = null;
 
 	public static ToolBar getInstance() {
 		if (instance == null) {
@@ -71,7 +72,7 @@ public class ToolBar extends JToolBar {
 		addProfesorBtn.setIcon(new ImageIcon("images/student.png"));
 
 		changeBtn = new JToggleButton();
-		
+		changeBtn.addActionListener(new IzmenaListener());
 		changeBtn.setIcon(new ImageIcon("images/change.png"));
 		
 		addStudentNaPredmetBtn = new JToggleButton();
