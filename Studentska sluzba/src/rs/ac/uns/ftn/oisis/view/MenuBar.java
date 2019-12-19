@@ -11,6 +11,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.text.TabExpander;
 
+import rs.ac.uns.ftn.oisis.controller.MenuElementListener;
+
 public class MenuBar extends JMenuBar{
 	
 	/**
@@ -47,7 +49,7 @@ public class MenuBar extends JMenuBar{
 		n.setMnemonic(KeyEvent.VK_N);
 		n.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		n.setIcon(new ImageIcon("images/new.png"));
-
+		n.addActionListener(new MenuElementListener());
 		file.add(n); 
 		file.addSeparator();			
 		
