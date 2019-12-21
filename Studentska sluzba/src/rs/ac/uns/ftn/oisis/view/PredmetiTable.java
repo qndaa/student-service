@@ -2,29 +2,19 @@ package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-import rs.ac.uns.ftn.oisis.controller.PredmetiController;
-import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
-import rs.ac.uns.ftn.oisis.model.Predmet;
 
 public class PredmetiTable extends JTable {
 
 	private static final long serialVersionUID = 1473484278510522821L;
 
 	private static PredmetiTable instance = null;
-	private File filePredmeti = new File("predmeti.txt");
+
 	
 	public static PredmetiTable getInstance() {
 		if(instance == null) {
@@ -45,36 +35,7 @@ public class PredmetiTable extends JTable {
 		apt.fireTableDataChanged();
 		validate();
 	}
-	
-	public void savePredmete() throws IOException {
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePredmeti)));
-		
-		for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++ ) {			
-			Predmet p = BazaPredmeta.getInstance().getPredmeti().get(i);
-			String line = p.toString();			
-			bw.write(line);
-		}
-		bw.close();	
-	}
-	
-	public void loadPredmete() throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePredmeti)));
-		
-		String line = new String();
-	
-		while((line = br.readLine()) != null ) {
-			String fields [] = line.split("-");
-			String trimFields[] = new String[fields.length];
-			for(int i = 0; i < fields.length; i++) {
-				trimFields[i] = fields[i].trim();
-			}
-			PredmetiController.getInstance().dodajPredmet(trimFields);
-			PredmetiTable.getInstance().refreshTable();		
-			// potrebno je jos ubaciti sve studente koji slusaju predmet kao i profesore koji predaju na predmetu 
-		}
-		br.close();		
-	}
-		
+
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);

@@ -2,6 +2,8 @@ package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -12,8 +14,10 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import rs.ac.uns.ftn.oisis.controller.BrisanjeListener;
-import rs.ac.uns.ftn.oisis.controller.DodavanjePredmetaListener;
+import rs.ac.uns.ftn.oisis.controller.DodavanjeListener;
 import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
+import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+import rs.ac.uns.ftn.oisis.controller.PretragaListener;
 
 public class ToolBar extends JToolBar {
 
@@ -65,7 +69,7 @@ public class ToolBar extends JToolBar {
 		addPredmetBtn = new JToggleButton();
 		addPredmetBtn.setToolTipText("Dodaj novi predmet.");
 		addPredmetBtn.setIcon(new ImageIcon("images/add.png"));
-		addPredmetBtn.addActionListener(new DodavanjePredmetaListener());
+		addPredmetBtn.addActionListener(new DodavanjeListener());
 
 		addProfesorBtn = new JToggleButton();
 		addProfesorBtn.setToolTipText("Dodaj novog profesora");
@@ -86,10 +90,46 @@ public class ToolBar extends JToolBar {
 		searchField = new JTextField(20);
 		Font font1 = new Font("SansSerif", Font.BOLD, 18);
 		searchField.setFont(font1);
+		searchField.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				JTextField txt = (JTextField) e.getComponent();
+				if(txt.getText().length() == 0) {
+					if (TabbedPane.activeTab == 0) {
+						
+					} else if (TabbedPane.activeTab == 1) {
+						PredmetiController.getInstance().pretragaPredmeta();
+						
+						
+						
+						
+						
+						
+					} else if (TabbedPane.activeTab == 2) {
+						
+					}
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		searchBtn = new JButton();
 		searchBtn.setToolTipText("Pretrazi studenta.");
 		searchBtn.setIcon(new ImageIcon("images/search.png"));
+		searchBtn.addActionListener(new PretragaListener());
 
 		paintComponents(Tip.STUDENT);
 		setFloatable(false);
@@ -139,12 +179,12 @@ public class ToolBar extends JToolBar {
 
 
 
-			add(Box.createHorizontalStrut(MainFrame.screenWidth / 100 * 35));
+			add(Box.createHorizontalStrut(550));//MainFrame.screenWidth / 100 * 35));
 
 		} else if (tip == Tip.PREDMET) {
 			
 			add(addStudentNaPredmetBtn);
-			add(Box.createHorizontalStrut(MainFrame.screenWidth / 100 * 32));
+			add(Box.createHorizontalStrut(480));//MainFrame.screenWidth / 100 * 32));
 
 		}
 
@@ -170,5 +210,13 @@ public class ToolBar extends JToolBar {
 		deleteBtn.setSelected(false);;
 
 		addStudentNaPredmetBtn.setSelected(false);;
+	}
+
+	public JTextField getSearchField() {
+		return searchField;
+	}
+
+	public void setSearchField(JTextField searchField) {
+		this.searchField = searchField;
 	}
 }

@@ -11,7 +11,13 @@ import rs.ac.uns.ftn.oisis.controller.TabbedPaneListener;
 
 
 public class MainFrame extends JFrame {
-	
+	/**
+	 * Klasa glavnog prozora, koja sadrzi polja za toolbar, meni, tabbedpane i status bar.
+	 * Kreirana kao singlton glasa, funkcijom getInstance() prvi put kreiramo objekat 
+	 * klase MainFrame i svaki sledeci put vratimo kreiranu instancu.
+	 * 
+	 */
+
 	private static final long serialVersionUID = -6400016063430161422L;
 	
 	private static MainFrame instance = null;
@@ -39,8 +45,8 @@ public class MainFrame extends JFrame {
 		screenWidth = screenSize.width;
 		screenHeight = screenSize.height;
 
-		setSize(screenWidth*3/4, screenHeight*3/4);
-
+		//setSize(screenWidth*3/4, screenHeight*3/4);
+		setSize(1200, 700);
 		setTitle("Studentska sluzba");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
