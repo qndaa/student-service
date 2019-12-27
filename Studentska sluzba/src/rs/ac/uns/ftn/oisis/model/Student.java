@@ -114,10 +114,25 @@ public class Student extends Osoba{
 	}
 	
 	
+	public GodinaStudija konverzija(String godStud) {
+		if(true) {
+			
+		}
+		
+		
+		
+		return null;
+	}
+	
+	
+	
 	public String getProsekS() {
 		String a= Double.toString(prosek);
 		return a;
 	}
+	
+	
+	
 	
 		
 	
