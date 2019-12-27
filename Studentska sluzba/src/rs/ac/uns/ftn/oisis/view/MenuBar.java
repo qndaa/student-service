@@ -7,9 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JTabbedPane;
+
 import javax.swing.KeyStroke;
-import javax.swing.text.TabExpander;
+
 
 import rs.ac.uns.ftn.oisis.controller.MenuElementListener;
 

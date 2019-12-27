@@ -2,26 +2,23 @@ package rs.ac.uns.ftn.oisis.model;
 
 import java.util.ArrayList;
 
-enum Semestar{I, II, III, IV, V, VI, VII, VIII};
-enum GodinaIzvodjenja {I, II, III, IV, V, VI};
 
 public class Predmet {
 	private String sifra;
 	private String naziv;
-	private Semestar semestar;
-	private GodinaIzvodjenja godIzv;
+	private String semestar;
+	private String godIzv;
 	private ArrayList<Profesor> predmetniProf;
 	private ArrayList<Student> studenti;
 	
-	public Predmet(String sifra, String naziv, Semestar semestar, GodinaIzvodjenja godIzv,
-			ArrayList<Profesor> predmetniProf, ArrayList<Student> studenti) {
+	public Predmet(String sifra, String naziv, String semestar, String godIzv) {
 		super();
 		this.sifra = sifra;
 		this.naziv = naziv;
 		this.semestar = semestar;
 		this.godIzv = godIzv;
-		this.predmetniProf = predmetniProf;
-		this.studenti = studenti;
+		this.predmetniProf = new ArrayList<Profesor>();
+		this.studenti = new ArrayList<Student>();
 	}
 
 	public String getSifra() {
@@ -40,19 +37,19 @@ public class Predmet {
 		this.naziv = naziv;
 	}
 
-	public Semestar getSemestar() {
+	public String getSemestar() {
 		return semestar;
 	}
 
-	public void setSemestar(Semestar semestar) {
+	public void setSemestar(String semestar) {
 		this.semestar = semestar;
 	}
 
-	public GodinaIzvodjenja getGodIzv() {
+	public String getGodIzv() {
 		return godIzv;
 	}
 
-	public void setGodIzv(GodinaIzvodjenja godIzv) {
+	public void setGodIzv(String godIzv) {
 		this.godIzv = godIzv;
 	}
 
@@ -70,6 +67,12 @@ public class Predmet {
 
 	public void setStudenti(ArrayList<Student> studenti) {
 		this.studenti = studenti;
+	}
+
+	@Override
+	public String toString() {
+		return sifra + " - " + naziv + " - " + semestar + " - " + godIzv
+				+ " - " + predmetniProf + " - " + studenti + "\n";
 	}
 	
 	

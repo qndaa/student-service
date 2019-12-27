@@ -7,7 +7,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class StudentiTable extends JTable{	
+public class StudentiTable extends JTable {
 	/**
 	 * 
 	 */
@@ -20,25 +20,23 @@ public class StudentiTable extends JTable{
 		this.setRowHeight(20);
 	}
 
-
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
 
 		if (isRowSelected(row)) {
 			c.setBackground(Color.GRAY);
-		
+
 		} else {
 			if (row % 2 == 0) {
-			
+
 				c.setBackground(new Color(224, 235, 255));
 			} else {
 				c.setBackground(Color.WHITE);
-		
+
 			}
 		}
 		return c;
 	}
-
 
 }

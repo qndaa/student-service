@@ -1,15 +1,25 @@
 package rs.ac.uns.ftn.oisis.view;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-import javax.swing.Box;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
+import rs.ac.uns.ftn.oisis.controller.BrisanjeListener;
+import rs.ac.uns.ftn.oisis.controller.DodavanjeListener;
+import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
+import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+import rs.ac.uns.ftn.oisis.controller.PretragaListener;
 
 public class ToolBar extends JToolBar {
 
@@ -40,8 +50,11 @@ public class ToolBar extends JToolBar {
 
 	private JToggleButton addStudentNaPredmetBtn;
 	private JButton searchBtn;
-	
-	public static ToolBar instance = null;
+
+	private JPanel left;
+	private JPanel right;
+	private static ToolBar instance = null;
+
 
 	public static ToolBar getInstance() {
 		if (instance == null) {
@@ -53,7 +66,13 @@ public class ToolBar extends JToolBar {
 
 	private ToolBar(Tip tip) {
 		super(SwingConstants.HORIZONTAL);
-		setLayout(new FlowLayout(FlowLayout.LEFT));
+		setLayout(new BorderLayout());
+		left  = new JPanel();
+		right = new JPanel();
+		left.setLayout(new FlowLayout(FlowLayout.LEFT));
+		left.setOpaque(false);
+		right.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		right.setOpaque(false);
 
 		addStudentBtn = new JToggleButton();
 		addStudentBtn.setToolTipText("Dodaj novog studenta");
@@ -62,12 +81,14 @@ public class ToolBar extends JToolBar {
 		addPredmetBtn = new JToggleButton();
 		addPredmetBtn.setToolTipText("Dodaj novi predmet.");
 		addPredmetBtn.setIcon(new ImageIcon("images/add.png"));
+		addPredmetBtn.addActionListener(new DodavanjeListener());
 
 		addProfesorBtn = new JToggleButton();
 		addProfesorBtn.setToolTipText("Dodaj novog profesora");
 		addProfesorBtn.setIcon(new ImageIcon("images/student.png"));
 
 		changeBtn = new JToggleButton();
+		changeBtn.addActionListener(new IzmenaListener());
 		changeBtn.setIcon(new ImageIcon("images/change.png"));
 		
 		addStudentNaPredmetBtn = new JToggleButton();
@@ -75,16 +96,55 @@ public class ToolBar extends JToolBar {
 		addStudentNaPredmetBtn.setIcon(new ImageIcon("images/student.png"));
 
 		deleteBtn = new JToggleButton();
+		deleteBtn.addActionListener(new BrisanjeListener());
 		deleteBtn.setIcon(new ImageIcon("images/delete.png"));
 		
 		searchField = new JTextField(20);
 		Font font1 = new Font("SansSerif", Font.BOLD, 18);
 		searchField.setFont(font1);
+		searchField.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				JTextField txt = (JTextField) e.getComponent();
+				if(txt.getText().length() == 0) {
+					if (TabbedPane.activeTab == 0) {
+						
+					} else if (TabbedPane.activeTab == 1) {
+						PredmetiController.getInstance().pretragaPredmeta();
+						
+						
+						
+						
+						
+						
+					} else if (TabbedPane.activeTab == 2) {
+						
+					}
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		searchBtn = new JButton();
 		searchBtn.setToolTipText("Pretrazi studenta.");
 		searchBtn.setIcon(new ImageIcon("images/search.png"));
-		
+
+		searchBtn.addActionListener(new PretragaListener());
+
+
 		paintComponents(Tip.STUDENT);
 		setFloatable(false);
 	}
@@ -92,17 +152,20 @@ public class ToolBar extends JToolBar {
 	public void paintComponents(Tip tip) {
 
 		removeAll();
+		left.removeAll();
+		right.removeAll();
 		if (tip == Tip.STUDENT) {
 
-			add(addStudentBtn, FlowLayout.LEFT);
+			left.add(addStudentBtn);
 		} else if (tip == Tip.PREDMET) {
 
-			add(addPredmetBtn, FlowLayout.LEFT);
+			left.add(addPredmetBtn);
 
 		} else if (tip == Tip.PROFESOR) {
 
-			add(addProfesorBtn, FlowLayout.LEFT);
+			left.add(addProfesorBtn);
 		}
+
 		
 		addSeparator();
 
@@ -114,9 +177,7 @@ public class ToolBar extends JToolBar {
 			changeBtn.setToolTipText("Izmena profesora");
 		}
 
-		add(changeBtn);
-
-		addSeparator();
+		left.add(changeBtn);
 
 		if (tip == Tip.STUDENT) {
 			deleteBtn.setToolTipText("Brisanje studenta");
@@ -126,32 +187,45 @@ public class ToolBar extends JToolBar {
 			deleteBtn.setToolTipText("Brisanje profesora");
 		}
 
-		add(deleteBtn);
+		left.add(deleteBtn);
 
-		addSeparator();
-
-		if (tip == Tip.STUDENT || tip == Tip.PROFESOR) {
-
-
-
-			add(Box.createHorizontalStrut(MainFrame.screenWidth / 100 * 35));
-
-		} else if (tip == Tip.PREDMET) {
+		if (tip == Tip.PREDMET) {
 			
-			add(addStudentNaPredmetBtn);
-			add(Box.createHorizontalStrut(MainFrame.screenWidth / 100 * 32));
+			left.add(addStudentNaPredmetBtn);
 
 		}
 
-		add(searchField);
+		right.add(searchField);
 
-		addSeparator();
 
-		add(searchBtn);
+		right.add(searchBtn);
+		
+		add(left, BorderLayout.WEST);
+		add(right, BorderLayout.EAST);
 
 	}
 
 	public Tip getTip(int i) {
 		return Tip.getTip(i);
+	}
+	
+	public void setSelectedButton() {
+		addPredmetBtn.setSelected(false);
+		addStudentBtn.setSelected(false);
+		addPredmetBtn.setSelected(false);;
+		addProfesorBtn.setSelected(false);;
+
+		changeBtn.setSelected(false);;
+		deleteBtn.setSelected(false);;
+
+		addStudentNaPredmetBtn.setSelected(false);;
+	}
+
+	public JTextField getSearchField() {
+		return searchField;
+	}
+
+	public void setSearchField(JTextField searchField) {
+		this.searchField = searchField;
 	}
 }
