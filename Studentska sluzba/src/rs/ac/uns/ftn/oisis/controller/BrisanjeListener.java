@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import rs.ac.uns.ftn.oisis.view.PredmetiTable;
+import rs.ac.uns.ftn.oisis.view.ProfesoriTable;
 import rs.ac.uns.ftn.oisis.view.TabbedPane;
 import rs.ac.uns.ftn.oisis.view.ToolBar;
 
@@ -19,7 +20,10 @@ public class BrisanjeListener implements ActionListener{
 			PredmetiTable.getInstance().refreshTable();	
 			ToolBar.getInstance().setSelectedButton();
 		} else if (TabbedPane.activeTab == 2) {
-			// implementirati brisanje profesora 	
+			ProfesoriController.getInstance().brisanjeProfesora();
+			
+			ProfesoriTable.getInstance().refresTable();
+			ToolBar.getInstance().setSelectedButton();
 		}
 		
 	}

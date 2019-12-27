@@ -40,14 +40,14 @@ public class PredmetiController {
 		int selectedRow = PredmetiTable.getInstance().getSelectedRow();
 		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta()&& 
 				BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
-			System.out.println("obicno");
+			//System.out.println("obicno");
 			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da izbrisete predmet?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
 			if (odabir == JOptionPane.YES_OPTION) {
 				BazaPredmeta.getInstance().obrisiPredmet(selectedRow);
 			}
 		} else if(selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
-			System.out.println("Search");
+			//System.out.println("Search");
 			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da izbrisete predmet?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
 			

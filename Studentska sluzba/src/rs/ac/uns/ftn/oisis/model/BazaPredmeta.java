@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
-import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTable;
 
@@ -231,8 +231,8 @@ public class BazaPredmeta {
 
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePredmeti)));
 
-		for (int i = 0; i < BazaPredmeta.getInstance().getSviPredmeti().size(); i++) {
-			Predmet p = BazaPredmeta.getInstance().getSviPredmeti().get(i);
+		for (int i = 0; i < sviPredmeti.size(); i++) {
+			Predmet p = sviPredmeti.get(i);
 			String line = p.toString();
 			bw.write(line);
 		}
@@ -251,7 +251,7 @@ public class BazaPredmeta {
 			for (int i = 0; i < fields.length; i++) {
 				trimFields[i] = fields[i].trim();
 			}
-			PredmetiController.getInstance().dodajPredmet(trimFields);
+			dodajPredmet(trimFields);
 			PredmetiTable.getInstance().refreshTable();
 			// potrebno je jos ubaciti sve studente koji slusaju predmet kao i profesore
 			// koji predaju na predmetu

@@ -66,5 +66,11 @@ public abstract class Osoba {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public String toString() {
+		return  ime + " - " + prezime + " - " + datumRodjenja + " - "
+				+ adresaStanovanja + " - " + kontaktTelefon + " - " + email + " - ";
+	}
 		
 }
