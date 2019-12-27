@@ -17,7 +17,7 @@ public class TabbedPaneListener implements ChangeListener {
 		toolBar.paintComponents(toolBar.getTip(TabbedPane.activeTab=tabbedPane.getSelectedIndex()));
 		ToolBar.getInstance().getSearchField().setText("");
 		PredmetiController.getInstance().pretragaPredmeta();
-		MenuBar.getInstance().nebitno(tabbedPane.getSelectedIndex());
+		MenuBar.getInstance().nebitno(TabbedPane.activeTab);
 		
 
 	}
