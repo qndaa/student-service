@@ -1,13 +1,15 @@
 package rs.ac.uns.ftn.oisis.view;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.Box;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
@@ -48,6 +50,8 @@ public class ToolBar extends JToolBar {
 
 	private JToggleButton addStudentNaPredmetBtn;
 	private JButton searchBtn;
+	private JPanel left;
+	private JPanel right;
 	private static ToolBar instance = null;
 
 	public static ToolBar getInstance() {
@@ -60,7 +64,13 @@ public class ToolBar extends JToolBar {
 
 	private ToolBar(Tip tip) {
 		super(SwingConstants.HORIZONTAL);
-		setLayout(new FlowLayout(FlowLayout.LEFT));
+		setLayout(new BorderLayout());
+		left  = new JPanel();
+		right = new JPanel();
+		left.setLayout(new FlowLayout(FlowLayout.LEFT));
+		left.setOpaque(false);
+		right.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		right.setOpaque(false);
 
 		addStudentBtn = new JToggleButton();
 		addStudentBtn.setToolTipText("Dodaj novog studenta");
@@ -138,18 +148,19 @@ public class ToolBar extends JToolBar {
 	public void paintComponents(Tip tip) {
 
 		removeAll();
+		left.removeAll();
+		right.removeAll();
 		if (tip == Tip.STUDENT) {
 
-			add(addStudentBtn, FlowLayout.LEFT);
+			left.add(addStudentBtn);
 		} else if (tip == Tip.PREDMET) {
 
-			add(addPredmetBtn, FlowLayout.LEFT);
+			left.add(addPredmetBtn);
 
 		} else if (tip == Tip.PROFESOR) {
 
-			add(addProfesorBtn, FlowLayout.LEFT);
+			left.add(addProfesorBtn);
 		}
-		addSeparator();
 
 		if (tip == Tip.STUDENT) {
 			changeBtn.setToolTipText("Izmeni studenta");
@@ -159,9 +170,7 @@ public class ToolBar extends JToolBar {
 			changeBtn.setToolTipText("Izmena profesora");
 		}
 
-		add(changeBtn);
-
-		addSeparator();
+		left.add(changeBtn);
 
 		if (tip == Tip.STUDENT) {
 			deleteBtn.setToolTipText("Brisanje studenta");
@@ -171,28 +180,21 @@ public class ToolBar extends JToolBar {
 			deleteBtn.setToolTipText("Brisanje profesora");
 		}
 
-		add(deleteBtn);
+		left.add(deleteBtn);
 
-		addSeparator();
-
-		if (tip == Tip.STUDENT || tip == Tip.PROFESOR) {
-
-
-
-			add(Box.createHorizontalStrut(550));//MainFrame.screenWidth / 100 * 35));
-
-		} else if (tip == Tip.PREDMET) {
+		if (tip == Tip.PREDMET) {
 			
-			add(addStudentNaPredmetBtn);
-			add(Box.createHorizontalStrut(480));//MainFrame.screenWidth / 100 * 32));
+			left.add(addStudentNaPredmetBtn);
 
 		}
 
-		add(searchField);
+		right.add(searchField);
 
-		addSeparator();
 
-		add(searchBtn);
+		right.add(searchBtn);
+		
+		add(left, BorderLayout.WEST);
+		add(right, BorderLayout.EAST);
 
 	}
 

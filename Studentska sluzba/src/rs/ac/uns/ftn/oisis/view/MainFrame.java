@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
 		Color bg = new Color(210, 210, 210);
 		getContentPane().setBackground(bg);
 		
-		setResizable(false);
+		setResizable(true);
 		setLayout(new BorderLayout());
 		
 		// menu_bar
