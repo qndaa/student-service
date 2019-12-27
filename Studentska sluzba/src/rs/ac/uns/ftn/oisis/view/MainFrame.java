@@ -27,6 +27,7 @@ public class MainFrame extends JFrame {
 	private StatusBar bar = null;
 	public static int screenWidth = 0;
 	public static int screenHeight = 0;
+
 	
 	
 	// Singlton obrazac
@@ -96,5 +97,7 @@ public class MainFrame extends JFrame {
 		bar = new StatusBar();
 		this.add(bar, BorderLayout.SOUTH);
 	}
+	
+	
 
 }
