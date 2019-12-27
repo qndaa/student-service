@@ -40,6 +40,7 @@ public class ToolBar extends JToolBar {
 
 	private JToggleButton addStudentNaPredmetBtn;
 	private JButton searchBtn;
+	
 	public static ToolBar instance = null;
 
 	public static ToolBar getInstance() {
@@ -83,7 +84,7 @@ public class ToolBar extends JToolBar {
 		searchBtn = new JButton();
 		searchBtn.setToolTipText("Pretrazi studenta.");
 		searchBtn.setIcon(new ImageIcon("images/search.png"));
-
+		
 		paintComponents(Tip.STUDENT);
 		setFloatable(false);
 	}
@@ -102,6 +103,7 @@ public class ToolBar extends JToolBar {
 
 			add(addProfesorBtn, FlowLayout.LEFT);
 		}
+		
 		addSeparator();
 
 		if (tip == Tip.STUDENT) {
