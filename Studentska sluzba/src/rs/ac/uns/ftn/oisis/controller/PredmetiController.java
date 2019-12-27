@@ -46,7 +46,7 @@ public class PredmetiController {
 			if (odabir == JOptionPane.YES_OPTION) {
 				BazaPredmeta.getInstance().obrisiPredmet(selectedRow);
 			}
-		} else if( selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
+		} else if(selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
 			System.out.println("Search");
 			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da izbrisete predmet?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
@@ -64,15 +64,17 @@ public class PredmetiController {
 	}
 
 	public void izmenaPredmeta() {
+		
 		int selectedRow = PredmetiTable.getInstance().getSelectedRow();
+		
 		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta() &&  
-			BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0 ) {
+				BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0 ) {
 			
 			IzmenaPredmetaDialog dialog = new IzmenaPredmetaDialog(MainFrame.getInstance(), "Izmena predmeta", true);
 			
 			dialog.setVisible(true);
 			
-		} else if( selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
+		} else if(selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
 			IzmenaPredmetaDialog dialog = new IzmenaPredmetaDialog(MainFrame.getInstance(), "Izmena predmeta", true);
 			
 			dialog.setVisible(true);
