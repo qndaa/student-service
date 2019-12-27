@@ -14,6 +14,10 @@ public class IzmenaListener implements ActionListener {
 		if(TabbedPane.activeTab == 0) {
 			// Implementirati izmenu studenta
 			
+			
+			
+			
+			ToolBar.getInstance().setSelectedButton();
 		} else if (TabbedPane.activeTab == 1){
 			// Implementirati izmenu predmeta
 			PredmetiController.getInstance().izmenaPredmeta();
@@ -21,6 +25,12 @@ public class IzmenaListener implements ActionListener {
 			ToolBar.getInstance().setSelectedButton();
 		} else if (TabbedPane.activeTab == 2) {
 			// Implementirati izmenu profesora
+			
+			
+			
+			
+			
+			ToolBar.getInstance().setSelectedButton();
 		}
 		
 	}

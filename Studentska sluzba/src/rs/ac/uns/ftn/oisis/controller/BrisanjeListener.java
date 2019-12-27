@@ -14,6 +14,12 @@ public class BrisanjeListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(TabbedPane.activeTab == 0) {
 			// implementirati brisanje studenta
+			
+			
+			
+			
+			
+			ToolBar.getInstance().setSelectedButton();
 		} else if (TabbedPane.activeTab == 1) {
 			// implementirati brisanje predmeta
 			PredmetiController.getInstance().brisanjePredmeta();
