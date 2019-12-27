@@ -14,11 +14,28 @@ public class ProfesoriTable extends JTable {
 	
 	private static final long serialVersionUID = 6534430224487357381L;
 
-	public ProfesoriTable() {
+	private static ProfesoriTable instance = null;
+	
+	public static ProfesoriTable getInstance() {
+		if(instance == null) {
+			instance = new ProfesoriTable();
+		}
+		
+		return instance;
+	}
+	
+	
+	private ProfesoriTable() {
 		this.setRowSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractProfesoriTable());
 		this.setRowHeight(20);
+	}
+	
+	public void refresTable() {
+		AbstractProfesoriTable apt = (AbstractProfesoriTable) this.getModel();
+		apt.fireTableDataChanged();
+		validate();
 	}
 	
 	@Override

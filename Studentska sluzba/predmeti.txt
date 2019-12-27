@@ -1,7 +1,5 @@
 pr3 - Arhitektura racunara - Zimski - I - [] - []
 m2 - Algebra - Zimski - I - [] - []
-au1 - Miss - Zimski - II - [] - []
-au2 - Metode optimizacije - Zimski - III - [] - []
 pr4 - Operativni sistemti 2 - Ljetni - II - [] - []
 rtrk1 - Lprs - Zimski - II - [] - []
 rtrk3 - Spurv - Ljetni - II - [] - []

@@ -59,5 +59,12 @@ public class Profesor extends Osoba {
 	public void setPredajeNaPredmetima(ArrayList<Predmet> predajeNaPredmetima) {
 		this.predajeNaPredmetima = predajeNaPredmetima;
 	}
+
+	@Override
+	public String toString() {
+		String ispis = super.toString() + adresaKancelarije + " - " + brojLicneKarte + " - "
+				+ titula + " - " + zvanje + "-" + predajeNaPredmetima;
+		return ispis;
+	}
 		
 }

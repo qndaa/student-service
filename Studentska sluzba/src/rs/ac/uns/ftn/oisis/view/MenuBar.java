@@ -1,10 +1,10 @@
 package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JEditorPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -12,6 +12,8 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import rs.ac.uns.ftn.oisis.controller.MenuElementListener;
+import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
 
 public class MenuBar extends JMenuBar {
 
@@ -101,6 +103,16 @@ public class MenuBar extends JMenuBar {
 		New_Sub.setMnemonic(KeyEvent.VK_U);
 		New_Sub.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, ActionEvent.CTRL_MASK));
 		New_Sub.setIcon(new ImageIcon("images/new.png"));
+		New_Sub.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DodavanjePredmetaDialog dialog = new DodavanjePredmetaDialog(MainFrame.getInstance(), "Dodavanje predmeta",
+						true);
+				dialog.setVisible(true);
+				
+			}
+		});
 
 		New.add(New_Sub);
 
@@ -166,6 +178,15 @@ public class MenuBar extends JMenuBar {
 		Edit_Sub.setMnemonic(KeyEvent.VK_Z);
 		Edit_Sub.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
 		Edit_Sub.setIcon(new ImageIcon("images/edit.png"));
+		Edit_Sub.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PredmetiController.getInstance().izmenaPredmeta();
+				PredmetiTable.getInstance().refreshTable();
+				
+			}
+		});
 		Edit.add(Edit_Sub);
 
 		Edit_Stud_Prof = new JMenu("Edit  Stud/Prof");
@@ -225,7 +246,15 @@ public class MenuBar extends JMenuBar {
 		Delete_Sub.setMnemonic(KeyEvent.VK_B);
 		Delete_Sub.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B,ActionEvent.CTRL_MASK));
 		Delete_Sub.setIcon(new ImageIcon("images/deleteM.png"));
-		
+		Delete_Sub.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PredmetiController.getInstance().brisanjePredmeta();
+				PredmetiTable.getInstance().refreshTable();	
+				
+			}
+		});
 		delete.add(Delete_Sub);
 		
 		Delete_Stud_Prof = new JMenu("Delete Stud/Prof");
@@ -247,6 +276,7 @@ public class MenuBar extends JMenuBar {
 		deleteProf.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,ActionEvent.CTRL_MASK));
 		deleteProf.setIcon(new ImageIcon("images/deleteM.png"));
 		
+		
 		Delete_Stud_Prof.addSeparator();
 		
 		Delete_Stud_Prof.add(deleteProf);
@@ -254,6 +284,16 @@ public class MenuBar extends JMenuBar {
 		//da bi na pocetku bilo zamrznuto sve sem studenta
 		Delete_Stud_Prof.setEnabled(false);
 		Delete_Prof.setEnabled(false);
+		Delete_Prof.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ProfesoriController.getInstance().brisanjeProfesora();
+				
+				ProfesoriTable.getInstance().refresTable();
+				
+			}
+		});
 		Delete_Sub.setEnabled(false);
 		
 		
