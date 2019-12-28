@@ -11,6 +11,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.ProfesoriTable;
 
 public class BazaProfesora {
@@ -68,14 +71,14 @@ public class BazaProfesora {
 
 	public String getValueAt(int row, int column) {
 		ArrayList<Profesor> temp;
-		if(rezultatPretrage.size() == 0) {
+		if (rezultatPretrage.size() == 0) {
 			temp = sviProfesori;
-		}else {
+		} else {
 			temp = rezultatPretrage;
 		}
 		if (row < temp.size()) {
-			
-			Profesor profesor = sviProfesori.get(row);
+
+			Profesor profesor = temp.get(row);
 			switch (column) {
 			case 0:
 				return profesor.getBrojLicneKarte();
@@ -152,8 +155,8 @@ public class BazaProfesora {
 
 			dodajPredmet(trimFields);
 			ProfesoriTable.getInstance().refresTable();
-			
-			// dodati jos ucitavanje predmeta na kojima predaje profesor 
+
+			// dodati jos ucitavanje predmeta na kojima predaje profesor
 		}
 
 		br.close();
@@ -181,6 +184,181 @@ public class BazaProfesora {
 			}
 		}
 		return true;
+	}
+
+	public void pretraziProfesore(String input) {
+		if (input.trim().length() == 0) {
+			rezultatPretrage.clear();
+			brojProfesoraKojiSuUPretrazi = 0;
+			return;
+		}
+
+		rezultatPretrage.clear();
+		brojProfesoraKojiSuUPretrazi = 0;
+
+		String[] podelaUnosa = input.split(";");
+		String s = podelaUnosa[0];
+		String[] obeVre = s.trim().split(":");
+		if (obeVre.length != 2 || obeVre[1].trim().length() == 0) {
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Pretraga nije dobro napisana!", "Greska",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (obeVre[0].toUpperCase().equals("BROJ LICNE KARTE") || obeVre[0].toUpperCase().equals("BROJ L. KARTE")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getBrojLicneKarte().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+		} else if (obeVre[0].toUpperCase().equals("IME")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getIme().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+		} else if (obeVre[0].toUpperCase().equals("PREZIME")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getPrezime().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+		} else if (obeVre[0].toUpperCase().equals("DATUM RODJENJA")
+				|| obeVre[0].toUpperCase().equals("DAT. RODJENJA")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getDatumRodjenja().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+		} else if (obeVre[0].toUpperCase().equals("ADRESA STANOVANJA")
+				|| obeVre[0].toUpperCase().equals("ADR. STANOVANJA")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getAdresaStanovanja().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+		} else if (obeVre[0].toUpperCase().equals("TELEFON")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getKontaktTelefon().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+		} else if (obeVre[0].toUpperCase().equals("ADRESA KANCELARIJE")
+				|| obeVre[0].toUpperCase().equals("ADR. KANCELARIJE")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getAdresaKancelarije().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+		} else if (obeVre[0].toUpperCase().equals("TITULA")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getTitula().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+		} else if (obeVre[0].toUpperCase().equals("ZVANJE")) {
+			for (Profesor p : sviProfesori) {
+				if (p.getZvanje().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+					rezultatPretrage.add(p);
+				}
+			}
+
+		} else {
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Pretraga nije dobro napisana!", "Greska",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+
+		if (podelaUnosa.length > 1) {
+			for (int i = 1; i < podelaUnosa.length; i++) {
+				s = podelaUnosa[i];
+				obeVre = s.trim().split(":");
+
+				if (obeVre.length != 2 || obeVre[1].trim().length() == 0) {
+					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Pretraga nije dobro napisana!", "Greska",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				if (obeVre[0].toUpperCase().equals("BROJ LICNE KARTE")
+						|| obeVre[0].toUpperCase().equals("BROJ L. KARTE")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getBrojLicneKarte().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+				} else if (obeVre[0].toUpperCase().equals("IME")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getIme().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+				} else if (obeVre[0].toUpperCase().equals("PREZIME")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getPrezime().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+				} else if (obeVre[0].toUpperCase().equals("DATUM RODJENJA")
+						|| obeVre[0].toUpperCase().equals("DAT. RODJENJA")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getDatumRodjenja().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+				} else if (obeVre[0].toUpperCase().equals("ADRESA STANOVANJA")
+						|| obeVre[0].toUpperCase().equals("ADR. STANOVANJA")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getAdresaStanovanja().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+				} else if (obeVre[0].toUpperCase().equals("TELEFON")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getKontaktTelefon().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+				} else if (obeVre[0].toUpperCase().equals("ADRESA KANCELARIJE")
+						|| obeVre[0].toUpperCase().equals("ADR. KANCELARIJE")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getAdresaKancelarije().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+				} else if (obeVre[0].toUpperCase().equals("TITULA")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getTitula().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+				} else if (obeVre[0].toUpperCase().equals("ZVANJE")) {
+					for (Profesor p : sviProfesori) {
+						if (!p.getZvanje().toUpperCase().equals(obeVre[1].trim().toUpperCase())) {
+							rezultatPretrage.remove(p);
+						}
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Pretraga nije dobro napisana!", "Greska",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+			}
+
+		}
+		
+		
+		brojProfesoraKojiSuUPretrazi = rezultatPretrage.size();
+		
+		if(rezultatPretrage.size() == 0) {
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Neuspesna pretraga!", "Greska",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		
+
 	}
 
 }

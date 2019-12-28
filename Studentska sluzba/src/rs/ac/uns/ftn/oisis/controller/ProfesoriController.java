@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import rs.ac.uns.ftn.oisis.model.BazaProfesora;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.ProfesoriTable;
+import rs.ac.uns.ftn.oisis.view.ToolBar;
 
 public class ProfesoriController {
 
@@ -24,42 +25,50 @@ public class ProfesoriController {
 		int selectedRow = ProfesoriTable.getInstance().getSelectedRow();
 		BazaProfesora.getInstance();
 		BazaProfesora.getInstance();
-		if(selectedRow >= 0 && selectedRow < BazaProfesora.getBrojUnetihProfesora() 
-			&& BazaProfesora.getBrojProfesoraKojiSuUPretrazi() == 0){
-			int odabir =  JOptionPane.showConfirmDialog(MainFrame.getInstance(),
-					"Da li ste sigurni da zelite da izbrisete profesora?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
-			
-			if(odabir == JOptionPane.YES_OPTION) {
+		if (selectedRow >= 0 && selectedRow < BazaProfesora.getBrojUnetihProfesora()
+				&& BazaProfesora.getBrojProfesoraKojiSuUPretrazi() == 0) {
+			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+					"Da li ste sigurni da zelite da izbrisete profesora?", "Brsanje predmeta",
+					JOptionPane.YES_NO_OPTION);
+
+			if (odabir == JOptionPane.YES_OPTION) {
 				BazaProfesora.getInstance().obrisiProfesora(selectedRow);
 			}
-		} else if(selectedRow >= 0 && selectedRow < BazaProfesora.getBrojProfesoraKojiSuUPretrazi()) {
+		} else if (selectedRow >= 0 && selectedRow < BazaProfesora.getBrojProfesoraKojiSuUPretrazi()) {
 			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
-					"Da li ste sigurni da zelite da izbrisete profesora?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
-			if(odabir == JOptionPane.YES_OPTION) {
-				// kada brisemo iz pretrage 
-				
+					"Da li ste sigurni da zelite da izbrisete profesora?", "Brsanje predmeta",
+					JOptionPane.YES_NO_OPTION);
+			if (odabir == JOptionPane.YES_OPTION) {
+				// kada brisemo iz pretrage
+
 			}
 		} else {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Profesor nije selektovan!", "Greska",
 					JOptionPane.ERROR_MESSAGE);
-			
+
 		}
-	
+
 	}
-	
-	
+
 	public void saveData() throws IOException {
 		BazaProfesora.getInstance().saveProfesori();
 	}
-	
+
 	public void loadData() throws IOException {
 		BazaProfesora.getInstance().loadProfesori();
 	}
 
 	public void dodajPredmet(String[] trimFields) {
-		
-		
+
 	}
-	
+
+	public void pretragaProfesora() {
+		String input = ToolBar.getInstance().getSearchField().getText();
+
+		BazaProfesora.getInstance().pretraziProfesore(input);
+
+		ProfesoriTable.getInstance().refresTable();
+
+	}
 
 }

@@ -1,2 +1,6 @@
 Marko-Markovic-10|09|1978-Radnicka 46-0654434324-marko@gmail.com-Pupinova palata 21-K1233339-Docent-profesor
 Nikola-Nikolic-21|10|1989-Narodnog fronta-0666565435-nikola@gmail.com-ftn-k13332198-Doktor-profesor
+Nikola-Popovic-20|09|1987-Bulevar oslobodjenja-06234231231-nikolapop@gmail.com-ftn-k12344498-Magistar-vanredni profesor
+Milica-Milicevic-11|11|1988-Pupinova-06532312314-milica@gmail.com-ftn-k1239998-Magistar-vanredni profesor
+Lidija-Vukovic-23|10|1998-Danila Kisa-0656586289-lidijav23@gmail.com-ftn-L7459980-Doktor-penzioner
+Aleksandar-Stevanovic-23|09|1999-Sime Milosevica-0656765778-stiven1@gmail.com-ftn-r2346560-Magistar-profesor
