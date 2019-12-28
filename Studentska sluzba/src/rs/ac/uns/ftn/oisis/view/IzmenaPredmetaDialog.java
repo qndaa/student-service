@@ -32,6 +32,7 @@ public class IzmenaPredmetaDialog extends PredmetDialog {
 		txtSifrePredmeta.setText(p.getSifra());
 		semestarCB.setSelectedItem(p.getSemestar());
 		godinaCB.setSelectedItem(p.getGodIzv());
+		
 		potvrdaBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -44,8 +45,9 @@ public class IzmenaPredmetaDialog extends PredmetDialog {
 						return;
 					}
 				}
+				
 				if(predmetIzSviPredmeti != null) {
-					predmetIzSviPredmeti.setNaziv(unos[1]);
+					predmetIzSviPredmeti.setNaziv(unos[1]); 
 					predmetIzSviPredmeti.setSifra(unos[0]);
 					predmetIzSviPredmeti.setSemestar(unos[2]);
 					predmetIzSviPredmeti.setGodIzv(unos[3]);

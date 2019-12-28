@@ -11,7 +11,9 @@ import javax.swing.JMenuItem;
 
 import javax.swing.KeyStroke;
 
-import rs.ac.uns.ftn.oisis.controller.MenuElementListener;
+import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
+import rs.ac.uns.ftn.oisis.controller.MenuElementListenerBirsanje;
+import rs.ac.uns.ftn.oisis.controller.MenuElementListenerDodavanje;
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
 
@@ -84,7 +86,7 @@ public class MenuBar extends JMenuBar {
 		New_Stud.setMnemonic(KeyEvent.VK_S);
 		New_Stud.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		New_Stud.setIcon(new ImageIcon("images/new.png"));
-		New_Stud.addActionListener(new MenuElementListener());
+		New_Stud.addActionListener(new MenuElementListenerDodavanje());
 		New.add(New_Stud);
 
 		New.addSeparator();
@@ -162,8 +164,9 @@ public class MenuBar extends JMenuBar {
 		Edi_Stud.setMnemonic(KeyEvent.VK_Q);
 		Edi_Stud.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 		Edi_Stud.setIcon(new ImageIcon("images/edit.png"));
+		Edi_Stud.addActionListener(new IzmenaListener());
 		Edit.add(Edi_Stud);
-
+			
 		Edit.addSeparator();
 
 		Edit_Prof = new JMenuItem("Edit Prof");
@@ -227,7 +230,7 @@ public class MenuBar extends JMenuBar {
 		Delete_Stud.setMnemonic(KeyEvent.VK_G);
 		Delete_Stud.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G,ActionEvent.CTRL_MASK));
 		Delete_Stud.setIcon(new ImageIcon("images/deleteM.png"));
-		
+		Delete_Stud.addActionListener(new MenuElementListenerBirsanje());
 		delete.add(Delete_Stud);
 		
 		delete.addSeparator();

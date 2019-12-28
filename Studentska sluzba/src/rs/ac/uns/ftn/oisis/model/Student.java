@@ -67,7 +67,31 @@ public class Student extends Osoba{
 		this.godStudija = godStudija;
 	}
 
+	public void setGodinaS(String s) {
+		switch (s) {
+		case "I":
+			godStudija = GodinaStudija.I;
+			break;
+		case "II":
+			godStudija = GodinaStudija.II;
+			break;
+		case "III":
+			godStudija = GodinaStudija.III;
+			break;
+		case "IV":
+			godStudija = GodinaStudija.IV;
+			break;
 
+		default:
+			break;
+		}
+		
+	}
+	
+	
+	
+	
+	
 	public Status getStatusStudenta() {
 		return statusStudenta;
 	}
@@ -77,6 +101,20 @@ public class Student extends Osoba{
 		this.statusStudenta = statusStudenta;
 	}
 
+	
+	
+	
+	public void setStatuS(String s) {
+		switch (s) {
+		case "B":
+			statusStudenta = Status.B;
+			break;
+		case "S":
+			statusStudenta = Status.S;
+		}
+		
+		
+	}
 
 	public ArrayList<Predmet> getSpisakPredmeta() {
 		return spisakPredmeta;
@@ -113,11 +151,28 @@ public class Student extends Osoba{
 		}
 	}
 	
-	
+	public int getGodinaI() {
+		switch (godStudija) {
+		case I:
+			return 0;
+		case II:
+			return 1;
+		case III:
+			return 2;
+		case IV:
+			return 3;
+		}
+		
+		return -1;
+	}
+
 	public String getProsekS() {
 		String a= Double.toString(prosek);
 		return a;
 	}
+	
+	
+	
 	
 		
 	

@@ -24,7 +24,6 @@ public class PredmetiController {
 
 	public boolean dodajPredmet(String kolone[]) {
 		boolean dodao = BazaPredmeta.getInstance().dodajPredmet(kolone);
-
 		return dodao;
 	}
 

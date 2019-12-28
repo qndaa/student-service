@@ -76,7 +76,8 @@ public class ToolBar extends JToolBar {
 		addStudentBtn = new JToggleButton();
 		addStudentBtn.setToolTipText("Dodaj novog studenta");
 		addStudentBtn.setIcon(new ImageIcon("images/student.png"));
-
+		addStudentBtn.addActionListener(new DodavanjeListener());
+		
 		addPredmetBtn = new JToggleButton();
 		addPredmetBtn.setToolTipText("Dodaj novi predmet.");
 		addPredmetBtn.setIcon(new ImageIcon("images/add.png"));
