@@ -50,7 +50,7 @@ public class BazaStudent {
 
 	void addStudenta() {
 		spisakStudenata.add(new Student("Aca", "Simic", "26.12.1998", "Kneza Caslava br.14", "0692603936",
-				"simicaca98@gmail.com", "Ra175/2017", "nekad", 8.0, GodinaStudija.III, Status.B));
+				"simicaca98@gmail.com", "RA-175-2017", "10.10.2017", 8.0, GodinaStudija.III, Status.B));
 		brStudenata++;
 	}
 

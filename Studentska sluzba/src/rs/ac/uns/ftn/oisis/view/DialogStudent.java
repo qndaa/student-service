@@ -387,7 +387,6 @@ public class DialogStudent extends JDialog {
 		} else {
 			txtField2.setBackground(Color.WHITE);
 		}
-
 		if (p[2].length() != 0) { // datum rodjenja
 			if (!Pattern.matches("^(3[01]|[12][0-9]|0[1-9]).(1[0-2]|0[1-9]).[0-9]{4}$", p[2])) {
 				txtField3.setBackground(Color.RED);
@@ -409,21 +408,20 @@ public class DialogStudent extends JDialog {
 				return false;
 			}
 		}
-
+		
 		if (p[5].length() != 0) { // email
 			if (!Pattern.matches("^(.+)@(.+)$", p[5])) {
 				txtField9.setBackground(Color.RED);
 				return false;
 			}
 		}
-
 		if (p[6].length() != 0) { // indeks
-			if (!Pattern.matches("[A-Z]{2,3}-[0-9]{2,3}-[0-9]{4}", p[6])) {
+			if (!Pattern.matches("[A-Z]{1,3}-[0-9]{2,3}-[0-9]{4}", p[6])) {
 				txtField6.setBackground(Color.RED);
 				return false;
 			}
 		}
-
+		
 		if (p[8].length() != 0) { // datum upisa
 			if (!Pattern.matches("^(3[01]|[12][0-9]|0[1-9]).(1[0-2]|0[1-9]).[0-9]{4}$", p[8])) {
 				txtField8.setBackground(Color.RED);

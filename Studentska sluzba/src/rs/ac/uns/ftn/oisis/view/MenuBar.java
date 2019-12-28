@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 
 import javax.swing.KeyStroke;
 
+import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerBirsanje;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerDodavanje;
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
@@ -163,8 +164,9 @@ public class MenuBar extends JMenuBar {
 		Edi_Stud.setMnemonic(KeyEvent.VK_Q);
 		Edi_Stud.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 		Edi_Stud.setIcon(new ImageIcon("images/edit.png"));
+		Edi_Stud.addActionListener(new IzmenaListener());
 		Edit.add(Edi_Stud);
-
+			
 		Edit.addSeparator();
 
 		Edit_Prof = new JMenuItem("Edit Prof");
