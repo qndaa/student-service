@@ -2,7 +2,7 @@ package rs.ac.uns.ftn.oisis.model;
 
 import java.util.ArrayList;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
+
 
 public class BazaStudent {
 
@@ -82,9 +82,9 @@ public class BazaStudent {
 	}
 
 	public boolean Dodavanje(String[] p) {
-		brStudenata++;
 		String index = p[6];
 		if (ProveraIndeksa(index)) {
+			brStudenata++;
 			Student s = new Student(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[8], 0, GodinaStudija.valueOf(p[7]),
 					Status.valueOf(p[9]));
 			spisakStudenata.add(s);
@@ -98,9 +98,27 @@ public class BazaStudent {
 		for (Student s : spisakStudenata) {
 			if (s.getBrIndeksa().equals(index)) {
 				return false;
-			}
+ 			}
 		}
 		return true;
 	}
+	
+	
+	 public void BrisanjeStudenta(int i) {
+		 spisakStudenata.remove(i);
+		 brStudenata--;
+	 }
+
+	public static int getBrStudenata() {
+		return brStudenata;
+	}
+
+	
+	
+	
+	
+	
+	
+	
 
 }

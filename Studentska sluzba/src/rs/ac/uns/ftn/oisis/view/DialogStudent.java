@@ -283,6 +283,7 @@ public class DialogStudent extends JDialog {
 		samo = new JRadioButton("Samofinansiranje");
 		odustani = new JButton("Odustasni");
 		potvrdi = new JButton("Potvird");
+		potvrdi.setEnabled(false);
 		samo.addActionListener(new ActionListener() {
 
 			@Override

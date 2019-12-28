@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import rs.ac.uns.ftn.oisis.view.PredmetiTable;
 import rs.ac.uns.ftn.oisis.view.ProfesoriTable;
+import rs.ac.uns.ftn.oisis.view.StudentiTable;
 import rs.ac.uns.ftn.oisis.view.TabbedPane;
 import rs.ac.uns.ftn.oisis.view.ToolBar;
 
@@ -14,11 +15,8 @@ public class BrisanjeListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(TabbedPane.activeTab == 0) {
 			// implementirati brisanje studenta
-			
-			
-			
-			
-			
+			StudentiController.getInstance().BrisanjeStudenta();
+			StudentiTable.getInstance().OsveziTabelu();
 			ToolBar.getInstance().setSelectedButton();
 		} else if (TabbedPane.activeTab == 1) {
 			// implementirati brisanje predmeta

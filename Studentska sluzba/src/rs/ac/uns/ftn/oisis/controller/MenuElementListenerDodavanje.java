@@ -5,11 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import rs.ac.uns.ftn.oisis.view.MainFrame;
+import rs.ac.uns.ftn.oisis.view.StudentiTable;
 import rs.ac.uns.ftn.oisis.view.TabbedPane;
 import rs.ac.uns.ftn.oisis.view.DialogStudent;
 import rs.ac.uns.ftn.oisis.view.DodavanjeStudentaDijalog;
 
-public class MenuElementListener implements ActionListener {
+public class MenuElementListenerDodavanje implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
