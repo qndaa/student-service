@@ -177,6 +177,18 @@ public class BazaProfesora {
 
 	}
 
+	public boolean DodajProf(String[] p){
+		String brLicneKarte = p[7];
+			if(profesorSaKljucemNePostoji(brLicneKarte)) {
+				brojUnetihProfesora++;
+				Profesor profesor = new Profesor(p[0], p[1], p[2], p[3], p[4],	p[5], p[6],p[7], p[8], p[9]);
+				sviProfesori.add(profesor);
+				return true;
+			}
+		return false;
+	}
+	
+	
 	private boolean profesorSaKljucemNePostoji(String key) {
 		for (Profesor p : sviProfesori) {
 			if (key.equals(p.getBrojLicneKarte())) {

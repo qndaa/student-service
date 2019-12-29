@@ -21,6 +21,10 @@ public class ProfesoriController {
 		return instance;
 	}
 
+	public boolean DodajProfesora(String[] p) {
+		return BazaProfesora.getInstance().DodajProf(p);
+	} 
+	
 	public void brisanjeProfesora() {
 		int selectedRow = ProfesoriTable.getInstance().getSelectedRow();
 		BazaProfesora.getInstance();
