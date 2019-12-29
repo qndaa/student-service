@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.TabbedPane;
+import rs.ac.uns.ftn.oisis.view.DialogProfesor;
 import rs.ac.uns.ftn.oisis.view.DodavanjeStudentaDijalog;
 
 public class MenuElementListenerDodavanje implements ActionListener {
@@ -16,6 +17,10 @@ public class MenuElementListenerDodavanje implements ActionListener {
 		if(TabbedPane.activeTab==0) {
 		DodavanjeStudentaDijalog di = new DodavanjeStudentaDijalog(MainFrame.getInstance(),"Dodavanje studenta", true);
 		di.setVisible(true);
+		}
+		if(TabbedPane.activeTab == 2) {
+			DialogProfesor di = new DialogProfesor(MainFrame.getInstance(),"Dodavanje profesora", true);
+			di.setVisible(true);
 		}
 		
 	}

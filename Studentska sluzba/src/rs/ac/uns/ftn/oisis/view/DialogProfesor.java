@@ -2,56 +2,44 @@ package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.Color;
 import java.awt.Frame;
-
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-public class DialogStudent extends JDialog {
+public class DialogProfesor extends JDialog {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6847297048903882740L;
+	private static final long serialVersionUID = 5804437570634152265L;
+
 	protected JTextField txtField1; // ime
 	protected JTextField txtField2; // prezime
 	protected JTextField txtField3; // datum rodjenja
 	protected JTextField txtField4; // adresa stanovanja
 	protected JTextField txtField5; // broj telefona
-	protected JTextField txtField6; // borj Indeksa
-	protected JTextField txtField9; // email
-	protected JTextField txtField8; // datum upisa
-
-	protected JComboBox<String> god;
-	protected JRadioButton budz;
-	protected JRadioButton samo;
-	protected ButtonGroup bg1;
+	protected JTextField txtField6; // email
+	protected JTextField txtField7; // adresa Kancelarije
+	protected JTextField txtField8; // brlicne
+	protected JTextField txtField9; // titula
+	protected JTextField txtField10; // zvanje
 	protected JButton odustani;
 	protected JButton potvrdi;
 
-	// email
-	// datum upisa
-
-	public DialogStudent(Frame parent, String title, boolean modal) {
+	public DialogProfesor(Frame parent, String title, boolean modal) {
 		super(parent, title, modal);
 
 		setLayout(new GridLayout(11, 2, 10, 20));
 		setSize(500, 500);
 		setLocationRelativeTo(parent);
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
 		JLabel lblTxtField1 = new JLabel("Ime");
 		txtField1 = new JTextField(20);
 		txtField1.addKeyListener(new KeyListener() {
@@ -64,16 +52,19 @@ public class DialogStudent extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (Provera_podataka()) {
+				if (Provera()) {
 					potvrdi.setEnabled(true);
-				} else {
+				}else {
 					potvrdi.setEnabled(false);
 				}
+
 			}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
+				if (Provera()) {
+
+				}
 
 			}
 		});
@@ -90,11 +81,12 @@ public class DialogStudent extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (Provera_podataka()) {
+				if (Provera()) {
 					potvrdi.setEnabled(true);
-				} else {
+				}else {
 					potvrdi.setEnabled(false);
 				}
+
 			}
 
 			@Override
@@ -116,11 +108,12 @@ public class DialogStudent extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (Provera_podataka()) {
+				if (Provera()) {
 					potvrdi.setEnabled(true);
-				} else {
+				}else {
 					potvrdi.setEnabled(false);
 				}
+
 			}
 
 			@Override
@@ -142,11 +135,12 @@ public class DialogStudent extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (Provera_podataka()) {
+				if (Provera()) {
 					potvrdi.setEnabled(true);
-				} else {
+				}else {
 					potvrdi.setEnabled(false);
 				}
+
 			}
 
 			@Override
@@ -155,6 +149,7 @@ public class DialogStudent extends JDialog {
 
 			}
 		});
+
 		JLabel lblTxtField5 = new JLabel("Broj telefona");
 		txtField5 = new JTextField(20);
 		txtField5.addKeyListener(new KeyListener() {
@@ -167,35 +162,9 @@ public class DialogStudent extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (Provera_podataka()) {
+				if (Provera()) {
 					potvrdi.setEnabled(true);
-				} else {
-					potvrdi.setEnabled(false);
-				}
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		JLabel lblTxtField9 = new JLabel("Email");
-		txtField9 = new JTextField(20);
-		txtField9.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (Provera_podataka()) {
-					potvrdi.setEnabled(true);
-				} else {
+				}else {
 					potvrdi.setEnabled(false);
 				}
 
@@ -208,7 +177,7 @@ public class DialogStudent extends JDialog {
 			}
 		});
 
-		JLabel lblTxtField6 = new JLabel("Broj indeksa");
+		JLabel lblTxtField6 = new JLabel("Email");
 		txtField6 = new JTextField(20);
 		txtField6.addKeyListener(new KeyListener() {
 
@@ -220,9 +189,9 @@ public class DialogStudent extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (Provera_podataka()) {
+				if (Provera()) {
 					potvrdi.setEnabled(true);
-				} else {
+				}else {
 					potvrdi.setEnabled(false);
 				}
 
@@ -235,7 +204,34 @@ public class DialogStudent extends JDialog {
 			}
 		});
 
-		JLabel lblTxtField8 = new JLabel("Datum Upisa");
+		JLabel lblTxtField7 = new JLabel("Adresa Kancelarije");
+		txtField7 = new JTextField(20);
+		txtField7.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (Provera()) {
+					potvrdi.setEnabled(true);
+				}else {
+					potvrdi.setEnabled(false);
+				}
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		JLabel lblTxtField8 = new JLabel("Broj licne karte");
 		txtField8 = new JTextField(20);
 		txtField8.addKeyListener(new KeyListener() {
 
@@ -247,9 +243,9 @@ public class DialogStudent extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (Provera_podataka()) {
+				if (Provera()) {
 					potvrdi.setEnabled(true);
-				} else {
+				}else {
 					potvrdi.setEnabled(false);
 				}
 
@@ -261,54 +257,65 @@ public class DialogStudent extends JDialog {
 
 			}
 		});
-		;
 
-		JLabel lblTxtField7 = new JLabel("Trenutna godina Studija*");
-		String[] godina = new String[] { "I", "II", "III", "IV" };
-		god = new JComboBox<String>(godina);
-		god.addActionListener(new ActionListener() {
+		JLabel lblTxtField9 = new JLabel("Titula");
+		txtField9 = new JTextField(20);
+		txtField9.addKeyListener(new KeyListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (Provera_podataka()) {
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (Provera()) {
 					potvrdi.setEnabled(true);
-				} else {
+				}else {
 					potvrdi.setEnabled(false);
 				}
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
 			}
 		});
 
-		bg1 = new ButtonGroup();
-		budz = new JRadioButton("Budzet", true);
-		samo = new JRadioButton("Samofinansiranje");
-		odustani = new JButton("Odustasni");
-		potvrdi = new JButton("Potvird");
+		JLabel lblTxtField10 = new JLabel("Zvanje");
+		txtField10 = new JTextField(20);
+		txtField10.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (Provera()) {
+					potvrdi.setEnabled(true);
+				}else {
+					potvrdi.setEnabled(false);
+				}
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		odustani = new JButton("Odustani");
+		potvrdi = new JButton("Potvrdi");
 		potvrdi.setEnabled(false);
-		samo.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (Provera_podataka()) {
-					potvrdi.setEnabled(true);
-				} else {
-					potvrdi.setEnabled(false);
-				}
-			}
-		});
-		budz.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (Provera_podataka()) {
-					potvrdi.setEnabled(true);
-				} else {
-					potvrdi.setEnabled(false);
-				}
-			}
-		});
-
-		bg1.add(budz);
-		bg1.add(samo);
 		add(lblTxtField1); // ime
 		add(txtField1);
 
@@ -318,31 +325,31 @@ public class DialogStudent extends JDialog {
 		add(lblTxtField3); // datum rodjenja
 		add(txtField3);
 
-		add(lblTxtField4); // Adresa Stanovanja
+		add(lblTxtField4); // adresa stanovanja
 		add(txtField4);
 
-		add(lblTxtField5); // Broj telefona
+		add(lblTxtField5); // broj telefona
 		add(txtField5);
 
-		add(lblTxtField9); // Email
-		add(txtField9);
-
-		add(lblTxtField6); // Broj Indeksa
+		add(lblTxtField6); // email
 		add(txtField6);
 
-		add(lblTxtField8); // datum upisa
+		add(lblTxtField7); // adresa kancelarije
+		add(txtField7);
+
+		add(lblTxtField8); // br licne karte
 		add(txtField8);
 
-		add(lblTxtField7); // Trenutna godina studija
+		add(lblTxtField9); // titula
+		add(txtField9);
 
-		add(god);
-		add(budz);
-		add(samo);
+		add(lblTxtField10); // Zvanje
+		add(txtField10);
+
 		add(odustani);
 		add(potvrdi);
 
 		setResizable(false);
-
 	}
 
 	protected String[] podaci() {
@@ -352,26 +359,21 @@ public class DialogStudent extends JDialog {
 			p[i] = new String();
 		}
 
-		p[0] = txtField1.getText().toString(); // ime
-		p[1] = txtField2.getText().toString(); // prezime
-		p[2] = txtField3.getText().toString(); // datum rodejna
-		p[3] = txtField4.getText().toString(); // adresa stanovanja
-		p[4] = txtField5.getText().toString(); // br telefona
-		p[5] = txtField9.getText().toString(); // email
-		p[6] = txtField6.getText().toString(); // br indeksa
-		p[7] = god.getSelectedItem().toString(); // godina 
-		p[8] = txtField8.getText().toString(); //datum upisa
-		// Budzet / samofinasiranje
-		if (samo.isSelected()) {
-			p[9] = "S";
-		} else {
-			p[9] = "B";
-		}
+		p[0] = txtField1.getText().toString();
+		p[1] = txtField2.getText().toString();
+		p[2] = txtField3.getText().toString();
+		p[3] = txtField4.getText().toString();
+		p[4] = txtField5.getText().toString();
+		p[5] = txtField6.getText().toString();
+		p[6] = txtField7.getText().toString();
+		p[7] = txtField8.getText().toString();
+		p[8] = txtField9.getText().toString();
+		p[9] = txtField10.getText().toString();
 
 		return p;
 	}
 
-	private boolean Provera_podataka() {
+	private boolean Provera() {
 		boolean ret = true;
 		String[] p = podaci();
 
@@ -408,25 +410,41 @@ public class DialogStudent extends JDialog {
 				return false;
 			}
 		}
-		
 		if (p[5].length() != 0) { // email
 			if (!Pattern.matches("^(.+)@(.+)$", p[5])) {
-				txtField9.setBackground(Color.RED);
-				return false;
-			}
-		}
-		if (p[6].length() != 0) { // indeks
-			if (!Pattern.matches("[A-Z]{2,3}-[0-9]{1,3}-[0-9]{4}", p[6])) {
 				txtField6.setBackground(Color.RED);
 				return false;
 			}
 		}
-		
-		if (p[8].length() != 0) { // datum upisa
-			if (!Pattern.matches("^(3[01]|[12][0-9]|0[1-9]).(1[0-2]|0[1-9]).[0-9]{4}$", p[8])) {
+
+		if (p[6].length() != 0) { // adresa stanovanja
+			if (!Pattern.matches("[A-Za-z0-9,._ ]*", p[6])) {
+				txtField7.setBackground(Color.RED);
+				return false;
+			}
+		}
+
+		if (p[7].length() != 0) { // brLinke
+			if (!Pattern.matches("[0-9]*", p[7])) {
+				txtField8.setBackground(Color.RED);
+				return false;
+			} else if (p[7].length() != 9) {
 				txtField8.setBackground(Color.RED);
 				return false;
 			}
+		}
+
+		if (!Pattern.matches("[A-Za-z_ ]*", p[8])) { // Titula
+			txtField9.setBackground(Color.RED);
+			return false;
+		} else {
+			txtField9.setBackground(Color.WHITE);
+		}
+		if (!Pattern.matches("[A-Za-z_ ]*", p[9])) { // Zvanje
+			txtField10.setBackground(Color.RED);
+			return false;
+		} else {
+			txtField10.setBackground(Color.WHITE);
 		}
 
 		for (String string : p) {
@@ -437,10 +455,11 @@ public class DialogStudent extends JDialog {
 				txtField4.setBackground(Color.WHITE);
 				txtField5.setBackground(Color.WHITE);
 				txtField6.setBackground(Color.WHITE);
+				txtField7.setBackground(Color.WHITE);
 				txtField8.setBackground(Color.WHITE);
 				txtField9.setBackground(Color.WHITE);
+				txtField10.setBackground(Color.WHITE);
 				return false;
-
 			}
 		}
 
@@ -450,8 +469,10 @@ public class DialogStudent extends JDialog {
 		txtField4.setBackground(Color.WHITE);
 		txtField5.setBackground(Color.WHITE);
 		txtField6.setBackground(Color.WHITE);
+		txtField7.setBackground(Color.WHITE);
 		txtField8.setBackground(Color.WHITE);
 		txtField9.setBackground(Color.WHITE);
+		txtField10.setBackground(Color.WHITE);
 
 		return ret;
 	}

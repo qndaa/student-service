@@ -96,7 +96,7 @@ public class MenuBar extends JMenuBar {
 		New_Prof.setMnemonic(KeyEvent.VK_P);
 		New_Prof.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
 		New_Prof.setIcon(new ImageIcon("images/new.png"));
-		// New_Prof.addActionListener(new MenuElementListener());
+		 New_Prof.addActionListener(new MenuElementListenerDodavanje());
 		New.add(New_Prof);
 
 		New.addSeparator();
