@@ -3,6 +3,8 @@ package rs.ac.uns.ftn.oisis.controller;
 import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.model.BazaStudent;
+import rs.ac.uns.ftn.oisis.model.Predmet;
+import rs.ac.uns.ftn.oisis.model.Student;
 import rs.ac.uns.ftn.oisis.view.IzmenaStudentaDialog;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.StudentiTable;
@@ -16,7 +18,24 @@ public class StudentiController {
 	public boolean DodajStudenta(String[] p) {
 		return BazaStudent.getInstance().Dodavanje(p);
 	}
+	
+	public boolean IndeksPostoji (String index) {
+		
+		return BazaStudent.getInstance().ProveraIndeksa(index);
+	}
 
+	public Student getStudentPoIndeksu(String indeks) {
+		if(BazaStudent.getBrStudenata() !=0) {
+		return BazaStudent.getInstance().getStudent(indeks);
+		}
+		return null;
+	}
+	
+	public void DodavanjePredmetaStudentu(Predmet predmet, String s) {
+		BazaStudent.getInstance().DodajPredmetStudentu(predmet, s);
+	}
+	
+	
 	public void BrisanjeStudenta() {
 		int row = StudentiTable.getInstance().getSelectedRow();
 

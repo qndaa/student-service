@@ -48,7 +48,7 @@ public class DialogStudent extends JDialog {
 		super(parent, title, modal);
 
 		setLayout(new GridLayout(11, 2, 10, 20));
-		setSize(500, 500);
+		setSize(500,500);
 		setLocationRelativeTo(parent);
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 

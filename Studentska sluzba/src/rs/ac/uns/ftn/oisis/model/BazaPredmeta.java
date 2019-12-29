@@ -29,6 +29,7 @@ public class BazaPredmeta {
 	}
 
 	private static int brojUnetihPredmeta = 0;
+	private static int BrojStudenataNaPredmetu = 0;
 	private static int brojPredmetaKojiSuUPretrazi = 0;
 
 	private ArrayList<String> nazivKolona;
@@ -303,6 +304,32 @@ public class BazaPredmeta {
 		brojPredmetaKojiSuUPretrazi--;
 		
 	}
+	
+	public Boolean ProveraStudenta(String index, int row) {
+		if(BrojStudenataNaPredmetu !=0) {
+			for (Student s : sviPredmeti.get(row).getStudenti()) {
+				System.out.println(sviPredmeti.get(row).getStudenti().size());
+				if(s.getBrIndeksa().equals(index)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public void DodajStudentaNaPredmet(Student stud, int i) {
+		sviPredmeti.get(i).getStudenti().add(stud);	
+		BrojStudenataNaPredmetu++;
+	}
 
+	public static int getBrojStudenataNaPredmetu() {
+		return BrojStudenataNaPredmetu;
+	}
+
+	public static void setBrojStudenataNaPredmetu(int brojStudenataNaPredmetu) {
+		BrojStudenataNaPredmetu = brojStudenataNaPredmetu;
+	}
+	
+	
 
 }

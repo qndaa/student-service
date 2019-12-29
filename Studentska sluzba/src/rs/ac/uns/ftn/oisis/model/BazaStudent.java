@@ -2,21 +2,27 @@ package rs.ac.uns.ftn.oisis.model;
 
 import java.util.ArrayList;
 
-
-
 public class BazaStudent {
 
 	private static BazaStudent instance = null;
 	private ArrayList<String> colon;
 	private ArrayList<Student> spisakStudenata;
 	private static int brStudenata = 0;
-
+	private static int brPredmeta = 0;
 	public static BazaStudent getInstance() {
 		if (instance == null) {
 			instance = new BazaStudent();
 		}
 
 		return instance;
+	}
+
+	public static int getBrPredmeta() {
+		return brPredmeta;
+	}
+
+	public static void setBrPredmeta(int brPredmeta) {
+		BazaStudent.brPredmeta = brPredmeta;
 	}
 
 	private BazaStudent() {
@@ -98,27 +104,40 @@ public class BazaStudent {
 		for (Student s : spisakStudenata) {
 			if (s.getBrIndeksa().equals(index)) {
 				return false;
- 			}
+			}
 		}
 		return true;
 	}
-	
-	
-	 public void BrisanjeStudenta(int i) {
-		 spisakStudenata.remove(i);
-		 brStudenata--;
-	 }
+
+	public void BrisanjeStudenta(int i) {
+		spisakStudenata.remove(i);
+		brStudenata--;
+	}
 
 	public static int getBrStudenata() {
 		return brStudenata;
 	}
 
-	
-	
-	
-	
-	
-	
-	
+	public Student getStudent(String index) {
+		Student student = null;
+		for (Student s : spisakStudenata) {
+			if (s.getBrIndeksa().equals(index)) {
+				student = s;
+			}
+		}
+
+		return student;
+	}
+
+	public void DodajPredmetStudentu(Predmet predmet, String s) {
+		for (int i = 0; i < spisakStudenata.size(); i++) {
+			if (spisakStudenata.get(i).getBrIndeksa().equals(s)) {
+				spisakStudenata.get(i).getSpisakPredmeta().add(predmet);
+				brPredmeta++;
+			}
+
+		}
+
+	}
 
 }
