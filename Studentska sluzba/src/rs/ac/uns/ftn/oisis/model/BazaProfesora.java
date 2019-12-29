@@ -189,7 +189,7 @@ public class BazaProfesora {
 	}
 	
 	
-	private boolean profesorSaKljucemNePostoji(String key) {
+	public boolean profesorSaKljucemNePostoji(String key) {
 		for (Profesor p : sviProfesori) {
 			if (key.equals(p.getBrojLicneKarte())) {
 				return false;
