@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 import rs.ac.uns.ftn.oisis.model.Predmet;
+import rs.ac.uns.ftn.oisis.model.Student;
+import rs.ac.uns.ftn.oisis.view.DialogStudenaNaPredmet;
 import rs.ac.uns.ftn.oisis.view.IzmenaPredmetaDialog;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTable;
@@ -92,5 +94,44 @@ public class PredmetiController {
 		PredmetiTable.getInstance().refreshTable();
 
 	}
+	
+	public boolean PostojiStudentSaIndeksom(String index, int row) {
+		return BazaPredmeta.getInstance().ProveraStudenta(index, row);
+	}
+	
+	public void DodavanjeStudNaPred() {
+		int row = PredmetiTable.getInstance().getSelectedRow();
+		
+		if(row >= 0 && row < BazaPredmeta.getBrojUnetihPredmeta()) {
+			DialogStudenaNaPredmet di = new DialogStudenaNaPredmet(MainFrame.getInstance(),"Dodavanje studenta na predmet", true);
+			di.setVisible(true);
+			
+			
+		} else {
+			
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Predmet nije selektovan", "EROR",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
+	
+	public Predmet getPredmetPoIndeksu(int i) {
+		if(BazaPredmeta.getBrojUnetihPredmeta() !=0) {
+		return BazaPredmeta.getInstance().getSviPredmeti().get(i);
+		}
+		return null;
+	}
+	
+	
+	public void DodavanjeStudentaNaPredmet(Student stud, int i) {
+		BazaPredmeta.getInstance().DodajStudentaNaPredmet(stud,i);
+	}
+	
+	
+	
+	
+	
+	
 
 }

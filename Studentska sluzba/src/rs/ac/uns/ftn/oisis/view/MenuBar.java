@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 
 import javax.swing.KeyStroke;
 
+import rs.ac.uns.ftn.oisis.controller.DodavanjeStudentaProfesoraNaPredmetListener;
 import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerBirsanje;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerDodavanje;
@@ -128,7 +129,8 @@ public class MenuBar extends JMenuBar {
 		newStud.setMnemonic(KeyEvent.VK_K);
 		newStud.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, ActionEvent.CTRL_MASK));
 		newStud.setIcon(new ImageIcon("images/new.png"));
-
+		newStud.addActionListener(new MenuElementListenerDodavanje());
+		
 		New_Stud_Prof.add(newStud);
 		New_Stud_Prof.addSeparator();
 
