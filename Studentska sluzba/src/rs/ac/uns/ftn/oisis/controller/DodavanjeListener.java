@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 
 import rs.ac.uns.ftn.oisis.view.DodavanjePredmetaDialog;
+import rs.ac.uns.ftn.oisis.view.DodavanjeProfesoraDialog;
 import rs.ac.uns.ftn.oisis.view.DodavanjeStudentaDijalog;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.TabbedPane;
@@ -25,8 +26,11 @@ public class DodavanjeListener implements ActionListener {
 			dialog.setVisible(true);
 			ToolBar.getInstance().setSelectedButton();
 		} else if (TabbedPane.activeTab == 2) {
-
+			DodavanjeProfesoraDialog dialog = new DodavanjeProfesoraDialog(MainFrame.getInstance(), "Dodavanje predmeta",
+					true);
+			dialog.setVisible(true);
 		}
+		
 
 	}
 

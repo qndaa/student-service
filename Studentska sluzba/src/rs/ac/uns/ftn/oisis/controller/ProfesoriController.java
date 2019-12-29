@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.model.BazaProfesora;
+import rs.ac.uns.ftn.oisis.view.IzmenaProfesoraDialog;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.ProfesoriTable;
 import rs.ac.uns.ftn.oisis.view.ToolBar;
@@ -24,6 +25,20 @@ public class ProfesoriController {
 	public boolean DodajProfesora(String[] p) {
 		return BazaProfesora.getInstance().DodajProf(p);
 	} 
+	
+	public void IzmenaProfesora() {
+		int row = ProfesoriTable.getInstance().getSelectedRow();
+		
+		if(row >= 0 && row < BazaProfesora.getBrojUnetihProfesora() ) {
+			IzmenaProfesoraDialog di = new IzmenaProfesoraDialog(MainFrame.getInstance(), "Izmena profesora", true);
+			di.setVisible(true);
+			
+		}else {
+		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Profesor nije selektovan", "EROR",
+					JOptionPane.ERROR_MESSAGE);
+			
+		}
+	}
 	
 	public void brisanjeProfesora() {
 		int selectedRow = ProfesoriTable.getInstance().getSelectedRow();

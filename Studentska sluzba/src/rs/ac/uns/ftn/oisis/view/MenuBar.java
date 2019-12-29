@@ -173,6 +173,7 @@ public class MenuBar extends JMenuBar {
 		Edit_Prof.setMnemonic(KeyEvent.VK_A);
 		Edit_Prof.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 		Edit_Prof.setIcon(new ImageIcon("images/edit.png"));
+		Edit_Prof.addActionListener(new IzmenaListener());
 		Edit.add(Edit_Prof);
 
 		Edit.addSeparator();
