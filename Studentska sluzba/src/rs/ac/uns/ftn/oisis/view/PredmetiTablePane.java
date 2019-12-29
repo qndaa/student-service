@@ -46,15 +46,19 @@ public class PredmetiTablePane extends JPanel {
 		add(left, BorderLayout.WEST);
 		add(right, BorderLayout.EAST);
 		
-		predmetiTable = PredmetiTable.getInstance();
-		
-		// ucitava postojece podatke iz predmeti.txt
+		//predmetiTable.setPreferredSize(new Dimension(screenHeight/4, screenWidth/4*3-20));
+				// ucitava postojece podatke iz predmeti.txt
 		try {
 			PredmetiController.getInstance().loadData();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		predmetiTable = PredmetiTable.getInstance();
+		//predmetiTable.setPreferredSize(new Dimension(screenHeight/4, screenWidth/4*3-20));
+		// ucitava postojece podatke iz predmeti.txt
+		
 		
 		
 		scrollPane = new JScrollPane(predmetiTable);

@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 
 import rs.ac.uns.ftn.oisis.controller.BrisanjeListener;
 import rs.ac.uns.ftn.oisis.controller.DodavanjeListener;
+import rs.ac.uns.ftn.oisis.controller.DodavanjeStudentaProfesoraNaPredmetListener;
 import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 import rs.ac.uns.ftn.oisis.controller.PretragaListener;
@@ -94,6 +95,7 @@ public class ToolBar extends JToolBar {
 		addStudentNaPredmetBtn = new JToggleButton();
 		addStudentNaPredmetBtn.setToolTipText("Dodaj novog studenta/profesora na predmet.");
 		addStudentNaPredmetBtn.setIcon(new ImageIcon("images/student.png"));
+		addStudentNaPredmetBtn.addActionListener(new DodavanjeStudentaProfesoraNaPredmetListener());
 
 		deleteBtn = new JToggleButton();
 		deleteBtn.addActionListener(new BrisanjeListener());

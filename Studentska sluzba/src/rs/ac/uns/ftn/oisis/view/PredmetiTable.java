@@ -3,7 +3,6 @@ package rs.ac.uns.ftn.oisis.view;
 import java.awt.Color;
 import java.awt.Component;
 
-
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
@@ -28,6 +27,8 @@ public class PredmetiTable extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractPredmetTable());
 		this.setRowHeight(20);
+		
+		
 	}
 
 	public void refreshTable() {

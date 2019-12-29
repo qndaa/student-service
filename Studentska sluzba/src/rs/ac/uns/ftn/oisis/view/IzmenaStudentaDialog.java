@@ -5,11 +5,8 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.net.ssl.SSLEngineResult.Status;
-import javax.net.ssl.SSLEngineResult.Status;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
+import javax.swing.JOptionPane;
 import rs.ac.uns.ftn.oisis.model.BazaStudent;
 import rs.ac.uns.ftn.oisis.model.Student;
 

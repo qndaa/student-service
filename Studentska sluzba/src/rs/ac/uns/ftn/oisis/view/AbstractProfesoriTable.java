@@ -16,7 +16,8 @@ public class AbstractProfesoriTable extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 17;
+		return (BazaProfesora.getBrojProfesoraKojiSuUPretrazi() == 0) ? BazaProfesora.getBrojUnetihProfesora() : BazaProfesora.getBrojProfesoraKojiSuUPretrazi();
+
 	}
 
 	@Override
