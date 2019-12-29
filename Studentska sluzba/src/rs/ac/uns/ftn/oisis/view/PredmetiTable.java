@@ -27,6 +27,8 @@ public class PredmetiTable extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractPredmetTable());
 		this.setRowHeight(20);
+		new StudentNaPredmetuButton(this, 5);
+		
 		
 		
 	}
