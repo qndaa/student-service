@@ -10,7 +10,8 @@ public class PretragaListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (TabbedPane.activeTab == 0) {
-
+			StudentiController.getInstance().pretragaStudenta();
+			
 		} else if (TabbedPane.activeTab == 1) {
 			PredmetiController.getInstance().pretragaPredmeta();
 

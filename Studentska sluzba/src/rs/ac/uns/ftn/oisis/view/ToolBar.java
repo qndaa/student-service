@@ -21,6 +21,7 @@ import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 import rs.ac.uns.ftn.oisis.controller.PretragaListener;
 import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
+import rs.ac.uns.ftn.oisis.controller.StudentiController;
 
 public class ToolBar extends JToolBar {
 
@@ -118,10 +119,9 @@ public class ToolBar extends JToolBar {
 				JTextField txt = (JTextField) e.getComponent();
 				if (txt.getText().length() == 0) {
 					if (TabbedPane.activeTab == 0) {
-
+						StudentiController.getInstance().pretragaStudenta();
 					} else if (TabbedPane.activeTab == 1) {
 						PredmetiController.getInstance().pretragaPredmeta();
-
 					} else if (TabbedPane.activeTab == 2) {
 						ProfesoriController.getInstance().pretragaProfesora();
 					}

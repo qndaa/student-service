@@ -137,6 +137,7 @@ public class BazaPredmeta {
 			brojPredmetaKojiSuUPretrazi = 0;
 			return;
 		}
+		
 		razultatPretrage.clear();
 		brojPredmetaKojiSuUPretrazi = 0;
 

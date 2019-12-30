@@ -29,11 +29,16 @@ public class ProfesoriController {
 	public void IzmenaProfesora() {
 		int row = ProfesoriTable.getInstance().getSelectedRow();
 		
-		if(row >= 0 && row < BazaProfesora.getBrojUnetihProfesora() ) {
+		if(row >= 0 && row < BazaProfesora.getBrojUnetihProfesora() && BazaProfesora.getBrojProfesoraKojiSuUPretrazi() ==0) {
 			IzmenaProfesoraDialog di = new IzmenaProfesoraDialog(MainFrame.getInstance(), "Izmena profesora", true);
 			di.setVisible(true);
 			
-		}else {
+		}if(row >= 0 && row < BazaProfesora.getBrojProfesoraKojiSuUPretrazi() ) {
+			IzmenaProfesoraDialog di = new IzmenaProfesoraDialog(MainFrame.getInstance(), "Izmena profesora", true);
+			di.setVisible(true);
+			
+		}
+		else {
 		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Profesor nije selektovan", "EROR",
 					JOptionPane.ERROR_MESSAGE);
 			

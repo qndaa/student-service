@@ -71,12 +71,13 @@ public class PredmetiController {
 		
 		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta() &&  
 				BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0 ) {
-			
+				
 			IzmenaPredmetaDialog dialog = new IzmenaPredmetaDialog(MainFrame.getInstance(), "Izmena predmeta", true);
 			
 			dialog.setVisible(true);
 			
 		} else if(selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
+		
 			IzmenaPredmetaDialog dialog = new IzmenaPredmetaDialog(MainFrame.getInstance(), "Izmena predmeta", true);
 			
 			dialog.setVisible(true);

@@ -129,6 +129,40 @@ public class BazaProfesora {
 		brojUnetihProfesora--;
 
 	}
+	
+	public Profesor getProfesora(String licna) {
+		Profesor prof = null;
+		for (Profesor p :sviProfesori) {
+			if(p.getBrojLicneKarte().equals(licna)) {
+				prof = p;
+			}
+		}
+		return prof;
+		
+	}
+	
+	public ArrayList<Profesor> getRezultatPretrage() {
+		return rezultatPretrage;
+	}
+
+	public void setRezultatPretrage(ArrayList<Profesor> rezultatPretrage) {
+		this.rezultatPretrage = rezultatPretrage;
+	}
+
+	public void BrisanjePoLicnoj(String licna) {
+		int pamtiIndeks = -1;
+		for (int i = 0; i < sviProfesori.size(); i++) {
+			if(sviProfesori.get(i).getBrojLicneKarte().equals(licna)) {
+				pamtiIndeks = i;
+			}
+		}
+		if(pamtiIndeks != -1) {
+			sviProfesori.remove(pamtiIndeks);
+			brojUnetihProfesora--;
+		}
+		
+		
+	}
 
 	public void saveProfesori() throws IOException {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileProfesori)));

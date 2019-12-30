@@ -19,7 +19,11 @@ public class AbstractStudentiTable extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 17;
+		if(BazaStudent.getBrStudenataPretga() == 0) {
+			return BazaStudent.getBrStudenata();
+			
+		}
+		return BazaStudent.getBrStudenataPretga();
 	}
 
 	@Override

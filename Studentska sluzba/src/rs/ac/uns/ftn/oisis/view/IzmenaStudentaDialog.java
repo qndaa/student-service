@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 
 import javax.swing.JOptionPane;
+
+import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 import rs.ac.uns.ftn.oisis.model.BazaStudent;
 import rs.ac.uns.ftn.oisis.model.Student;
 
@@ -17,12 +19,20 @@ public class IzmenaStudentaDialog extends DialogStudent {
 	 */
 	private static final long serialVersionUID = 1871482353300249173L;
 	private Student s;
-
+	private Student sviStud=null;
 	public IzmenaStudentaDialog(Frame parent, String title, boolean modal) {
 		super(parent, title, modal);
 
 		int row = StudentiTable.getInstance().getSelectedRow();
-		s = BazaStudent.getInstance().getSpisakStudenata().get(row);
+		
+		
+		if(BazaStudent.getBrStudenataPretga() == 0) {
+			s = BazaStudent.getInstance().getSpisakStudenata().get(row);
+		}else {
+			s = BazaStudent.getInstance().getRezPretrage().get(row);
+			sviStud = BazaStudent.getInstance().getStudent(s.getBrIndeksa());
+		}
+		
 
 		txtField1.setText(s.getIme()); // ime
 		txtField2.setText(s.getPrezime());
@@ -60,6 +70,22 @@ public class IzmenaStudentaDialog extends DialogStudent {
 						return;
 					}
 				}
+					
+				if (sviStud !=null) {
+					sviStud.setIme(pod[0]);
+					sviStud.setPrezime(pod[1]);
+					sviStud.setDatumRodjenja(pod[2]);
+					sviStud.setAdresaStanovanja(pod[3]);
+					sviStud.setKontaktTelefon(pod[4]);
+					sviStud.setEmail(pod[5]);
+					sviStud.setBrIndeksa(pod[6]);
+					sviStud.setGodinaS(pod[7]);
+					sviStud.setDatumUpisa(pod[8]);
+					sviStud.setStatuS(pod[9]);
+				}
+
+
+
 
 				s.setIme(pod[0]);
 				s.setPrezime(pod[1]);
