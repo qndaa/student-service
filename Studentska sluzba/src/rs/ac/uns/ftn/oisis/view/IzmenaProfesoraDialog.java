@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import rs.ac.uns.ftn.oisis.model.BazaProfesora;
 import rs.ac.uns.ftn.oisis.model.Profesor;

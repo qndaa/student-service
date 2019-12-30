@@ -18,12 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import javax.swing.text.TabExpander;
 
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 import rs.ac.uns.ftn.oisis.controller.StudentiController;
-import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
-import rs.ac.uns.ftn.oisis.model.BazaStudent;
 import rs.ac.uns.ftn.oisis.model.Predmet;
 import rs.ac.uns.ftn.oisis.model.Student;
 

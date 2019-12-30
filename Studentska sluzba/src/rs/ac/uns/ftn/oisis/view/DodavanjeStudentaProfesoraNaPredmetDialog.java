@@ -14,19 +14,23 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 public class DodavanjeStudentaProfesoraNaPredmetDialog  extends JDialog {
 	
 
 	private static final long serialVersionUID = -8764610600946433965L;
 
+	
+	
+	
 	public DodavanjeStudentaProfesoraNaPredmetDialog(Frame parent, String title, boolean modal) {
 		super(parent, title, modal);
 		
 		setLayout(new BorderLayout());
 		setSize(400, 200);
 		setLocationRelativeTo(parent);
-		//setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		
 		JPanel centar = new JPanel();
 		centar.setLayout(new GridBagLayout());
@@ -41,6 +45,25 @@ public class DodavanjeStudentaProfesoraNaPredmetDialog  extends JDialog {
 		JButton addProfesor = new JButton();
 		addProfesor.setIcon(new ImageIcon("images/profesor_na_predmet.png"));
 		addProfesor.setBackground(Color.WHITE);
+		addProfesor.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				DodavanjeProfesoraNaPredmetDialog dialog = new DodavanjeProfesoraNaPredmetDialog(MainFrame.getInstance(), "Dodavanje profesora na predmet", true);
+				dialog.setVisible(true);
+				
+				
+				
+				
+			}
+		});
+		
+		
+		
+		
+		
+		
 		JButton closeBtn = new JButton();
 		closeBtn.setBackground(Color.WHITE);
 		closeBtn.setIcon(new ImageIcon("images/close.png"));
@@ -48,9 +71,13 @@ public class DodavanjeStudentaProfesoraNaPredmetDialog  extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();	
+				dispose();
+				ToolBar.getInstance().setSelectedButton();
 			}
 		});
+		
+		
+		
 		
 		add(centar);
 		

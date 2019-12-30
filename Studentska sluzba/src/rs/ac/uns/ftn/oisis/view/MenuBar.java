@@ -11,7 +11,6 @@ import javax.swing.JMenuItem;
 
 import javax.swing.KeyStroke;
 
-import rs.ac.uns.ftn.oisis.controller.DodavanjeStudentaProfesoraNaPredmetListener;
 import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerBirsanje;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerDodavanje;
