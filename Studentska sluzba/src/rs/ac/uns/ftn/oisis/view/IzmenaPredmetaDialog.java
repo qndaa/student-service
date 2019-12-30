@@ -19,7 +19,7 @@ public class IzmenaPredmetaDialog extends PredmetDialog {
 	public IzmenaPredmetaDialog(Frame parent, String title, boolean modal) {
 		super(parent, title, modal);
 		
-		int selectedRow = PredmetiTable.getInstance().getSelectedRow();
+		int selectedRow = PredmetiTablePane.getSelectedRow();
 		if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
 			 p = BazaPredmeta.getInstance().getSviPredmeti().get(selectedRow);
 			

@@ -11,6 +11,7 @@ import rs.ac.uns.ftn.oisis.view.DialogStudenaNaPredmet;
 import rs.ac.uns.ftn.oisis.view.IzmenaPredmetaDialog;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTable;
+import rs.ac.uns.ftn.oisis.view.PredmetiTablePane;
 import rs.ac.uns.ftn.oisis.view.ToolBar;
 
 public class PredmetiController {
@@ -38,7 +39,7 @@ public class PredmetiController {
 	}
 
 	public void brisanjePredmeta() {
-		int selectedRow = PredmetiTable.getInstance().getSelectedRow();
+		int selectedRow = PredmetiTablePane.getSelectedRow();
 		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta()&& 
 				BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
 			//System.out.println("obicno");
@@ -66,7 +67,7 @@ public class PredmetiController {
 
 	public void izmenaPredmeta() {
 		
-		int selectedRow = PredmetiTable.getInstance().getSelectedRow();
+		int selectedRow = PredmetiTablePane.getSelectedRow();
 		
 		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta() &&  
 				BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0 ) {
