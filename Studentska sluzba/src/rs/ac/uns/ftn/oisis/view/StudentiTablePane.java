@@ -3,9 +3,12 @@ package rs.ac.uns.ftn.oisis.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import rs.ac.uns.ftn.oisis.controller.StudentiController;
 
 public class StudentiTablePane extends JPanel {
 
@@ -52,6 +55,18 @@ public class StudentiTablePane extends JPanel {
 		
 		
 		studentiTable = StudentiTable.getInstance();
+		
+		
+		try {
+			StudentiController.getInstance().otvoriFileStudent();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 		scrollPane = new JScrollPane(studentiTable);
 		add(scrollPane,BorderLayout.CENTER);
 	}

@@ -1,6 +1,16 @@
 package rs.ac.uns.ftn.oisis.model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+
+import rs.ac.uns.ftn.oisis.controller.StudentiController;
+import rs.ac.uns.ftn.oisis.view.StudentiTable;
 
 public class BazaStudent {
 
@@ -35,7 +45,7 @@ public class BazaStudent {
 		colon.add("Status");
 		colon.add("Prosek");
 		colon.add("Spisak Predmeta");
-		addStudenta();
+	
 	}
 
 	public ArrayList<String> getColon() {
@@ -49,17 +59,46 @@ public class BazaStudent {
 	public ArrayList<Student> getSpisakStudenata() {
 		return spisakStudenata;
 	}
+	
 
 	public void setSpisakStudenata(ArrayList<Student> spisakStudenata) {
 		this.spisakStudenata = spisakStudenata;
 	}
 
-	void addStudenta() {
-		spisakStudenata.add(new Student("Aca", "Simic", "26.12.1998", "Kneza Caslava br.14", "0692603936",
-				"simicaca98@gmail.com", "RA-175-2017", "10.10.2017", 8.0, GodinaStudija.III, Status.B));
-		brStudenata++;
-	}
 
+	public void sacuvajStudente()  throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("studenti.txt")));
+		
+		
+		for (int i = 0; i < spisakStudenata.size(); i++) {
+			Student s = spisakStudenata.get(i);
+			String line = s.toString(); 
+			bw.write(line);	
+		}
+		bw.close();
+	}
+	
+	public void otvoriFileStudenta() throws IOException {
+		BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream("studenti.txt")));
+		String line;
+		
+		while((line = bfr.readLine()) != null) {
+			String p[] = line.split("-");
+			String trimP[] = new String[p.length];
+			for (int i = 0; i < p.length; i++) {
+				trimP[i] = p[i].trim();
+			}
+			Dodavanje(trimP);
+			StudentiTable.getInstance().OsveziTabelu();
+			
+			
+		}	
+		
+		bfr.close();
+	}
+	
+	
+	
 	public String getValueAt(int row, int column) {
 		if (row < brStudenata) {
 			Student student = spisakStudenata.get(row);
@@ -78,6 +117,16 @@ public class BazaStudent {
 				return student.getProsekS();
 			case 6:
 				return "Predmeti";
+			case 7:
+				return student.getDatumRodjenja();
+			case 8:
+				return student.getKontaktTelefon();
+			case 9:
+				return student.getEmail();
+			case 10:
+					return student.getAdresaStanovanja();
+			case 11:
+					return student.getDatumUpisa();
 			default:
 				return null;
 			}
@@ -89,9 +138,10 @@ public class BazaStudent {
 
 	public boolean Dodavanje(String[] p) {
 		String index = p[6];
+		double prosek = Double.parseDouble(p[10]);
 		if (ProveraIndeksa(index)) {
 			brStudenata++;
-			Student s = new Student(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[8], 0, GodinaStudija.valueOf(p[7]),
+			Student s = new Student(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[8], prosek, GodinaStudija.valueOf(p[7]),
 					Status.valueOf(p[9]));
 			spisakStudenata.add(s);
 			return true;

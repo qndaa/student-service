@@ -1,5 +1,7 @@
 package rs.ac.uns.ftn.oisis.controller;
 
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.model.BazaStudent;
@@ -33,6 +35,15 @@ public class StudentiController {
 	
 	public void DodavanjePredmetaStudentu(Predmet predmet, String s) {
 		BazaStudent.getInstance().DodajPredmetStudentu(predmet, s);
+	}
+	
+	public void sacuvajStudenta()  throws IOException {
+		 BazaStudent.getInstance().sacuvajStudente();
+	}
+	
+	public void otvoriFileStudent() throws IOException {
+		BazaStudent.getInstance().otvoriFileStudenta();
+		
 	}
 	
 	

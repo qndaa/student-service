@@ -170,17 +170,18 @@ public class Student extends Osoba{
 		String a= Double.toString(prosek);
 		return a;
 	}
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
 
+
+	@Override
+	public String toString() {
+		String s = super.toString() + brIndeksa + " - "+godStudija + " - " 
+				+  datumUpisa + " - " + statusStudenta + " - " + prosek + " - ";
+		for (Predmet predmet : spisakPredmeta) {
+			s += predmet.getNaziv() + ",";
+		}
+		s+="\n";
+		
+		return s;
+	}
+	
 }

@@ -30,6 +30,7 @@ public class MainFrameListener implements WindowListener {
 				PredmetiController.getInstance().saveData();
 				// Dok Aca doda dodavanje predmeta
 				//ProfesoriController.getInstance().saveData();
+				StudentiController.getInstance().sacuvajStudenta();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

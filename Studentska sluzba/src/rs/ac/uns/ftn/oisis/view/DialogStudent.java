@@ -346,7 +346,7 @@ public class DialogStudent extends JDialog {
 	}
 
 	protected String[] podaci() {
-		String[] p = new String[10];
+		String[] p = new String[11];
 
 		for (int i = 0; i < p.length; i++) {
 			p[i] = new String();
@@ -367,6 +367,7 @@ public class DialogStudent extends JDialog {
 		} else {
 			p[9] = "B";
 		}
+		p[10]="0";
 
 		return p;
 	}
@@ -416,7 +417,7 @@ public class DialogStudent extends JDialog {
 			}
 		}
 		if (p[6].length() != 0) { // indeks
-			if (!Pattern.matches("[A-Z]{2,3}-[0-9]{1,3}-[0-9]{4}", p[6])) {
+			if (!Pattern.matches("[A-Z]{2,3}/[0-9]{1,3}/[0-9]{4}", p[6])) {
 				txtField6.setBackground(Color.RED);
 				return false;
 			}
