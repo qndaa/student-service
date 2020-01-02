@@ -3,6 +3,8 @@ package rs.ac.uns.ftn.oisis.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
@@ -11,9 +13,9 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
+public class PredmetiSlusaStudentButton extends AbstractCellEditor implements TableCellEditor, TableCellRenderer{
 
-private JButton renderButton; //dugme koje se iscrtava
+	private JButton renderButton; //dugme koje se iscrtava
 	
 	private JButton editorButton; // dugme koje obradjuje akciju
 
@@ -21,7 +23,7 @@ private JButton renderButton; //dugme koje se iscrtava
 	
 	private boolean isEditorActive = false;
 	
-	public ProfesoriNaPredmetuButton(JTable table, int column) {
+	public PredmetiSlusaStudentButton(JTable table, int column) {
 		
 		this.table=table;
 		
@@ -64,8 +66,6 @@ private JButton renderButton; //dugme koje se iscrtava
 		
 		return renderButton;
 	}
-	
-	
 	
 	
 }

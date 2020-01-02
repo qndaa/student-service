@@ -30,6 +30,7 @@ public class StudentiTable extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractStudentiTable());
 		this.setRowHeight(20);
+		new PredmetiSlusaStudentButton(this, 11);
 	}
 
 	

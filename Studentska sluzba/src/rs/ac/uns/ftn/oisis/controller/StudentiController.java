@@ -63,7 +63,7 @@ public class StudentiController {
 
 		} else if (row >= 0 && row < BazaStudent.getBrStudenataPretga()) {
 			
-		}
+		
 			int pritisnuo = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da obrisete studenta?", "Brisanje Studenta",
 					JOptionPane.YES_NO_OPTION);
@@ -74,7 +74,7 @@ public class StudentiController {
 				BazaStudent.getInstance().SmanjiBrPretrage(); 
 				BazaStudent.getInstance().BrisanjePoIndeksu(s.getBrIndeksa());;//izbrisi po indesku iz svih studenata
 				
-				
+			}	
 				
 			}else {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Student nije selektovan", "EROR",

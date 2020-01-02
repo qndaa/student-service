@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -23,6 +24,12 @@ public class StudentiTablePane extends JPanel {
 		setLayout(new BorderLayout());
 		setOpaque(false);
 		createStudentiTable();
+	}
+	
+	
+	public StudentiTablePane(Component c, int levo, int desno) {
+		this();
+		add(c,BorderLayout.CENTER);
 	}
 	
 	
