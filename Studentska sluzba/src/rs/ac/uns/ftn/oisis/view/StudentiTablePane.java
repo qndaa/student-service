@@ -1,12 +1,18 @@
 package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import rs.ac.uns.ftn.oisis.controller.StudentiController;
 
@@ -18,11 +24,20 @@ public class StudentiTablePane extends JPanel {
 	private static final long serialVersionUID = 7795870561938458998L;
 	private StudentiTable studentiTable;
 	private JScrollPane scrollPane;
-	
+	private static int selektovanaVrsta = -1;
 	public StudentiTablePane() {
 		setLayout(new BorderLayout());
 		setOpaque(false);
 		createStudentiTable();
+	}
+	
+	
+	
+
+
+	public StudentiTablePane(Component c, int levo, int desno) {
+		this();
+		add(c,BorderLayout.CENTER);
 	}
 	
 	
@@ -56,6 +71,45 @@ public class StudentiTablePane extends JPanel {
 		
 		studentiTable = StudentiTable.getInstance();
 		
+		TableRowSorter<TableModel> sort = new TableRowSorter<TableModel>(studentiTable.getModel());
+		studentiTable.setRowSorter(sort);
+		
+		studentiTable.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				JTable table = (JTable) e.getComponent();
+				selektovanaVrsta = table.convertRowIndexToModel(table.getSelectedRow());
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
+		
 		
 		try {
 			StudentiController.getInstance().otvoriFileStudent();
@@ -71,6 +125,16 @@ public class StudentiTablePane extends JPanel {
 		add(scrollPane,BorderLayout.CENTER);
 	}
 	
+	
+	
+	public static int getSelektovanaVrsta() {
+		return selektovanaVrsta;
+	}
+
+
+	public static void setSelektovanaVrsta(int selektovanaVrsta) {
+		StudentiTablePane.selektovanaVrsta = selektovanaVrsta;
+	}
 	
 	
 

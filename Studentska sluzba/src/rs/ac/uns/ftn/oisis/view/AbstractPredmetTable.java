@@ -29,6 +29,7 @@ public class AbstractPredmetTable extends AbstractTableModel {
 				return BazaPredmeta.getInstance().getValueAt(row, column);
 		} else if (column == 4) {
 			JButton btn = new JButton("Profesori");
+
 			btn.addActionListener(new ActionListener() {
 				
 				@Override
@@ -40,6 +41,7 @@ public class AbstractPredmetTable extends AbstractTableModel {
 			});
 			btn.setOpaque(false);
 			return btn;
+
 		} else if (column == 5) {
 			JButton btn = new JButton("Studenti");
 			btn.setOpaque(false);

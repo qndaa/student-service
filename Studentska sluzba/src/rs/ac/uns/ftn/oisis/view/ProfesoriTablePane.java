@@ -3,10 +3,15 @@ package rs.ac.uns.ftn.oisis.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
 
@@ -15,6 +20,7 @@ public class ProfesoriTablePane extends JPanel {
 	private static final long serialVersionUID = 3185855001667405798L;
 	private JScrollPane scrollPane;
 	private ProfesoriTable profesoriTable;
+	private static int selektovanaVrsta = -1;
 
 	public ProfesoriTablePane() {
 		setLayout(new BorderLayout());
@@ -45,7 +51,44 @@ public class ProfesoriTablePane extends JPanel {
 		add(right, BorderLayout.EAST);
 
 		profesoriTable = ProfesoriTable.getInstance();
+		
+		TableRowSorter<TableModel> sort = new TableRowSorter<TableModel>(profesoriTable.getModel());
+		profesoriTable.setRowSorter(sort);
 
+		profesoriTable.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				JTable table = (JTable) e.getComponent();
+				selektovanaVrsta =  table.convertRowIndexToModel(table.getSelectedRow());
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		try {
 			ProfesoriController.getInstance().loadData();
 			

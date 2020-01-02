@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -22,7 +23,6 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 	private boolean isEditorActive = false;
 
 	public ProfesoriNaPredmetuButton(JTable table, int column) {
-		// TODO Auto-generated constructor stub
 
 		this.table = table;
 		this.table.getColumnModel().getColumn(column).setCellRenderer(this);
@@ -94,5 +94,4 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 	public void setEditorActive(boolean isEditorActive) {
 		this.isEditorActive = isEditorActive;
 	}
-
 }
