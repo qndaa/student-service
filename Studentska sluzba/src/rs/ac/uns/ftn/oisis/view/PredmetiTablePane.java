@@ -79,7 +79,7 @@ public class PredmetiTablePane extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+			
 			}
 
 			@Override
@@ -96,8 +96,9 @@ public class PredmetiTablePane extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				JTable table = (JTable) e.getComponent();
+				selectedRow = table.convertRowIndexToModel(table.getSelectedRow());	
+							
 			}
 			
 		});

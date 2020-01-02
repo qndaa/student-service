@@ -10,28 +10,28 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
+public class ObrisiProfesoraSaPredmetaButton extends AbstractCellEditor implements TableCellRenderer, TableCellEditor {
 
-	private static final long serialVersionUID = 927738645791978946L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2933356557531124549L;
 	private JButton renderButton;
-	private JButton edirotButton;
-
+	private JButton editorButton;
 	private JTable table;
 
-	private boolean isEditorActive = false;
+	private boolean isEditableActive = false;
 
-	public ProfesoriNaPredmetuButton(JTable table, int column) {
-		// TODO Auto-generated constructor stub
+	public ObrisiProfesoraSaPredmetaButton(JTable table, int column) {
 
 		this.table = table;
 		this.table.getColumnModel().getColumn(column).setCellRenderer(this);
 		this.table.getColumnModel().getColumn(column).setCellEditor(this);
 
-		this.renderButton = new JButton("Profesori");
-		this.edirotButton = new JButton("Profesori");
+		this.renderButton = new JButton("Obrisi");
+		this.editorButton = new JButton("Obrisi");
 
-		this.edirotButton.addActionListener(new ActionListener() {
+		this.editorButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -40,7 +40,7 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 			}
 		});
 
-		this.isEditorActive = false;
+		this.isEditableActive = false;
 
 	}
 
@@ -51,14 +51,14 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 	}
 
 	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		JButton btn = (JButton) value;
 		return btn;
 	}
 
 	@Override
-	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
 		JButton btn = (JButton) value;
 		return btn;
 	}
@@ -71,12 +71,12 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 		this.renderButton = renderButton;
 	}
 
-	public JButton getEdirotButton() {
-		return edirotButton;
+	public JButton getEditorButton() {
+		return editorButton;
 	}
 
-	public void setEdirotButton(JButton edirotButton) {
-		this.edirotButton = edirotButton;
+	public void setEditorButton(JButton editorButton) {
+		this.editorButton = editorButton;
 	}
 
 	public JTable getTable() {
@@ -87,12 +87,12 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 		this.table = table;
 	}
 
-	public boolean isEditorActive() {
-		return isEditorActive;
+	public boolean isEditableActive() {
+		return isEditableActive;
 	}
 
-	public void setEditorActive(boolean isEditorActive) {
-		this.isEditorActive = isEditorActive;
+	public void setEditableActive(boolean isEditableActive) {
+		this.isEditableActive = isEditableActive;
 	}
 
 }

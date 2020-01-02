@@ -28,8 +28,7 @@ public class MainFrameListener implements WindowListener {
 		if (odabir == JOptionPane.YES_OPTION) {
 			try {
 				PredmetiController.getInstance().saveData();
-				// Dok Aca doda dodavanje predmeta
-				//ProfesoriController.getInstance().saveData();
+				ProfesoriController.getInstance().saveData();
 				StudentiController.getInstance().sacuvajStudenta();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block

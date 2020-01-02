@@ -2,7 +2,6 @@ package rs.ac.uns.ftn.oisis.model;
 
 import java.util.ArrayList;
 
-
 public class Predmet {
 	private String sifra;
 	private String naziv;
@@ -10,7 +9,7 @@ public class Predmet {
 	private String godIzv;
 	private ArrayList<Profesor> predmetniProf;
 	private ArrayList<Student> studenti;
-	
+
 	public Predmet(String sifra, String naziv, String semestar, String godIzv) {
 		super();
 		this.sifra = sifra;
@@ -71,11 +70,26 @@ public class Predmet {
 
 	@Override
 	public String toString() {
-		return sifra + " - " + naziv + " - " + semestar + " - " + godIzv
-				+ " - " + predmetniProf + " - " + studenti + "\n";
+		String s = sifra + " - " + naziv + " - " + semestar + " - " + godIzv + "-/";
+		for (Profesor p : predmetniProf) {
+			s += p.getBrojLicneKarte();
+			s += "/";
+		}
+
+		s += "\n";
+		return s;
 	}
-	
-	
-	
-	
+
+	public boolean dodajProfesoraNaPredmet(Profesor profesor) {
+		for (Profesor p : predmetniProf) {
+			if (p.getBrojLicneKarte().equals(profesor.getBrojLicneKarte())) {
+				return false;
+			}
+		}
+
+		predmetniProf.add(profesor);
+		return true;
+
+	}
+
 }

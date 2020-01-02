@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 import rs.ac.uns.ftn.oisis.model.Predmet;
+import rs.ac.uns.ftn.oisis.model.Profesor;
 import rs.ac.uns.ftn.oisis.model.Student;
 import rs.ac.uns.ftn.oisis.view.DialogStudenaNaPredmet;
 import rs.ac.uns.ftn.oisis.view.IzmenaPredmetaDialog;
@@ -128,6 +129,16 @@ public class PredmetiController {
 	
 	public void DodavanjeStudentaNaPredmet(Student stud, int i) {
 		BazaPredmeta.getInstance().DodajStudentaNaPredmet(stud,i);
+	}
+
+	public boolean dodajProfesoraNaPredmet(Profesor profesor) {
+		// TODO Auto-generated method stub
+		return BazaPredmeta.getInstance().dodajProfesoraNaPredmet(profesor);
+	}
+
+	public void obrisiProfesoraSaPredmeta() {
+		BazaPredmeta.getInstance().obrisiProfesoraSaPredmeta();
+		
 	}
 	
 	

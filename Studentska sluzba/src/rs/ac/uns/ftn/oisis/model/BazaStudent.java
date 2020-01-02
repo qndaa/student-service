@@ -8,11 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.concurrent.BrokenBarrierException;
 
 import javax.swing.JOptionPane;
 
-import rs.ac.uns.ftn.oisis.controller.StudentiController;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.StudentiTable;
 

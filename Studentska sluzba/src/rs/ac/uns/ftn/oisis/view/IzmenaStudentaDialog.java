@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 
 
 import javax.swing.JOptionPane;
-
-import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 import rs.ac.uns.ftn.oisis.model.BazaStudent;
 import rs.ac.uns.ftn.oisis.model.Student;
 

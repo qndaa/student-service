@@ -63,7 +63,7 @@ public class Profesor extends Osoba {
 	@Override
 	public String toString() {
 		String ispis = super.toString() + adresaKancelarije + " - " + brojLicneKarte + " - "
-				+ titula + " - " + zvanje + "-" + predajeNaPredmetima;
+				+ titula + " - " + zvanje + "-" + predajeNaPredmetima + "\n";
 		return ispis;
 	}
 		

@@ -66,4 +66,44 @@ public class StudentNaPredmetuButton extends AbstractCellEditor implements Table
 		return btn;
 	}
 
+
+	public JButton getRenderButton() {
+		return renderButton;
+	}
+
+
+	public void setRenderButton(JButton renderButton) {
+		this.renderButton = renderButton;
+	}
+
+
+	public JButton getEditorButton() {
+		return editorButton;
+	}
+
+
+	public void setEditorButton(JButton editorButton) {
+		this.editorButton = editorButton;
+	}
+
+
+	public JTable getTable() {
+		return table;
+	}
+
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+
+	public boolean isEditorActive() {
+		return isEditorActive;
+	}
+
+
+	public void setEditorActive(boolean isEditorActive) {
+		this.isEditorActive = isEditorActive;
+	}
+
 }

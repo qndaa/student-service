@@ -50,7 +50,7 @@ public class ToolBar extends JToolBar {
 	private JToggleButton deleteBtn;
 	private JTextField searchField;
 
-	private JToggleButton addStudentNaPredmetBtn;
+	private JToggleButton addStudentProfesorNaPredmetBtn;
 	private JButton searchBtn;
 
 	private JPanel left;
@@ -76,32 +76,39 @@ public class ToolBar extends JToolBar {
 		right.setOpaque(false);
 
 		addStudentBtn = new JToggleButton();
-		addStudentBtn.setToolTipText("Dodaj novog studenta");
+		addStudentBtn.setToolTipText("Dodaj novog studenta(alt+a)");
 		addStudentBtn.setIcon(new ImageIcon("images/student.png"));
 		addStudentBtn.addActionListener(new DodavanjeListener());
+		addStudentBtn.setMnemonic(KeyEvent.VK_A);
 		
 		addPredmetBtn = new JToggleButton();
-		addPredmetBtn.setToolTipText("Dodaj novi predmet.");
+		addPredmetBtn.setToolTipText("Dodaj novi predmet(alt+a)");
 		addPredmetBtn.setIcon(new ImageIcon("images/add.png"));
 		addPredmetBtn.addActionListener(new DodavanjeListener());
+		addPredmetBtn.setMnemonic(KeyEvent.VK_A);
 
 		addProfesorBtn = new JToggleButton();
-		addProfesorBtn.setToolTipText("Dodaj novog profesora");
+		addProfesorBtn.setToolTipText("Dodaj novog profesora(alt+a)");
 		addProfesorBtn.setIcon(new ImageIcon("images/student.png"));
 		addProfesorBtn.addActionListener(new DodavanjeListener());
+		addProfesorBtn.setMnemonic(KeyEvent.VK_A);
 		
 		changeBtn = new JToggleButton();
 		changeBtn.addActionListener(new IzmenaListener());
 		changeBtn.setIcon(new ImageIcon("images/change.png"));
+		changeBtn.setMnemonic(KeyEvent.VK_I);
 
-		addStudentNaPredmetBtn = new JToggleButton();
-		addStudentNaPredmetBtn.setToolTipText("Dodaj novog studenta/profesora na predmet.");
-		addStudentNaPredmetBtn.setIcon(new ImageIcon("images/student.png"));
-		addStudentNaPredmetBtn.addActionListener(new DodavanjeStudentaProfesoraNaPredmetListener());
-
+		addStudentProfesorNaPredmetBtn = new JToggleButton();
+		addStudentProfesorNaPredmetBtn.setToolTipText("Dodaj novog studenta/profesora na predmet(alt+o)");
+		addStudentProfesorNaPredmetBtn.setIcon(new ImageIcon("images/student.png"));
+		addStudentProfesorNaPredmetBtn.addActionListener(new DodavanjeStudentaProfesoraNaPredmetListener());
+		addStudentProfesorNaPredmetBtn.setMnemonic(KeyEvent.VK_O);
+		
+		
 		deleteBtn = new JToggleButton();
 		deleteBtn.addActionListener(new BrisanjeListener());
 		deleteBtn.setIcon(new ImageIcon("images/delete.png"));
+		deleteBtn.setMnemonic(KeyEvent.VK_D);
 
 		searchField = new JTextField(20);
 		Font font1 = new Font("SansSerif", Font.BOLD, 18);
@@ -137,10 +144,11 @@ public class ToolBar extends JToolBar {
 		});
 
 		searchBtn = new JButton();
-		searchBtn.setToolTipText("Pretrazi studenta.");
+		searchBtn.setToolTipText("Pretrazi(alt+s)");
 		searchBtn.setIcon(new ImageIcon("images/search.png"));
 
 		searchBtn.addActionListener(new PretragaListener());
+		searchBtn.setMnemonic(KeyEvent.VK_S);
 
 		paintComponents(Tip.STUDENT);
 		setFloatable(false);
@@ -166,28 +174,28 @@ public class ToolBar extends JToolBar {
 		addSeparator();
 
 		if (tip == Tip.STUDENT) {
-			changeBtn.setToolTipText("Izmeni studenta");
+			changeBtn.setToolTipText("Izmeni studenta(alt+i)");
 		} else if (tip == Tip.PREDMET) {
-			changeBtn.setToolTipText("Izmena predmeta");
+			changeBtn.setToolTipText("Izmena predmeta(alt+i)");
 		} else if (tip == Tip.PROFESOR) {
-			changeBtn.setToolTipText("Izmena profesora");
+			changeBtn.setToolTipText("Izmena profesora(alt+i)");
 		}
 
 		left.add(changeBtn);
 
 		if (tip == Tip.STUDENT) {
-			deleteBtn.setToolTipText("Brisanje studenta");
+			deleteBtn.setToolTipText("Brisanje studenta(alt+d)");
 		} else if (tip == Tip.PREDMET) {
-			deleteBtn.setToolTipText("Brisanje predmeta");
+			deleteBtn.setToolTipText("Brisanje predmeta(alt+d)");
 		} else if (tip == Tip.PROFESOR) {
-			deleteBtn.setToolTipText("Brisanje profesora");
+			deleteBtn.setToolTipText("Brisanje profesora(alt+d)");
 		}
 
 		left.add(deleteBtn);
 
 		if (tip == Tip.PREDMET) {
 
-			left.add(addStudentNaPredmetBtn);
+			left.add(addStudentProfesorNaPredmetBtn);
 
 		}
 
@@ -208,13 +216,9 @@ public class ToolBar extends JToolBar {
 		addPredmetBtn.setSelected(false);
 		addStudentBtn.setSelected(false);
 		addProfesorBtn.setSelected(false);
-
 		changeBtn.setSelected(false);
-
 		deleteBtn.setSelected(false);
-
-		addStudentNaPredmetBtn.setSelected(false);
-
+		addStudentProfesorNaPredmetBtn.setSelected(false);
 	}
 
 	public JTextField getSearchField() {

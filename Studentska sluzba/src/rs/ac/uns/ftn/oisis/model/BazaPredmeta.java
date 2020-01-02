@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTable;
+import rs.ac.uns.ftn.oisis.view.PredmetiTablePane;
+import rs.ac.uns.ftn.oisis.view.ProfesoriNaPredmetuTable;
 
 public class BazaPredmeta {
 
@@ -329,6 +331,25 @@ public class BazaPredmeta {
 
 	public static void setBrojStudenataNaPredmetu(int brojStudenataNaPredmetu) {
 		BrojStudenataNaPredmetu = brojStudenataNaPredmetu;
+	}
+
+	public boolean dodajProfesoraNaPredmet(Profesor profesor) {
+		// TODO Auto-generated method stub
+		int selectedRow = PredmetiTablePane.getSelectedRow();
+		
+		Predmet predmet = sviPredmeti.get(selectedRow);
+		return predmet.dodajProfesoraNaPredmet(profesor);
+		
+		
+		
+		
+	}
+
+	public void obrisiProfesoraSaPredmeta() {
+		int selectedPredmet = PredmetiTablePane.getSelectedRow();
+		int selectedProfesor = ProfesoriNaPredmetuTable.getInstance().getSelectedRow();
+		Predmet predmet = sviPredmeti.get(selectedPredmet);
+		predmet.getPredmetniProf().remove(selectedProfesor);	
 	}
 	
 	
