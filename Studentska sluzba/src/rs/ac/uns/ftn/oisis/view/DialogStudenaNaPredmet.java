@@ -85,7 +85,7 @@ public class DialogStudenaNaPredmet extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				String p = brIndeksa();
 
-				int row = PredmetiTable.getInstance().getSelectedRow();
+				int row = PredmetiTablePane.getSelectedRow();
 				Predmet pred = PredmetiController.getInstance().getPredmetPoIndeksu(row); // vraca Predmet selektovan
 				Student s = StudentiController.getInstance().getStudentPoIndeksu(p);// vraca studenta sa prosledjenim
 																					// indeksom
@@ -113,7 +113,7 @@ public class DialogStudenaNaPredmet extends JDialog {
 				if (DodajStudentaNaPredmet) {
 					dispose();
 	
-					PredmetiController.getInstance().DodavanjeStudentaNaPredmet(s, row);
+					PredmetiController.getInstance().DodavanjeStudentaNaPredmet(s, row,pred);
 					StudentiController.getInstance().DodavanjePredmetaStudentu(pred, p); // dodali smo predmet studentu
 					JOptionPane.showMessageDialog((Component) e.getSource(), "Uspesno ste dodali studenta na predmet");
 				} else {
@@ -177,7 +177,7 @@ public class DialogStudenaNaPredmet extends JDialog {
 		String brIn = brIndeksa();
 
 		if (brIn.length() != 0) { // indeks
-			if (!Pattern.matches("[A-Z]{2,3}-[0-9]{1,3}-[0-9]{4}", brIn)) {
+			if (!Pattern.matches("[A-Z]{2,3}/[0-9]{1,3}/[0-9]{4}", brIn)) {
 				indeks.setBackground(Color.RED);
 				return false;
 			}

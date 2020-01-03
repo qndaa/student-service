@@ -10,6 +10,8 @@ import rs.ac.uns.ftn.oisis.model.Student;
 import rs.ac.uns.ftn.oisis.view.IzmenaStudentaDialog;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.StudentiTable;
+import rs.ac.uns.ftn.oisis.view.StudentiTablePane;
+import rs.ac.uns.ftn.oisis.view.TabelaIndeksa;
 import rs.ac.uns.ftn.oisis.view.ToolBar;
 
 public class StudentiController {
@@ -38,6 +40,11 @@ public class StudentiController {
 		BazaStudent.getInstance().DodajPredmetStudentu(predmet, s);
 	}
 	
+	public void IzbrisiPredmetStudentu(String sifraPredmeta, String brIndeksa) {
+		BazaStudent.getInstance().IzbrisiPredmetStudentu(sifraPredmeta, brIndeksa);
+	}
+	
+	
 	public void sacuvajStudenta()  throws IOException {
 		 BazaStudent.getInstance().sacuvajStudente();
 	}
@@ -49,7 +56,7 @@ public class StudentiController {
 	
 	
 	public void BrisanjeStudenta() {
-		int row = StudentiTable.getInstance().getSelectedRow();
+		int row = StudentiTablePane.getSelektovanaVrsta();
 
 		// ako je selektovana kolona veca ili jedanko od 0 i ako u bazi ima sutudenata
 		// izbirsi
@@ -86,11 +93,9 @@ public class StudentiController {
 	}
 
 	public void IzmenaStudenta() {
-		int row = StudentiTable.getInstance().getSelectedRow();
-
-		// ako je selektovana kolona veca ili jedanko od 0 i ako u bazi ima sutudenata
-		// izbirsi
-		
+		int row = StudentiTablePane.getSelektovanaVrsta();
+		System.out.println(row);
+	
 		if (row >= 0 && row < BazaStudent.getBrStudenata() && BazaStudent.getBrStudenataPretga() == 0) {
 			
 			IzmenaStudentaDialog d = new IzmenaStudentaDialog(MainFrame.getInstance(),"Izmena studenta", true);

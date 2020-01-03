@@ -60,14 +60,18 @@ public class ProfesoriTablePane extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				JTable table = (JTable) e.getComponent();
+
 				setSelektovanaVrsta(table.convertRowIndexToModel(table.getSelectedRow()));
+
 				
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				JTable table = (JTable) e.getComponent();
+
 				setSelektovanaVrsta(table.convertRowIndexToModel(table.getSelectedRow()));
+
 				
 			}
 			

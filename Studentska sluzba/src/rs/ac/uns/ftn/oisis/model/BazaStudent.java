@@ -218,6 +218,23 @@ public class BazaStudent {
 			}
 		}
 	}
+	
+	public void IzbrisiPredmetStudentu(String sifraPredmeta, String brIndeksa ) {
+		for (int i = 0; i < spisakStudenata.size(); i++) {
+			if(spisakStudenata.get(i).getBrIndeksa().equals(brIndeksa)) {
+				for (int j = 0; j < spisakStudenata.get(i).getSpisakPredmeta().size(); j++) {
+					if(spisakStudenata.get(i).getSpisakPredmeta().get(j).getSifra().equals(sifraPredmeta)) {
+						spisakStudenata.get(i).getSpisakPredmeta().remove(j);
+					}
+				}
+				
+			}
+		}
+		
+	}
+	
+	
+	
 
 	public void PretragaStud(String ulaz) {
 		// proveravam da li je unetio nesto ako nije ne ulazi u fun

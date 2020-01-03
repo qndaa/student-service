@@ -37,7 +37,10 @@ public class StudentNaPredmetuButton extends AbstractCellEditor implements Table
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Dovrsi");
+				
+				
+				DialogLista d = new DialogLista(MainFrame.getInstance(), "Lista studenata",true);
+				d.setVisible(true);
 				
 			}
 		});
@@ -55,15 +58,15 @@ public class StudentNaPredmetuButton extends AbstractCellEditor implements Table
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		// TODO Auto-generated method stub
-		JButton btn = (JButton) value;
-		return btn;
+		
+		return editorButton;
 	}
 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
-		JButton btn = (JButton) value;
-		return btn;
+		
+		return renderButton;
 	}
 
 

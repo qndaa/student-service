@@ -319,7 +319,7 @@ public class MenuBar extends JMenuBar {
 
 	}
 
-	public void nebitno(int a) {
+	public void PromenaDugmica(int a) {
 
 		if (a == 0) {
 			New_Stud.setEnabled(true);
