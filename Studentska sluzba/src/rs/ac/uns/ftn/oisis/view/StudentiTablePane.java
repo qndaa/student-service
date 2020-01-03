@@ -25,117 +25,94 @@ public class StudentiTablePane extends JPanel {
 	private StudentiTable studentiTable;
 	private JScrollPane scrollPane;
 	private static int selektovanaVrsta = -1;
+
 	public StudentiTablePane() {
 		setLayout(new BorderLayout());
 		setOpaque(false);
 		createStudentiTable();
 	}
-	
-	
-	
 
-
-	public StudentiTablePane(Component c, int levo, int desno) {
-		this();
-		add(c,BorderLayout.CENTER);
-	}
-	
-	
-	
 	private void createStudentiTable() {
-		Toolkit kit= Toolkit.getDefaultToolkit();
-		Dimension screenSize= kit.getScreenSize();
-		int swidth=screenSize.width;
-		int sHeight= screenSize.height;
-		
-		JPanel top= new JPanel();
-		JPanel down= new JPanel();
-		JPanel left= new JPanel();
-		JPanel right= new JPanel();
-		
-		
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Dimension screenSize = kit.getScreenSize();
+		int swidth = screenSize.width;
+		int sHeight = screenSize.height;
+
+		JPanel top = new JPanel();
+		JPanel down = new JPanel();
+		JPanel left = new JPanel();
+		JPanel right = new JPanel();
+
 		top.setOpaque(false);
 		down.setOpaque(false);
 		left.setOpaque(false);
 		right.setOpaque(false);
 
-		top.setPreferredSize(new Dimension(swidth,sHeight/10));
-		down.setPreferredSize(new Dimension(swidth,sHeight/10));
-		
-		add(top,BorderLayout.NORTH);
-		add(down,BorderLayout.SOUTH);
-		add(left,BorderLayout.WEST);
-		add(right,BorderLayout.EAST);
-		
-		
-		
-		studentiTable = StudentiTable.getInstance();
-		
-		TableRowSorter<TableModel> sort = new TableRowSorter<TableModel>(studentiTable.getModel());
-		studentiTable.setRowSorter(sort);
-		
-		studentiTable.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				JTable table = (JTable) e.getComponent();
-				selektovanaVrsta = table.convertRowIndexToModel(table.getSelectedRow());
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		
-		
-		
+		top.setPreferredSize(new Dimension(swidth, sHeight / 10));
+		down.setPreferredSize(new Dimension(swidth, sHeight / 10));
+
+		add(top, BorderLayout.NORTH);
+		add(down, BorderLayout.SOUTH);
+		add(left, BorderLayout.WEST);
+		add(right, BorderLayout.EAST);
+
 		try {
 			StudentiController.getInstance().otvoriFileStudent();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
+		studentiTable = StudentiTable.getInstance();
+
+		TableRowSorter<TableModel> sort = new TableRowSorter<TableModel>(studentiTable.getModel());
+		studentiTable.setRowSorter(sort);
+
+		studentiTable.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				JTable table = (JTable) e.getComponent();
+				setSelektovanaVrsta( table.convertRowIndexToModel(table.getSelectedRow()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JTable table = (JTable) e.getComponent();
+				setSelektovanaVrsta( table.convertRowIndexToModel(table.getSelectedRow()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 		scrollPane = new JScrollPane(studentiTable);
-		add(scrollPane,BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.CENTER);
 	}
-	
-	
-	
+
 	public static int getSelektovanaVrsta() {
 		return selektovanaVrsta;
 	}
 
-
 	public static void setSelektovanaVrsta(int selektovanaVrsta) {
 		StudentiTablePane.selektovanaVrsta = selektovanaVrsta;
 	}
-	
-	
 
 }

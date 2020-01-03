@@ -23,7 +23,7 @@ public class IzmenaStudentaDialog extends DialogStudent {
 	public IzmenaStudentaDialog(Frame parent, String title, boolean modal) {
 		super(parent, title, modal);
 
-		int row = StudentiTable.getInstance().getSelectedRow();
+		int row = StudentiTablePane.getSelektovanaVrsta();
 		
 		
 		if(BazaStudent.getBrStudenataPretga() == 0) {

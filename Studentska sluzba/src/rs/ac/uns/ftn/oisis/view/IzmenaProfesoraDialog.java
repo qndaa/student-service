@@ -22,7 +22,7 @@ public class IzmenaProfesoraDialog extends DialogProfesor {
 	public IzmenaProfesoraDialog(Frame parent, String title, boolean modal) {
 		super(parent, title, modal);
 
-		int row = ProfesoriTable.getInstance().getSelectedRow();
+		int row = ProfesoriTablePane.getSelektovanaVrsta();
 
 		if (BazaProfesora.getBrojProfesoraKojiSuUPretrazi() == 0) {
 			prof = BazaProfesora.getInstance().getSviProfesori().get(row);

@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-
-
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTable;
 
@@ -137,14 +135,14 @@ public class BazaPredmeta {
 			brojPredmetaKojiSuUPretrazi = 0;
 			return;
 		}
-		
+
 		razultatPretrage.clear();
 		brojPredmetaKojiSuUPretrazi = 0;
 
 		String[] podelaUnosa = input.split(";");
 		String s = podelaUnosa[0];
 		String[] obeVre = s.trim().split(":");
-		if(obeVre.length != 2 || obeVre[1].trim().length() == 0 ) { // proverimo da li je uneseno sta se trazi
+		if (obeVre.length != 2 || obeVre[1].trim().length() == 0) { // proverimo da li je uneseno sta se trazi
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Pretraga nije dobro napisana!", "Greska",
 					JOptionPane.ERROR_MESSAGE);
 			return;
@@ -184,7 +182,7 @@ public class BazaPredmeta {
 			for (int i = 1; i < podelaUnosa.length; i++) {
 				s = podelaUnosa[i];
 				obeVre = s.trim().split(":");
-				if(obeVre.length != 2 || obeVre[1].trim().length() == 0) { // proverimo da li je uneseno sta se trazi
+				if (obeVre.length != 2 || obeVre[1].trim().length() == 0) { // proverimo da li je uneseno sta se trazi
 					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Pretraga nije dobro napisana!", "Greska",
 							JOptionPane.ERROR_MESSAGE);
 					return;
@@ -277,24 +275,22 @@ public class BazaPredmeta {
 	public void setBrojPredmetaKojiSuUPretrazi(int brojPredmetaKojiSuUPretrazi) {
 		BazaPredmeta.brojPredmetaKojiSuUPretrazi = brojPredmetaKojiSuUPretrazi;
 	}
-	
+
 	public Predmet vratiPredmetPoKljucu(String key) {
 		Predmet povratka = null;
-		for(Predmet p : sviPredmeti) {
-			if(p.getSifra().equals(key)) {
+		for (Predmet p : sviPredmeti) {
+			if (p.getSifra().equals(key)) {
 				povratka = p;
 			}
 		}
 		return povratka;
-		
+
 	}
-	
-	
-	
+
 	public void brisiPoKljucu(String key) {
 		int i = 0;
-		for(; i < sviPredmeti.size(); i++) {
-			if(key.equals(sviPredmeti.get(i).getSifra())) {
+		for (; i < sviPredmeti.size(); i++) {
+			if (key.equals(sviPredmeti.get(i).getSifra())) {
 				break;
 			}
 		}
@@ -303,24 +299,36 @@ public class BazaPredmeta {
 
 	public void smanjiBrojPredmetaKojiSuUPretrazi() {
 		brojPredmetaKojiSuUPretrazi--;
-		
+
 	}
-	
+
 	public Boolean ProveraStudenta(String index, int row) {
-		if(BrojStudenataNaPredmetu !=0) {
+		if (BrojStudenataNaPredmetu != 0) {
 			for (Student s : sviPredmeti.get(row).getStudenti()) {
 				System.out.println(sviPredmeti.get(row).getStudenti().size());
-				if(s.getBrIndeksa().equals(index)) {
+				if (s.getBrIndeksa().equals(index)) {
 					return false;
 				}
 			}
 		}
 		return true;
 	}
-	
-	public void DodajStudentaNaPredmet(Student stud, int i) {
-		sviPredmeti.get(i).getStudenti().add(stud);	
-		BrojStudenataNaPredmetu++;
+
+	public void DodajStudentaNaPredmet(Student stud, int i, Predmet p) {
+		if (brojPredmetaKojiSuUPretrazi == 0) {
+			sviPredmeti.get(i).getStudenti().add(stud);
+			BrojStudenataNaPredmetu++;
+		}else {
+			for (Predmet pred : sviPredmeti) {
+				if(pred.getSifra().equals(p.getSifra())) {
+					pred.getStudenti().add(stud);
+					//razultatPretrage.get(i).getStudenti().add(stud);
+				}
+				
+			}
+			
+			
+		}
 	}
 
 	public static int getBrojStudenataNaPredmetu() {
@@ -330,7 +338,16 @@ public class BazaPredmeta {
 	public static void setBrojStudenataNaPredmetu(int brojStudenataNaPredmetu) {
 		BrojStudenataNaPredmetu = brojStudenataNaPredmetu;
 	}
-	
-	
+
+	public String[] IzbrisiStudentaSaPredmeta(int sleketovanPredmet, int selektovanStudent) {
+		String sifrIndeks[] = new String[2];
+
+		sifrIndeks[0] = sviPredmeti.get(sleketovanPredmet).getSifra();
+		sifrIndeks[1] = sviPredmeti.get(sleketovanPredmet).getStudenti().get(selektovanStudent).getBrIndeksa();
+		sviPredmeti.get(sleketovanPredmet).getStudenti().remove(selektovanStudent);
+		BrojStudenataNaPredmetu--;
+		return sifrIndeks;
+
+	}
 
 }

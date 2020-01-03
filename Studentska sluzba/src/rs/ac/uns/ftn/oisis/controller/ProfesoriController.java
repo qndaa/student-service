@@ -8,6 +8,7 @@ import rs.ac.uns.ftn.oisis.model.BazaProfesora;
 import rs.ac.uns.ftn.oisis.view.IzmenaProfesoraDialog;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.ProfesoriTable;
+import rs.ac.uns.ftn.oisis.view.ProfesoriTablePane;
 import rs.ac.uns.ftn.oisis.view.ToolBar;
 
 public class ProfesoriController {
@@ -27,16 +28,15 @@ public class ProfesoriController {
 	} 
 	
 	public void IzmenaProfesora() {
-		int row = ProfesoriTable.getInstance().getSelectedRow();
+		int row = ProfesoriTablePane.getSelektovanaVrsta();
 		
 		if(row >= 0 && row < BazaProfesora.getBrojUnetihProfesora() && BazaProfesora.getBrojProfesoraKojiSuUPretrazi() ==0) {
 			IzmenaProfesoraDialog di = new IzmenaProfesoraDialog(MainFrame.getInstance(), "Izmena profesora", true);
 			di.setVisible(true);
 			
-		}if(row >= 0 && row < BazaProfesora.getBrojProfesoraKojiSuUPretrazi() ) {
+		}else if(row >= 0 && row < BazaProfesora.getBrojProfesoraKojiSuUPretrazi() ) {
 			IzmenaProfesoraDialog di = new IzmenaProfesoraDialog(MainFrame.getInstance(), "Izmena profesora", true);
-			di.setVisible(true);
-			
+			di.setVisible(true);	
 		}
 		else {
 		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Profesor nije selektovan", "EROR",

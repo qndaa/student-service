@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
+import rs.ac.uns.ftn.oisis.model.BazaStudent;
 import rs.ac.uns.ftn.oisis.model.Predmet;
 import rs.ac.uns.ftn.oisis.model.Student;
 import rs.ac.uns.ftn.oisis.view.DialogStudenaNaPredmet;
@@ -12,6 +13,7 @@ import rs.ac.uns.ftn.oisis.view.IzmenaPredmetaDialog;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTable;
 import rs.ac.uns.ftn.oisis.view.PredmetiTablePane;
+import rs.ac.uns.ftn.oisis.view.TabelaIndeksa;
 import rs.ac.uns.ftn.oisis.view.ToolBar;
 
 public class PredmetiController {
@@ -40,19 +42,19 @@ public class PredmetiController {
 
 	public void brisanjePredmeta() {
 		int selectedRow = PredmetiTablePane.getSelectedRow();
-		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta()&& 
-				BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
-			//System.out.println("obicno");
+		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta()
+				&& BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+			// System.out.println("obicno");
 			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da izbrisete predmet?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
 			if (odabir == JOptionPane.YES_OPTION) {
 				BazaPredmeta.getInstance().obrisiPredmet(selectedRow);
 			}
-		} else if(selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
-			//System.out.println("Search");
+		} else if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()) {
+			// System.out.println("Search");
 			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da izbrisete predmet?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
-			
+
 			if (odabir == JOptionPane.YES_OPTION) {
 				Predmet p = BazaPredmeta.getInstance().getRazultatPretrage().get(selectedRow);
 				BazaPredmeta.getInstance().getRazultatPretrage().remove(selectedRow);
@@ -66,22 +68,22 @@ public class PredmetiController {
 	}
 
 	public void izmenaPredmeta() {
-		
+
 		int selectedRow = PredmetiTablePane.getSelectedRow();
 		
-		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta() &&  
-				BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0 ) {
-				
+		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta()
+				&& BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+
 			IzmenaPredmetaDialog dialog = new IzmenaPredmetaDialog(MainFrame.getInstance(), "Izmena predmeta", true);
-			
+
 			dialog.setVisible(true);
-			
-		} else if(selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
-		
+
+		} else if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()) {
+
 			IzmenaPredmetaDialog dialog = new IzmenaPredmetaDialog(MainFrame.getInstance(), "Izmena predmeta", true);
-			
+
 			dialog.setVisible(true);
-		}else {
+		} else {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Predmet nije selektovan!", "Greska",
 					JOptionPane.ERROR_MESSAGE);
 		}
@@ -96,44 +98,65 @@ public class PredmetiController {
 		PredmetiTable.getInstance().refreshTable();
 
 	}
-	
+
 	public boolean PostojiStudentSaIndeksom(String index, int row) {
 		return BazaPredmeta.getInstance().ProveraStudenta(index, row);
 	}
-	
+
 	public void DodavanjeStudNaPred() {
-		int row = PredmetiTable.getInstance().getSelectedRow();
-		
-		if(row >= 0 && row < BazaPredmeta.getBrojUnetihPredmeta()) {
-			DialogStudenaNaPredmet di = new DialogStudenaNaPredmet(MainFrame.getInstance(),"Dodavanje studenta na predmet", true);
+		int row = PredmetiTablePane.getSelectedRow();
+
+		if (row >= 0 && row < BazaPredmeta.getBrojUnetihPredmeta()) {
+			DialogStudenaNaPredmet di = new DialogStudenaNaPredmet(MainFrame.getInstance(),
+					"Dodavanje studenta na predmet", true);
 			di.setVisible(true);
-			
-			
+
 		} else {
-			
+
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Predmet nije selektovan", "EROR",
 					JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 	}
-	
-	
+
 	public Predmet getPredmetPoIndeksu(int i) {
-		if(BazaPredmeta.getBrojUnetihPredmeta() !=0) {
-		return BazaPredmeta.getInstance().getSviPredmeti().get(i);
+		if (BazaPredmeta.getBrojUnetihPredmeta() != 0 && BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+			return BazaPredmeta.getInstance().getSviPredmeti().get(i);
+		}else {
+			return BazaPredmeta.getInstance().getRazultatPretrage().get(i);
+			
 		}
-		return null;
 	}
-	
-	
-	public void DodavanjeStudentaNaPredmet(Student stud, int i) {
-		BazaPredmeta.getInstance().DodajStudentaNaPredmet(stud,i);
+
+	public void DodavanjeStudentaNaPredmet(Student stud, int i, Predmet p) {
+		BazaPredmeta.getInstance().DodajStudentaNaPredmet(stud, i, p);
 	}
+
+	public void IzbrisiStudentaSaPredmeta() {
+		int selektovanPredmet = PredmetiTablePane.getSelectedRow();
+		int selektovanStudent = TabelaIndeksa.getInstance().getSelectedRow();
+		String ret[]= null;
+		if (selektovanStudent != -1) {
+			int pritisnuo = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+					"Da li ste sigurni da zelite da obrisete studenta?", "Brisanje Studenta",
+					JOptionPane.YES_NO_OPTION);
+			if (pritisnuo == JOptionPane.YES_OPTION) {
+				ret= BazaPredmeta.getInstance().IzbrisiStudentaSaPredmeta(selektovanPredmet, selektovanStudent);
+				StudentiController.getInstance().IzbrisiPredmetStudentu(ret[0], ret[1]);
+				TabelaIndeksa.getInstance().OsveziTabelu();
+				JOptionPane.showMessageDialog(MainFrame.getInstance(), "Uspesno ste izbrisali studenta", "Potvrda",
+						JOptionPane.INFORMATION_MESSAGE);
+				
+				
+			}
+
+		} else {
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Student nije selektovan", "EROR",
+					JOptionPane.ERROR_MESSAGE);
+			
+		}
+		
 	
-	
-	
-	
-	
-	
+	}
 
 }
