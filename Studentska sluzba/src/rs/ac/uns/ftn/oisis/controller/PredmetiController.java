@@ -119,7 +119,7 @@ public class PredmetiController {
 			DialogStudenaNaPredmet di = new DialogStudenaNaPredmet(MainFrame.getInstance(),
 					"Dodavanje studenta na predmet", true);
 			di.setVisible(true);
-
+			
 		} else {
 
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Predmet nije selektovan", "EROR",

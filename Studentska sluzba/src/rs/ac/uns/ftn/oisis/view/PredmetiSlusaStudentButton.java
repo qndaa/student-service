@@ -37,9 +37,8 @@ public class PredmetiSlusaStudentButton extends AbstractCellEditor implements Ta
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				fireEditingStopped();
-				JOptionPane.showMessageDialog(table, "Selektovan je igrac u redu: " + table.getSelectedRow());
-	
+				DialogListaPredmetaNaStudentu d = new DialogListaPredmetaNaStudentu(MainFrame.getInstance(), "Predmeti",true);
+				d.setVisible(true);
 			}
 		});
 

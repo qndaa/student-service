@@ -44,6 +44,7 @@ public class AbstractStudentiTable extends AbstractTableModel {
 		return BazaStudent.getInstance().getColon().get(column);
 	}
 
+
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
@@ -84,13 +85,6 @@ public class AbstractStudentiTable extends AbstractTableModel {
 	}
 	
  
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

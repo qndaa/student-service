@@ -17,22 +17,31 @@ public class AbstractListaStudenataTable extends AbstractTableModel {
 	@Override
 	public int getRowCount() {
 		int selektovan = PredmetiTablePane.getSelectedRow();
-		if (selektovan != -1) {
-			Predmet p = BazaPredmeta.getInstance().getSviPredmeti().get(selektovan);
-			return p.getStudenti().size();
-		}
+		Predmet p;
+		
+			if(BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+				p = BazaPredmeta.getInstance().getSviPredmeti().get(selektovan);
 
-		return 0;
+			}else {
+				p = BazaPredmeta.getInstance().getRazultatPretrage().get(selektovan);
+			}
+			
+		
+
+		return p.getStudenti().size();
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		int selektovan = PredmetiTablePane.getSelectedRow();
 		if (selektovan != -1) {
-			if (rowIndex < BazaPredmeta.getInstance().getSviPredmeti().get(selektovan).getStudenti().size() && BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() ==0) {
+			if (BazaPredmeta.getInstance().getBrojPredmetaKojiSuUPretrazi() == 0) {
 				Predmet p = BazaPredmeta.getInstance().getSviPredmeti().get(selektovan);
 				return p.getStudenti().get(rowIndex).getBrIndeksa();
-
+			}else {
+				Predmet p = BazaPredmeta.getInstance().getRazultatPretrage().get(selektovan);
+				return p.getStudenti().get(rowIndex).getBrIndeksa();
+				
 			}
 		}
 
@@ -42,10 +51,6 @@ public class AbstractListaStudenataTable extends AbstractTableModel {
 	public String getColumnName(int column) {
 
 		return "Br.Indeksa";
-	}
-
-	public void addRow(Object[] dates) {
-
 	}
 
 }

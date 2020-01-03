@@ -162,9 +162,7 @@ public class BazaProfesora {
 		if(pamtiIndeks != -1) {
 			sviProfesori.remove(pamtiIndeks);
 			brojUnetihProfesora--;
-		}
-		
-		
+		}	
 	}
 
 	public void saveProfesori() throws IOException {

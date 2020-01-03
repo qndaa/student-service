@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+
 public class DodavanjeStudentaProfesoraNaPredmetDialog extends JDialog {
 
 	private static final long serialVersionUID = -8764610600946433965L;
@@ -35,6 +37,17 @@ public class DodavanjeStudentaProfesoraNaPredmetDialog extends JDialog {
 		JButton addStudenta = new JButton();
 		addStudenta.setBackground(Color.WHITE);
 		addStudenta.setIcon(new ImageIcon("images/student_na_predmet.png"));
+		addStudenta.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PredmetiController.getInstance().DodavanjeStudNaPred();
+				PredmetiTable.getInstance().refreshTable();
+				
+			}
+		});
+		
+		
 		JButton addProfesor = new JButton();
 		addProfesor.setIcon(new ImageIcon("images/profesor_na_predmet.png"));
 		addProfesor.setBackground(Color.WHITE);

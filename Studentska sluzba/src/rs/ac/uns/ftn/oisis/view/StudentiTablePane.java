@@ -17,7 +17,6 @@ import javax.swing.table.TableRowSorter;
 import rs.ac.uns.ftn.oisis.controller.StudentiController;
 
 public class StudentiTablePane extends JPanel {
-
 	/**
 	 * 
 	 */
@@ -67,7 +66,7 @@ public class StudentiTablePane extends JPanel {
 
 		TableRowSorter<TableModel> sort = new TableRowSorter<TableModel>(studentiTable.getModel());
 		studentiTable.setRowSorter(sort);
-
+ 
 		studentiTable.addMouseListener(new MouseListener() {
 
 			@Override

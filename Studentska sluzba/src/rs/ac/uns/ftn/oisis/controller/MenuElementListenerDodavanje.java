@@ -24,7 +24,7 @@ public class MenuElementListenerDodavanje implements ActionListener {
 
 			PredmetiController.getInstance().DodavanjeStudNaPred();
 			PredmetiTable.getInstance().refreshTable();
-
+			
 		}
 
 		if (TabbedPane.activeTab == 2) {

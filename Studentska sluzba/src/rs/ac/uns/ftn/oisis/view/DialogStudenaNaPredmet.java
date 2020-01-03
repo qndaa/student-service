@@ -116,6 +116,7 @@ public class DialogStudenaNaPredmet extends JDialog {
 					PredmetiController.getInstance().DodavanjeStudentaNaPredmet(s, row,pred);
 					StudentiController.getInstance().DodavanjePredmetaStudentu(pred, p); // dodali smo predmet studentu
 					JOptionPane.showMessageDialog((Component) e.getSource(), "Uspesno ste dodali studenta na predmet");
+					return;
 				} else {
 	
 					if (IndeksPostoji) {

@@ -137,7 +137,16 @@ public class MenuBar extends JMenuBar {
 		newProf.setMnemonic(KeyEvent.VK_L);
 		newProf.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
 		newProf.setIcon(new ImageIcon("images/new.png"));
+		newProf.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DodavanjeProfesoraNaPredmetDialog dialog = new DodavanjeProfesoraNaPredmetDialog(
+						MainFrame.getInstance(), "Dodavanje profesora na predmet", true);
+				dialog.setVisible(true);
 
+			}
+		});
 		New_Stud_Prof.add(newProf);
 
 		// da bi na pocetku sva polja ne bi bila aktivna
