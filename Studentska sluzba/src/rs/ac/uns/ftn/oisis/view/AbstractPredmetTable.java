@@ -25,18 +25,19 @@ public class AbstractPredmetTable extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		if(column < 4) {
-				return BazaPredmeta.getInstance().getValueAt(row, column);
+		if (column < 4) {
+			return BazaPredmeta.getInstance().getValueAt(row, column);
 		} else if (column == 4) {
 			JButton btn = new JButton("Profesori");
 
 			btn.addActionListener(new ActionListener() {
-				
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					ProfesoriNaPredmetuDialog dialog = new ProfesoriNaPredmetuDialog(MainFrame.getInstance(), "Profesori sa predmeta", true);
+					ProfesoriNaPredmetuDialog dialog = new ProfesoriNaPredmetuDialog(MainFrame.getInstance(),
+							"Profesori sa predmeta", true);
 					dialog.setVisible(true);
-					
+
 				}
 			});
 			btn.setOpaque(false);
@@ -54,7 +55,7 @@ public class AbstractPredmetTable extends AbstractTableModel {
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return String.class;		
+			return String.class;
 		case 1:
 			return String.class;
 		case 2:
@@ -75,9 +76,7 @@ public class AbstractPredmetTable extends AbstractTableModel {
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return columnIndex >= 4;
 	}
-	
-	
-	
+
 	public String getColumnName(int column) {
 		return BazaPredmeta.getInstance().getNazivKolona().get(column);
 	}

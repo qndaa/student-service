@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
+import rs.ac.uns.ftn.oisis.model.BazaProfesora;
 import rs.ac.uns.ftn.oisis.model.Predmet;
 import rs.ac.uns.ftn.oisis.model.Profesor;
 import rs.ac.uns.ftn.oisis.model.Student;
@@ -43,19 +44,22 @@ public class PredmetiController {
 		int selectedRow = PredmetiTablePane.getSelectedRow();
 		if (selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojUnetihPredmeta()&& 
 				BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
-			//System.out.println("obicno");
+			
 			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da izbrisete predmet?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
 			if (odabir == JOptionPane.YES_OPTION) {
+				String sifraPredmeta = BazaPredmeta.getInstance().getSviPredmeti().get(selectedRow).getSifra();
 				BazaPredmeta.getInstance().obrisiPredmet(selectedRow);
+				BazaProfesora.getInstance().obrisiPredmetSaProfesora(sifraPredmeta);
 			}
 		} else if(selectedRow >= 0 && selectedRow < BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()){
-			//System.out.println("Search");
+			
 			int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da izbrisete predmet?", "Brsanje predmeta", JOptionPane.YES_NO_OPTION);
 			
 			if (odabir == JOptionPane.YES_OPTION) {
 				Predmet p = BazaPredmeta.getInstance().getRazultatPretrage().get(selectedRow);
+				BazaProfesora.getInstance().obrisiPredmetSaProfesora(p.getSifra());
 				BazaPredmeta.getInstance().getRazultatPretrage().remove(selectedRow);
 				BazaPredmeta.getInstance().smanjiBrojPredmetaKojiSuUPretrazi();
 				BazaPredmeta.getInstance().brisiPoKljucu(p.getSifra());

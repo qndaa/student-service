@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
 import rs.ac.uns.ftn.oisis.model.BazaProfesora;
 import rs.ac.uns.ftn.oisis.model.Profesor;
 
@@ -71,13 +72,15 @@ public class DodavanjeProfesoraNaPredmetDialog extends JDialog {
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-
-				boolean dodat = PredmetiController.getInstance().dodajProfesoraNaPredmet(profesor);
-
-				if (dodat) {
+				
+				boolean dodatProfesor = PredmetiController.getInstance().dodajProfesoraNaPredmet(profesor);
+				boolean dodatPredmet = ProfesoriController.getInstance().dodajPredmetNaProfesora(licnaKartaUnos.getText()); 
+				
+				if (dodatProfesor && dodatPredmet) {
 					dispose();
 					JOptionPane.showMessageDialog((Component) e.getSource(),
 							"Uspesno ste dodali profesora na predmet.");
+					PredmetiTable.getInstance().refreshTable();
 					ToolBar.getInstance().setSelectedButton();
 					return;
 				} else {

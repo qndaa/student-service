@@ -13,7 +13,10 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
+import rs.ac.uns.ftn.oisis.view.PredmetiTablePane;
+import rs.ac.uns.ftn.oisis.view.ProfesoriNaPredmetuTable;
 import rs.ac.uns.ftn.oisis.view.ProfesoriTable;
 
 public class BazaProfesora {
@@ -405,6 +408,74 @@ public class BazaProfesora {
 		}
 		
 
+	}
+
+	public boolean dodajPredmetNaProfesora(String text) {
+		int selectedRow = PredmetiTablePane.getSelectedRow();
+		Predmet predmet;
+		if(BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()==0) {
+			predmet = PredmetiController.getInstance().getPredmetPoIndeksu(selectedRow);
+		} else {
+			predmet = BazaPredmeta.getInstance().getRazultatPretrage().get(selectedRow);
+		}
+		Profesor profesor = getProfesora(text.trim());
+		
+		for(Predmet p : profesor.getPredajeNaPredmetima()) {
+			if(p.getSifra().equals(predmet.getSifra())) {
+				return false;
+			}
+		}
+		
+		profesor.getPredajeNaPredmetima().add(predmet);
+		
+		return true;
+	}
+
+	public void obrisiPredmetSaProfesora() {
+		int selectedProfesor = ProfesoriNaPredmetuTable.getInstance().getSelectedRow();
+		int selectedPredmet = PredmetiTablePane.getSelectedRow();
+		
+		Predmet predmet = BazaPredmeta.getInstance().getSviPredmeti().get(selectedPredmet);
+		Profesor profesor = predmet.getPredmetniProf().get(selectedProfesor);
+		
+		for(Predmet p : profesor.getPredajeNaPredmetima()) {
+			if(p.getSifra().equals(predmet.getSifra())) {
+				profesor.getPredajeNaPredmetima().remove(p);
+				break;
+			}
+		}
+		
+	}
+
+	public void obrisiPredmetSaProfesora(String sifraPredmeta) {
+		for(Profesor profesor : sviProfesori) {
+			for(Predmet predmet : profesor.getPredajeNaPredmetima()) {
+				if(sifraPredmeta.equals(predmet.getSifra())) {
+					profesor.getPredajeNaPredmetima().remove(predmet);
+					break;
+				}
+			}
+		}
+		
+	}
+
+	public void smanjiBrojProfesoraKojiSuUPretrazi() {
+		brojProfesoraKojiSuUPretrazi--;
+	}
+
+	public void brisiPoLicnoj(String brojLicneKarte) {
+		int i = 0;
+		for(; i < sviProfesori.size(); i++) {
+			if(brojLicneKarte.equals(sviProfesori.get(i).getBrojLicneKarte())) {
+				break;
+			}
+		}
+		
+		sviProfesori.remove(i);
+		
+		brojUnetihProfesora--;
+		
+		
 	}
 
 }

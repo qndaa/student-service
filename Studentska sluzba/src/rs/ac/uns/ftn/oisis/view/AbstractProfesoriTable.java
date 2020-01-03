@@ -1,9 +1,12 @@
 package rs.ac.uns.ftn.oisis.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-import rs.ac.uns.ftn.oisis.model.BazaProfesora;
-;
+import rs.ac.uns.ftn.oisis.model.BazaProfesora;;
 
 public class AbstractProfesoriTable extends AbstractTableModel {
 
@@ -16,18 +19,67 @@ public class AbstractProfesoriTable extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return (BazaProfesora.getBrojProfesoraKojiSuUPretrazi() == 0) ? BazaProfesora.getBrojUnetihProfesora() : BazaProfesora.getBrojProfesoraKojiSuUPretrazi();
+		return (BazaProfesora.getBrojProfesoraKojiSuUPretrazi() == 0) ? BazaProfesora.getBrojUnetihProfesora()
+				: BazaProfesora.getBrojProfesoraKojiSuUPretrazi();
 
 	}
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		return BazaProfesora.getInstance().getValueAt(row, column);		
+		if (column < 9) {
+			return BazaProfesora.getInstance().getValueAt(row, column);
+		} else {
+			JButton btn = new JButton("Predmeti");
+			btn.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					PredmetiNaProfesoruDialog dialog = new PredmetiNaProfesoruDialog(MainFrame.getInstance(), "Predmeti na kojima predaje profesor", true);
+					dialog.setVisible(true);
+				}
+			});
+
+			btn.setOpaque(false);
+			return btn;
+		}
 	}
-	
+
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			return String.class;
+		case 1:
+			return String.class;
+		case 2:
+			return String.class;
+		case 3:
+			return String.class;
+		case 4:
+			return String.class;
+		case 5:
+			return String.class;
+		case 6:
+			return String.class;
+		case 7:
+			return String.class;
+		case 8:
+			return String.class;
+		case 9:
+			return JButton.class;
+		default:
+			return null;
+		}
+
+	}
+
 	public String getColumnName(int column) {
 		return BazaProfesora.getInstance().getNaziviKolona().get(column);
 	}
 
-	
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return columnIndex >= 9;
+	}
+
 }

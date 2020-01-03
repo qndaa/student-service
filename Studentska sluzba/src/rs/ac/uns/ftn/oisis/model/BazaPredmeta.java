@@ -301,6 +301,7 @@ public class BazaPredmeta {
 			}
 		}
 		sviPredmeti.remove(i);
+		brojUnetihPredmeta--;
 	}
 
 	public void smanjiBrojPredmetaKojiSuUPretrazi() {
@@ -336,8 +337,12 @@ public class BazaPredmeta {
 	public boolean dodajProfesoraNaPredmet(Profesor profesor) {
 		// TODO Auto-generated method stub
 		int selectedRow = PredmetiTablePane.getSelectedRow();
-		
-		Predmet predmet = sviPredmeti.get(selectedRow);
+		Predmet predmet;
+		if(brojPredmetaKojiSuUPretrazi == 0) {
+			predmet = sviPredmeti.get(selectedRow);
+		} else {
+			predmet = razultatPretrage.get(selectedRow);
+		}
 		return predmet.dodajProfesoraNaPredmet(profesor);
 		
 		
@@ -350,6 +355,18 @@ public class BazaPredmeta {
 		int selectedProfesor = ProfesoriNaPredmetuTable.getInstance().getSelectedRow();
 		Predmet predmet = sviPredmeti.get(selectedPredmet);
 		predmet.getPredmetniProf().remove(selectedProfesor);	
+	}
+
+	public void obrisiProfesoraSaPredmeta(String licna) {
+		for(Predmet predmet : sviPredmeti) {
+			for(Profesor profesor : predmet.getPredmetniProf()) {
+				if(profesor.getBrojLicneKarte().equals(licna)) {
+					predmet.getPredmetniProf().remove(profesor);
+					break;
+				}
+			}
+		}
+		
 	}
 	
 	

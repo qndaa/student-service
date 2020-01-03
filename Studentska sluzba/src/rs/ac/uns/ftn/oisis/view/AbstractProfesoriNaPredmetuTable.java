@@ -8,6 +8,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
 import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 import rs.ac.uns.ftn.oisis.model.Predmet;
 
@@ -49,31 +50,42 @@ public class AbstractProfesoriNaPredmetuTable extends AbstractTableModel {
 	@Override
 	public int getRowCount() {
 		int selectedRow = PredmetiTablePane.getSelectedRow();
-		Predmet p = BazaPredmeta.getInstance().getSviPredmeti().get(selectedRow);
+		Predmet p;
+		if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+			p = BazaPredmeta.getInstance().getSviPredmeti().get(selectedRow);
+		} else {
+			p = BazaPredmeta.getInstance().getRazultatPretrage().get(selectedRow);
+		}
 		return p.getPredmetniProf().size();
 	}
 
 	@Override
 	public Object getValueAt(int row, int column) {
 		int selectedRow = PredmetiTablePane.getSelectedRow();
-		if (row < BazaPredmeta.getInstance().getSviPredmeti().get(selectedRow).getPredmetniProf().size()) {
-			if (column == 0) {
-				Predmet p = BazaPredmeta.getInstance().getSviPredmeti().get(selectedRow);
-				return p.getPredmetniProf().get(row).getBrojLicneKarte();
-			} else if (column == 1) {
-				JButton delete = new JButton("Obrisi");
-				delete.addActionListener(new ActionListener() {
+		if (column == 0) {
+			Predmet p;
+			if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+				p = BazaPredmeta.getInstance().getSviPredmeti().get(selectedRow);
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						PredmetiController.getInstance().obrisiProfesoraSaPredmeta();
-						ProfesoriNaPredmetuTable.getInstance().addNotify();
-						
-						
-					}
-				});
-				return delete;
+			} else {
+				p = BazaPredmeta.getInstance().getRazultatPretrage().get(selectedRow);
 			}
+			return p.getPredmetniProf().get(row).getBrojLicneKarte();
+
+		} else if (column == 1) {
+			JButton delete = new JButton("Obrisi");
+			delete.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ProfesoriController.getInstance().obrisiPredmetSaProfesora();
+					PredmetiController.getInstance().obrisiProfesoraSaPredmeta();
+
+					ProfesoriNaPredmetuTable.getInstance().addNotify();
+
+				}
+			});
+			return delete;
 		}
 
 		return null;
@@ -82,7 +94,7 @@ public class AbstractProfesoriNaPredmetuTable extends AbstractTableModel {
 	@Override
 	public boolean isCellEditable(int arg0, int arg1) {
 		// TODO Auto-generated method stub
-		return (arg1 == 1) ? true : false ;
+		return (arg1 == 1) ? true : false;
 	}
 
 	@Override

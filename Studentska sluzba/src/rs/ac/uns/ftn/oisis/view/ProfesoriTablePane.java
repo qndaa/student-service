@@ -60,13 +60,14 @@ public class ProfesoriTablePane extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				JTable table = (JTable) e.getComponent();
-				selektovanaVrsta =  table.convertRowIndexToModel(table.getSelectedRow());
+				setSelektovanaVrsta(table.convertRowIndexToModel(table.getSelectedRow()));
 				
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
+				JTable table = (JTable) e.getComponent();
+				setSelektovanaVrsta(table.convertRowIndexToModel(table.getSelectedRow()));
 				
 			}
 			
@@ -84,7 +85,6 @@ public class ProfesoriTablePane extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
@@ -99,6 +99,14 @@ public class ProfesoriTablePane extends JPanel {
 
 		scrollPane = new JScrollPane(profesoriTable);
 		add(scrollPane, BorderLayout.CENTER);
+	}
+
+	public static int getSelektovanaVrsta() {
+		return selektovanaVrsta;
+	}
+
+	public static void setSelektovanaVrsta(int selektovanaVrsta) {
+		ProfesoriTablePane.selektovanaVrsta = selektovanaVrsta;
 	}
 
 }

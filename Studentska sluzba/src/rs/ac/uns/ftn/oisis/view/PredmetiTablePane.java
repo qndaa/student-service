@@ -73,7 +73,7 @@ public class PredmetiTablePane extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				JTable table = (JTable) e.getComponent();
-				selectedRow = table.convertRowIndexToModel(table.getSelectedRow());	
+				selectedRow = table.convertRowIndexToModel(table.getSelectedRow());
 			}
 
 			@Override
@@ -98,7 +98,6 @@ public class PredmetiTablePane extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				JTable table = (JTable) e.getComponent();
 				selectedRow = table.convertRowIndexToModel(table.getSelectedRow());	
-							
 			}
 			
 		});
