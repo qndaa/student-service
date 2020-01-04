@@ -1,21 +1,27 @@
 package rs.ac.uns.ftn.oisis.view;
 
+import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.WindowConstants;
 
 import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerBirsanje;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerDodavanje;
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
+import rs.ac.uns.ftn.oisis.controller.StudentiController;
 
 public class MenuBar extends JMenuBar {
 
@@ -42,22 +48,18 @@ public class MenuBar extends JMenuBar {
 	private JMenuItem Edi_Stud;
 	private JMenuItem Edit_Prof;
 	private JMenuItem Edit_Sub;
-	private JMenu Edit_Stud_Prof; // dugme za dodavanje prof/stud
-	private JMenuItem editStud;
-	private JMenuItem editProf;
 
 	// dugmici za brisanje
 
 	private JMenuItem Delete_Stud;
 	private JMenuItem Delete_Prof;
 	private JMenuItem Delete_Sub;
-	private JMenu Delete_Stud_Prof; // dugme za dodavanje prof/stud
-	private JMenuItem deleteStud;
-	private JMenuItem deleteProf;
-	
 	private JMenu delete;
+	
 	private JMenu help;
-	private JMenu about;
+	private JMenuItem pomoc;
+	
+	private JMenuItem about;
 
 	public static MenuBar getInstance() {
 		if (instance == null) {
@@ -73,6 +75,25 @@ public class MenuBar extends JMenuBar {
 		cloos = new JMenuItem("Close");
 		New = new JMenu("New");
 
+		cloos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int odabir = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da zatvorite aplikaciju?",
+						"Zatvaranje aplikacije", JOptionPane.YES_NO_OPTION);
+				if (odabir == JOptionPane.YES_OPTION) {
+					try {
+						PredmetiController.getInstance().saveData();
+						ProfesoriController.getInstance().saveData();
+						StudentiController.getInstance().sacuvajStudenta();
+						System.exit(0);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+			}
+		}});
 		New_Stud_Prof = new JMenu("New Stud/Prof");
 
 		New.setMnemonic(KeyEvent.VK_N);
@@ -203,26 +224,7 @@ public class MenuBar extends JMenuBar {
 		});
 		Edit.add(Edit_Sub);
 
-		Edit_Stud_Prof = new JMenu("Edit  Stud/Prof");
-		Edit_Stud_Prof.setMnemonic(KeyEvent.VK_W);
-		Edit_Stud_Prof.setIcon(new ImageIcon("images/edit.png"));
-		Edit.add(Edit_Stud_Prof);
-		
-		
-		editStud = new JMenuItem("Edit Stud");
-		editStud.setMnemonic(KeyEvent.VK_I);
-		editStud.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,ActionEvent.CTRL_MASK));
-		editStud.setIcon(new ImageIcon("images/edit.png"));
-		Edit_Stud_Prof.add(editStud);
-
-		editProf = new JMenuItem("Edit Prof");
-		editProf.setMnemonic(KeyEvent.VK_J);
-		editProf.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_J,ActionEvent.CTRL_MASK));
-		editProf.setIcon(new ImageIcon("images/edit.png"));
-		Edit_Stud_Prof.add(editProf);
-
 		//da bi na pocetku bila zamrznuta sva sem studetnta
-		Edit_Stud_Prof.setEnabled(false);
 		Edit_Prof.setEnabled(false);
 		Edit_Sub.setEnabled(false);
 		
@@ -271,32 +273,9 @@ public class MenuBar extends JMenuBar {
 		});
 		delete.add(Delete_Sub);
 		
-		Delete_Stud_Prof = new JMenu("Delete Stud/Prof");
-		Delete_Stud_Prof.setMnemonic(KeyEvent.VK_Y);
-		Delete_Stud_Prof.setIcon(new ImageIcon("images/deleteM.png"));
-		
-		delete.add(Delete_Stud_Prof);
-		
-		
-		deleteStud = new JMenuItem("Delete Stud");
-		deleteStud.setMnemonic(KeyEvent.VK_R);
-		deleteStud.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,ActionEvent.CTRL_MASK));
-		deleteStud.setIcon(new ImageIcon("images/deleteM.png"));
-		
-		Delete_Stud_Prof.add(deleteStud);
-		
-		deleteProf = new JMenuItem("Delete Prof");
-		deleteProf.setMnemonic(KeyEvent.VK_F);
-		deleteProf.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,ActionEvent.CTRL_MASK));
-		deleteProf.setIcon(new ImageIcon("images/deleteM.png"));
-		
-		
-		Delete_Stud_Prof.addSeparator();
-		
-		Delete_Stud_Prof.add(deleteProf);
-		
+
 		//da bi na pocetku bilo zamrznuto sve sem studenta
-		Delete_Stud_Prof.setEnabled(false);
+		
 		Delete_Prof.setEnabled(false);
 		Delete_Prof.addActionListener(new ActionListener() {
 			
@@ -314,17 +293,56 @@ public class MenuBar extends JMenuBar {
 		edit.add(delete);
 
 		help = new JMenu("Help");
-		about = new JMenu("About");
-
+		
+		about = new JMenuItem("About");
+		pomoc =  new JMenuItem("Help");
+		
+		about.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog((Component) e.getSource(), "Java Aplikacija Studentska Sluzba  vrezija 1.0 \n Aca Simić RA/175/2017 \n Đorđije Kundačina RA/178/2017", "Aplikacija", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+		});
+		
+		pomoc.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				File file = new File("Opis aplikacije.docx");
+				if(!Desktop.isDesktopSupported()) {
+					JOptionPane.showMessageDialog((Component) e.getSource(), "Vas sistem ne podrzava ovaj fajl");
+					return;
+				}
+				Desktop desktop = Desktop.getDesktop();
+				if(file.exists()) {
+					try {
+						desktop.open(file);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				
+			}
+		});
+		
+		pomoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
+		about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
 		file.setMnemonic(KeyEvent.VK_1);
 		edit.setMnemonic(KeyEvent.VK_2);
 		help.setMnemonic(KeyEvent.VK_3);
-		about.setMnemonic(KeyEvent.VK_4);
+		
+		help.add(pomoc);
+		help.addSeparator();
+		help.add(about);
+		
 
 		add(file);
 		add(edit);
 		add(help);
-		add(about);
+		
 
 	}
 
@@ -337,12 +355,10 @@ public class MenuBar extends JMenuBar {
 			New_Sub.setEnabled(false);
 			
 			Edi_Stud.setEnabled(true);
-			Edit_Stud_Prof.setEnabled(false);
 			Edit_Prof.setEnabled(false);
 			Edit_Sub.setEnabled(false);
 			
 			Delete_Stud.setEnabled(true);
-			Delete_Stud_Prof.setEnabled(false);
 			Delete_Prof.setEnabled(false);
 			Delete_Sub.setEnabled(false);
 			
@@ -355,12 +371,10 @@ public class MenuBar extends JMenuBar {
 			New_Prof.setEnabled(false);
 			
 			Edi_Stud.setEnabled(false);
-			Edit_Stud_Prof.setEnabled(true);
 			Edit_Prof.setEnabled(false);
 			Edit_Sub.setEnabled(true);
 			
 			Delete_Stud.setEnabled(false);
-			Delete_Stud_Prof.setEnabled(true);
 			Delete_Prof.setEnabled(false);
 			Delete_Sub.setEnabled(true);
 			
@@ -373,12 +387,10 @@ public class MenuBar extends JMenuBar {
 			New_Sub.setEnabled(false);
 			
 			Edi_Stud.setEnabled(false);
-			Edit_Stud_Prof.setEnabled(false);
 			Edit_Prof.setEnabled(true);
 			Edit_Sub.setEnabled(false);
 			
 			Delete_Stud.setEnabled(false);
-			Delete_Stud_Prof.setEnabled(false);
 			Delete_Prof.setEnabled(true);
 			Delete_Sub.setEnabled(false);
 			
