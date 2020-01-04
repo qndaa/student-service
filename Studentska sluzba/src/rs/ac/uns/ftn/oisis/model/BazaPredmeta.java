@@ -1,19 +1,18 @@
 package rs.ac.uns.ftn.oisis.model;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.view.MainFrame;
-import rs.ac.uns.ftn.oisis.view.PredmetiTable;
 import rs.ac.uns.ftn.oisis.view.PredmetiTablePane;
 import rs.ac.uns.ftn.oisis.view.ProfesoriNaPredmetuTable;
 
@@ -36,7 +35,7 @@ public class BazaPredmeta {
 	private ArrayList<Predmet> sviPredmeti;
 	private ArrayList<Predmet> razultatPretrage;
 
-	private File filePredmeti = new File("predmeti.txt");
+	private File filePredmeti = new File("predmeti.raw");
 
 	private BazaPredmeta() {
 		super();
@@ -231,35 +230,57 @@ public class BazaPredmeta {
 
 	public void savePredmete() throws IOException {
 
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePredmeti)));
+		ObjectOutputStream out = null;
 
-		for (int i = 0; i < sviPredmeti.size(); i++) {
-			Predmet p = sviPredmeti.get(i);
-			String line = p.toString();
-			bw.write(line);
+		try {
+
+			out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filePredmeti)));
+			for (Predmet predmet : sviPredmeti) {
+				out.writeObject(predmet);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		bw.close();
 
 	}
 
 	public void loadPredmete() throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePredmeti)));
+		ObjectInputStream in = null;
 
-		String line = new String();
+		Predmet predmet = null;
+		try {
+			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filePredmeti)));
+			while (true) {
 
-		while ((line = br.readLine()) != null) {
-			String fields[] = line.split("-");
-			String trimFields[] = new String[fields.length];
-			for (int i = 0; i < fields.length; i++) {
-				trimFields[i] = fields[i].trim();
+				predmet = (Predmet) in.readObject();
+				dodajPredmet(predmet);
+
 			}
-			dodajPredmet(trimFields);
-			PredmetiTable.getInstance().refreshTable();
-			// potrebno je jos ubaciti sve studente koji slusaju predmet kao i profesore
-			// koji predaju na predmetu
-		}
-		br.close();
+		} catch (Exception e) {
 
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private void dodajPredmet(Predmet predmet) {
+		brojUnetihPredmeta++;
+		sviPredmeti.add(predmet);
 	}
 
 	public ArrayList<Predmet> getRazultatPretrage() {
@@ -321,16 +342,15 @@ public class BazaPredmeta {
 		if (brojPredmetaKojiSuUPretrazi == 0) {
 			sviPredmeti.get(i).getStudenti().add(stud);
 			BrojStudenataNaPredmetu++;
-		}else {
+		} else {
 			for (Predmet pred : sviPredmeti) {
-				if(pred.getSifra().equals(p.getSifra())) {
+				if (pred.getSifra().equals(p.getSifra())) {
 					pred.getStudenti().add(stud);
-					//razultatPretrage.get(i).getStudenti().add(stud);
+					// razultatPretrage.get(i).getStudenti().add(stud);
 				}
-				
+
 			}
-			
-			
+
 		}
 	}
 
@@ -342,43 +362,37 @@ public class BazaPredmeta {
 		BrojStudenataNaPredmetu = brojStudenataNaPredmetu;
 	}
 
-
 	public boolean dodajProfesoraNaPredmet(Profesor profesor) {
 		// TODO Auto-generated method stub
 		int selectedRow = PredmetiTablePane.getSelectedRow();
 		Predmet predmet;
-		if(brojPredmetaKojiSuUPretrazi == 0) {
+		if (brojPredmetaKojiSuUPretrazi == 0) {
 			predmet = sviPredmeti.get(selectedRow);
 		} else {
 			predmet = razultatPretrage.get(selectedRow);
 		}
 		return predmet.dodajProfesoraNaPredmet(profesor);
-		
-		
-		
-		
+
 	}
 
 	public void obrisiProfesoraSaPredmeta() {
 		int selectedPredmet = PredmetiTablePane.getSelectedRow();
 		int selectedProfesor = ProfesoriNaPredmetuTable.getInstance().getSelectedRow();
 		Predmet predmet = sviPredmeti.get(selectedPredmet);
-		predmet.getPredmetniProf().remove(selectedProfesor);	
+		predmet.getPredmetniProf().remove(selectedProfesor);
 	}
 
 	public void obrisiProfesoraSaPredmeta(String licna) {
-		for(Predmet predmet : sviPredmeti) {
-			for(Profesor profesor : predmet.getPredmetniProf()) {
-				if(profesor.getBrojLicneKarte().equals(licna)) {
+		for (Predmet predmet : sviPredmeti) {
+			for (Profesor profesor : predmet.getPredmetniProf()) {
+				if (profesor.getBrojLicneKarte().equals(licna)) {
 					predmet.getPredmetniProf().remove(profesor);
 					break;
 				}
 			}
 		}
-		
+
 	}
-	
-	
 
 	public String[] IzbrisiStudentaSaPredmeta(int sleketovanPredmet, int selektovanStudent) {
 		String sifrIndeks[] = new String[2];
@@ -390,6 +404,5 @@ public class BazaPredmeta {
 		return sifrIndeks;
 
 	}
-
 
 }

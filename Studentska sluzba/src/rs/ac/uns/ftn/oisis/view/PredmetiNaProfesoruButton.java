@@ -36,8 +36,9 @@ public class PredmetiNaProfesoruButton extends AbstractCellEditor implements Tab
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Dovrsi");
-
+				PredmetiNaProfesoruDialog dialog = new PredmetiNaProfesoruDialog(MainFrame.getInstance(),
+						"Predmeti na kojima predaje profesor", true);
+				dialog.setVisible(true);
 			}
 		});
 
@@ -55,15 +56,13 @@ public class PredmetiNaProfesoruButton extends AbstractCellEditor implements Tab
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
 		// TODO Auto-generated method stub
-		JButton btn = (JButton) value;
-		return btn;
+		return renderButton;
 	}
 
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		// TODO Auto-generated method stub
-		JButton btn = (JButton) value;
-		return btn;
+		return edirotButton;
 	}
 
 	public boolean isEditorActive() {

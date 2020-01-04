@@ -1,7 +1,6 @@
 package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,13 +14,13 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
-import rs.ac.uns.ftn.oisis.controller.StudentiController;
-import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 
 
 
 public class DialogLista extends JDialog {
 
+
+	private static final long serialVersionUID = -8461691726966921404L;
 	private JPanel down;
 	protected JButton odustani;
 	protected JButton potvrdi;

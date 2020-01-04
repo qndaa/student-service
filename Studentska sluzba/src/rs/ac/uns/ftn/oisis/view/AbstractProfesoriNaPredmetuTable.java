@@ -1,14 +1,9 @@
 package rs.ac.uns.ftn.oisis.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
-
-import rs.ac.uns.ftn.oisis.controller.PredmetiController;
-import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
 import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 import rs.ac.uns.ftn.oisis.model.Predmet;
 
@@ -74,17 +69,8 @@ public class AbstractProfesoriNaPredmetuTable extends AbstractTableModel {
 
 		} else if (column == 1) {
 			JButton delete = new JButton("Obrisi");
-			delete.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					ProfesoriController.getInstance().obrisiPredmetSaProfesora();
-					PredmetiController.getInstance().obrisiProfesoraSaPredmeta();
-
-					ProfesoriNaPredmetuTable.getInstance().addNotify();
-
-				}
-			});
+			
+			delete.setOpaque(false);
 			return delete;
 		}
 

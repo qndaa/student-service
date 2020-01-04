@@ -3,10 +3,14 @@ package rs.ac.uns.ftn.oisis.view;
 import javax.swing.table.AbstractTableModel;
 
 import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
-import rs.ac.uns.ftn.oisis.model.BazaStudent;
 import rs.ac.uns.ftn.oisis.model.Predmet;
 
 public class AbstractListaStudenataTable extends AbstractTableModel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1632732570193280986L;
 
 	@Override
 	public int getColumnCount() {
@@ -35,7 +39,8 @@ public class AbstractListaStudenataTable extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		int selektovan = PredmetiTablePane.getSelectedRow();
 		if (selektovan != -1) {
-			if (BazaPredmeta.getInstance().getBrojPredmetaKojiSuUPretrazi() == 0) {
+			BazaPredmeta.getInstance();
+			if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
 				Predmet p = BazaPredmeta.getInstance().getSviPredmeti().get(selektovan);
 				return p.getStudenti().get(rowIndex).getBrIndeksa();
 			}else {

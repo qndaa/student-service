@@ -1,8 +1,5 @@
 package rs.ac.uns.ftn.oisis.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
@@ -30,14 +27,6 @@ public class AbstractProfesoriTable extends AbstractTableModel {
 			return BazaProfesora.getInstance().getValueAt(row, column);
 		} else {
 			JButton btn = new JButton("Predmeti");
-			btn.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					PredmetiNaProfesoruDialog dialog = new PredmetiNaProfesoruDialog(MainFrame.getInstance(), "Predmeti na kojima predaje profesor", true);
-					dialog.setVisible(true);
-				}
-			});
 
 			btn.setOpaque(false);
 			return btn;

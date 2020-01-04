@@ -2,22 +2,17 @@ package rs.ac.uns.ftn.oisis.model;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.view.MainFrame;
-import rs.ac.uns.ftn.oisis.view.StudentiTable;
 
 public class BazaStudent {
 
@@ -83,17 +78,17 @@ public class BazaStudent {
 
 	public void sacuvajStudente() throws IOException {
 		ObjectOutputStream out = null;
-		
+
 		try {
 			out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("studenti.raw")));
 			for (Student s : spisakStudenata) {
 				out.writeObject(s);
 			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(out != null) {
+		} finally {
+			if (out != null) {
 				try {
 					out.close();
 				} catch (Exception e2) {
@@ -101,8 +96,7 @@ public class BazaStudent {
 				}
 			}
 		}
-		
-		
+
 	}
 
 	public void otvoriFileStudenta() throws IOException {
@@ -114,11 +108,11 @@ public class BazaStudent {
 				s = (Student) in.readObject();
 				DodavanjeObjecta(s);
 			}
-			
+
 		} catch (Exception e) {
-			// TODO: handle exception
-		}finally {
-			if(in != null) {
+			
+		} finally {
+			if (in != null) {
 				try {
 					in.close();
 				} catch (Exception e2) {
@@ -130,13 +124,13 @@ public class BazaStudent {
 
 	public String getValueAt(int row, int column) {
 		ArrayList<Student> t;
-		if(rezPretrage.size() == 0) {
+		if (rezPretrage.size() == 0) {
 			t = spisakStudenata;
-		}else {
-			t=rezPretrage;
+		} else {
+			t = rezPretrage;
 		}
 		if (row < t.size()) {
-			
+
 			Student student = t.get(row);
 			switch (column) {
 			case 0:
@@ -177,7 +171,7 @@ public class BazaStudent {
 		String index = p[6];
 		double prosek = Double.parseDouble(p[10]);
 		Random rand = new Random();
-		prosek=rand.nextInt((10 -5) +1)+5;
+		prosek = rand.nextInt((10 - 5) + 1) + 5;
 		if (ProveraIndeksa(index)) {
 			brStudenata++;
 			Student s = new Student(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[8], prosek, GodinaStudija.valueOf(p[7]),
@@ -188,13 +182,11 @@ public class BazaStudent {
 
 		return false;
 	}
-	
+
 	public void DodavanjeObjecta(Student s) {
-			brStudenata++;			
-			spisakStudenata.add(s);
+		brStudenata++;
+		spisakStudenata.add(s);
 	}
-	
-	
 
 	public boolean ProveraIndeksa(String index) {
 		for (Student s : spisakStudenata) {
@@ -224,19 +216,19 @@ public class BazaStudent {
 
 		return student;
 	}
-	
+
 	public void SmanjiBrPretrage() {
 		brStudenataPretga--;
 	}
-	
+
 	public void BrisanjePoIndeksu(String indeks) {
-		int pamtiIndeks=-1;
+		int pamtiIndeks = -1;
 		for (int i = 0; i < spisakStudenata.size(); i++) {
-			if(spisakStudenata.get(i).getBrIndeksa().equals(indeks)) {
-				pamtiIndeks=i;
+			if (spisakStudenata.get(i).getBrIndeksa().equals(indeks)) {
+				pamtiIndeks = i;
 			}
 		}
-		if(pamtiIndeks != -1) {
+		if (pamtiIndeks != -1) {
 			spisakStudenata.remove(pamtiIndeks);
 			brStudenata--;
 		}
@@ -250,23 +242,20 @@ public class BazaStudent {
 			}
 		}
 	}
-	
-	public void IzbrisiPredmetStudentu(String sifraPredmeta, String brIndeksa ) {
+
+	public void IzbrisiPredmetStudentu(String sifraPredmeta, String brIndeksa) {
 		for (int i = 0; i < spisakStudenata.size(); i++) {
-			if(spisakStudenata.get(i).getBrIndeksa().equals(brIndeksa)) {
+			if (spisakStudenata.get(i).getBrIndeksa().equals(brIndeksa)) {
 				for (int j = 0; j < spisakStudenata.get(i).getSpisakPredmeta().size(); j++) {
-					if(spisakStudenata.get(i).getSpisakPredmeta().get(j).getSifra().equals(sifraPredmeta)) {
+					if (spisakStudenata.get(i).getSpisakPredmeta().get(j).getSifra().equals(sifraPredmeta)) {
 						spisakStudenata.get(i).getSpisakPredmeta().remove(j);
 					}
 				}
-				
+
 			}
 		}
-		
+
 	}
-	
-	
-	
 
 	public void PretragaStud(String ulaz) {
 		// proveravam da li je unetio nesto ako nije ne ulazi u fun
@@ -295,7 +284,7 @@ public class BazaStudent {
 
 		if (drugaPodela[0].toLowerCase().equals("broj indeksa") || drugaPodela[0].toLowerCase().equals("br. indeksa")) {
 			for (Student s : spisakStudenata) {
-				if (s.getBrIndeksa().toLowerCase().equals(drugaPodela[1].trim().toLowerCase()) ) {
+				if (s.getBrIndeksa().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 					rezPretrage.add(s);
 				}
 
@@ -328,62 +317,66 @@ public class BazaStudent {
 					rezPretrage.add(s);
 				}
 			}
-		}else if(drugaPodela[0].toLowerCase().equals("prosek")) {
+		} else if (drugaPodela[0].toLowerCase().equals("prosek")) {
 			for (Student s : spisakStudenata) {
-				if(s.getProsekS().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+				if (s.getProsekS().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 					rezPretrage.add(s);
 				}
 			}
-		}else if(drugaPodela[0].toLowerCase().equals("datum rodjenja") || drugaPodela[0].toLowerCase().equals("dat. rodjenja")) {
+		} else if (drugaPodela[0].toLowerCase().equals("datum rodjenja")
+				|| drugaPodela[0].toLowerCase().equals("dat. rodjenja")) {
 			for (Student s : spisakStudenata) {
-				if(s.getDatumRodjenja().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+				if (s.getDatumRodjenja().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 					rezPretrage.add(s);
 				}
 			}
-		}else if(drugaPodela[0].toLowerCase().equals("broj telefona") || drugaPodela[0].toLowerCase().equals("br. telefona") || drugaPodela[0].toLowerCase().equals("br")) {
+		} else if (drugaPodela[0].toLowerCase().equals("broj telefona")
+				|| drugaPodela[0].toLowerCase().equals("br. telefona") || drugaPodela[0].toLowerCase().equals("br")) {
 			for (Student s : spisakStudenata) {
-				if(s.getKontaktTelefon().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+				if (s.getKontaktTelefon().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 					rezPretrage.add(s);
 				}
 			}
-		}else if(drugaPodela[0].toLowerCase().equals("email") || drugaPodela[0].toLowerCase().equals("gmail")) {
+		} else if (drugaPodela[0].toLowerCase().equals("email") || drugaPodela[0].toLowerCase().equals("gmail")) {
 			for (Student s : spisakStudenata) {
-				if(s.getEmail().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+				if (s.getEmail().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 					rezPretrage.add(s);
 				}
 			}
-		}else if(drugaPodela[0].toLowerCase().equals("adresa")) {
+		} else if (drugaPodela[0].toLowerCase().equals("adresa")) {
 			for (Student s : spisakStudenata) {
-				if(s.getAdresaStanovanja().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+				if (s.getAdresaStanovanja().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 					rezPretrage.add(s);
 				}
 			}
-		}else if(drugaPodela[0].toLowerCase().equals("dat. upisa") || drugaPodela[0].toLowerCase().equals("datum upisa")) {
+		} else if (drugaPodela[0].toLowerCase().equals("dat. upisa")
+				|| drugaPodela[0].toLowerCase().equals("datum upisa")) {
 			for (Student s : spisakStudenata) {
-				if(s.getDatumUpisa().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+				if (s.getDatumUpisa().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 					rezPretrage.add(s);
 				}
 			}
-		}else {
+		} else {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Nije napisana dobro pretraga", "EROR",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
-		if(prvaPodela.length>1) {
+
+		if (prvaPodela.length > 1) {
 			for (int i = 0; i < prvaPodela.length; i++) {
 				prvi = prvaPodela[i];
 				drugaPodela = prvi.trim().split(":");
-				
+
 				if (drugaPodela.length != 2 || drugaPodela[1].trim().length() == 0) {
 					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Nije napisana dobro pretraga", "EROR",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
-				if (drugaPodela[0].toLowerCase().equals("broj indeksa") || drugaPodela[0].toLowerCase().equals("br. indeksa")) {
+				if (drugaPodela[0].toLowerCase().equals("broj indeksa")
+						|| drugaPodela[0].toLowerCase().equals("br. indeksa")) {
 					for (Student s : spisakStudenata) {
-						if (!s.getBrIndeksa().toLowerCase().equals(drugaPodela[1].trim().toLowerCase()) ) {
+						if (!s.getBrIndeksa().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 							rezPretrage.remove(s);
 						}
 
@@ -395,7 +388,8 @@ public class BazaStudent {
 							rezPretrage.remove(s);
 						}
 					}
-				} else if (drugaPodela[0].toLowerCase().equals("prezime") || drugaPodela[0].toLowerCase().equals("prz")) {
+				} else if (drugaPodela[0].toLowerCase().equals("prezime")
+						|| drugaPodela[0].toLowerCase().equals("prz")) {
 					for (Student s : spisakStudenata) {
 						if (!s.getPrezime().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 							rezPretrage.remove(s);
@@ -416,53 +410,57 @@ public class BazaStudent {
 							rezPretrage.remove(s);
 						}
 					}
-				}else if(drugaPodela[0].toLowerCase().equals("prosek")) {
+				} else if (drugaPodela[0].toLowerCase().equals("prosek")) {
 					for (Student s : spisakStudenata) {
-						if(!s.getProsekS().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+						if (!s.getProsekS().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 							rezPretrage.remove(s);
 						}
 					}
-				}else if(drugaPodela[0].toLowerCase().equals("datum rodjenja") || drugaPodela[0].toLowerCase().equals("dat. rodjenja")) {
+				} else if (drugaPodela[0].toLowerCase().equals("datum rodjenja")
+						|| drugaPodela[0].toLowerCase().equals("dat. rodjenja")) {
 					for (Student s : spisakStudenata) {
-						if(!s.getDatumRodjenja().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+						if (!s.getDatumRodjenja().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 							rezPretrage.remove(s);
 						}
 					}
-				}else if(drugaPodela[0].toLowerCase().equals("broj telefona") || drugaPodela[0].toLowerCase().equals("br. telefona") || drugaPodela[0].toLowerCase().equals("br")) {
+				} else if (drugaPodela[0].toLowerCase().equals("broj telefona")
+						|| drugaPodela[0].toLowerCase().equals("br. telefona")
+						|| drugaPodela[0].toLowerCase().equals("br")) {
 					for (Student s : spisakStudenata) {
-						if(!s.getKontaktTelefon().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+						if (!s.getKontaktTelefon().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 							rezPretrage.remove(s);
 						}
 					}
-				}else if(drugaPodela[0].toLowerCase().equals("email") || drugaPodela[0].toLowerCase().equals("gmail")) {
+				} else if (drugaPodela[0].toLowerCase().equals("email")
+						|| drugaPodela[0].toLowerCase().equals("gmail")) {
 					for (Student s : spisakStudenata) {
-						if(!s.getEmail().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+						if (!s.getEmail().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 							rezPretrage.remove(s);
 						}
 					}
-				}else if(drugaPodela[0].toLowerCase().equals("adresa")) {
+				} else if (drugaPodela[0].toLowerCase().equals("adresa")) {
 					for (Student s : spisakStudenata) {
-						if(!s.getAdresaStanovanja().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+						if (!s.getAdresaStanovanja().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 							rezPretrage.remove(s);
 						}
 					}
-				}else if(drugaPodela[0].toLowerCase().equals("dat. upisa") || drugaPodela[0].toLowerCase().equals("datum upisa")) {
+				} else if (drugaPodela[0].toLowerCase().equals("dat. upisa")
+						|| drugaPodela[0].toLowerCase().equals("datum upisa")) {
 					for (Student s : spisakStudenata) {
-						if(!s.getDatumUpisa().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
+						if (!s.getDatumUpisa().toLowerCase().equals(drugaPodela[1].trim().toLowerCase())) {
 							rezPretrage.remove(s);
 						}
 					}
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Nije napisana dobro pretraga", "EROR",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-	
+
 			}
-			
-			
+
 		}
-			
+
 		brStudenataPretga = rezPretrage.size();
 		if (rezPretrage.size() == 0) {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Ne postoji student sa unetim podacima", "EROR",
@@ -470,7 +468,7 @@ public class BazaStudent {
 			return;
 		}
 
-	}//kraj metode
+	}// kraj metode
 
 	public ArrayList<Student> getRezPretrage() {
 		return rezPretrage;
@@ -491,15 +489,5 @@ public class BazaStudent {
 	public static void setBrStudenata(int brStudenata) {
 		BazaStudent.brStudenata = brStudenata;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-}//kraj klase
+}// kraj klase

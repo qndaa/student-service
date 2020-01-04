@@ -1,7 +1,6 @@
 package rs.ac.uns.ftn.oisis.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -10,6 +10,9 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
+import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+import rs.ac.uns.ftn.oisis.controller.ProfesoriController;
+
 public class ObrisiProfesoraSaPredmetaButton extends AbstractCellEditor implements TableCellRenderer, TableCellEditor {
 
 	/**
@@ -35,9 +38,13 @@ public class ObrisiProfesoraSaPredmetaButton extends AbstractCellEditor implemen
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Dovrsi");
+				ProfesoriController.getInstance().obrisiPredmetSaProfesora();
+				PredmetiController.getInstance().obrisiProfesoraSaPredmeta();
+
+				ProfesoriNaPredmetuTable.getInstance().addNotify();
 
 			}
+
 		});
 
 		this.isEditableActive = false;
@@ -52,15 +59,13 @@ public class ObrisiProfesoraSaPredmetaButton extends AbstractCellEditor implemen
 
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-		JButton btn = (JButton) value;
-		return btn;
+		return editorButton;
 	}
 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
-		JButton btn = (JButton) value;
-		return btn;
+		return renderButton;
 	}
 
 	public JButton getRenderButton() {

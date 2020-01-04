@@ -33,11 +33,14 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 
 		this.edirotButton.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Dovrsi");
 
-			}
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ProfesoriNaPredmetuDialog dialog = new ProfesoriNaPredmetuDialog(MainFrame.getInstance(),
+							"Profesori sa predmeta", true);
+					dialog.setVisible(true);
+				}
+			
 		});
 
 		this.isEditorActive = false;
@@ -53,14 +56,13 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
-		JButton btn = (JButton) value;
-		return btn;
+		
+		return renderButton;
 	}
 
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-		JButton btn = (JButton) value;
-		return btn;
+		return edirotButton;
 	}
 
 	public JButton getRenderButton() {

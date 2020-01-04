@@ -2,17 +2,12 @@ package rs.ac.uns.ftn.oisis.model;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -21,7 +16,6 @@ import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTablePane;
 import rs.ac.uns.ftn.oisis.view.ProfesoriNaPredmetuTable;
-import rs.ac.uns.ftn.oisis.view.ProfesoriTable;
 
 public class BazaProfesora {
 
@@ -41,7 +35,7 @@ public class BazaProfesora {
 	private ArrayList<Profesor> sviProfesori;
 	private ArrayList<Profesor> rezultatPretrage;
 
-	private File fileProfesori = new File("profesori.txt");
+	//private File fileProfesori = new File("profesori.txt");
 
 	private BazaProfesora() {
 		super();
@@ -220,20 +214,7 @@ public class BazaProfesora {
 		sviProfesori.add(p);
 	}
 	
-	private boolean dodajPredmet(String[] kolone) {
-		brojUnetihProfesora++;
-		String key = kolone[7];
-		if (profesorSaKljucemNePostoji(key)) {
-			Profesor newProfesor = new Profesor(kolone[0], kolone[1], kolone[2], kolone[3], kolone[4], kolone[5],
-					kolone[6], kolone[7], kolone[8], kolone[9]);
-			sviProfesori.add(newProfesor);
-			return true;
-
-		}
-		return false;
-
-	}
-
+	
 	public boolean DodajProf(String[] p) {
 		String brLicneKarte = p[7];
 		if (profesorSaKljucemNePostoji(brLicneKarte)) {

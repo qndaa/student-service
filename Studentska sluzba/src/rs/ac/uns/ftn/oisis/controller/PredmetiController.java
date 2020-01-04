@@ -8,8 +8,6 @@ import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 
 import rs.ac.uns.ftn.oisis.model.BazaProfesora;
 
-import rs.ac.uns.ftn.oisis.model.BazaStudent;
-
 import rs.ac.uns.ftn.oisis.model.Predmet;
 import rs.ac.uns.ftn.oisis.model.Profesor;
 import rs.ac.uns.ftn.oisis.model.Student;
@@ -119,7 +117,7 @@ public class PredmetiController {
 			DialogStudenaNaPredmet di = new DialogStudenaNaPredmet(MainFrame.getInstance(),
 					"Dodavanje studenta na predmet", true);
 			di.setVisible(true);
-			
+
 		} else {
 
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Predmet nije selektovan", "EROR",

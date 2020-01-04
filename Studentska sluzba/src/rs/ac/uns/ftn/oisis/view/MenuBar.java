@@ -14,7 +14,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.WindowConstants;
 
 import rs.ac.uns.ftn.oisis.controller.IzmenaListener;
 import rs.ac.uns.ftn.oisis.controller.MenuElementListenerBirsanje;
