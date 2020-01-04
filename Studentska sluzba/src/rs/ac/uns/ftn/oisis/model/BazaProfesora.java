@@ -1,5 +1,7 @@
 package rs.ac.uns.ftn.oisis.model;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
@@ -132,18 +136,18 @@ public class BazaProfesora {
 		brojUnetihProfesora--;
 
 	}
-	
+
 	public Profesor getProfesora(String licna) {
 		Profesor prof = null;
-		for (Profesor p :sviProfesori) {
-			if(p.getBrojLicneKarte().equals(licna)) {
+		for (Profesor p : sviProfesori) {
+			if (p.getBrojLicneKarte().equals(licna)) {
 				prof = p;
 			}
 		}
 		return prof;
-		
+
 	}
-	
+
 	public ArrayList<Profesor> getRezultatPretrage() {
 		return rezultatPretrage;
 	}
@@ -155,49 +159,67 @@ public class BazaProfesora {
 	public void BrisanjePoLicnoj(String licna) {
 		int pamtiIndeks = -1;
 		for (int i = 0; i < sviProfesori.size(); i++) {
-			if(sviProfesori.get(i).getBrojLicneKarte().equals(licna)) {
+			if (sviProfesori.get(i).getBrojLicneKarte().equals(licna)) {
 				pamtiIndeks = i;
 			}
 		}
-		if(pamtiIndeks != -1) {
+		if (pamtiIndeks != -1) {
 			sviProfesori.remove(pamtiIndeks);
 			brojUnetihProfesora--;
-		}	
+		}
 	}
 
 	public void saveProfesori() throws IOException {
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileProfesori)));
+		ObjectOutputStream out = null;
 
-		for (int i = 0; i < sviProfesori.size(); i++) {
-			Profesor p = sviProfesori.get(i);
-			String line = p.toString();
-			bw.write(line);
+		try {
+			out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("profesori.raw")));
+			for (Profesor p : sviProfesori) {
+				out.writeObject(p);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
 		}
-		bw.close();
 	}
 
 	public void loadProfesori() throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileProfesori)));
-
-		String line = new String();
-
-		while ((line = br.readLine()) != null) {
-			String fields[] = line.split("-");
-			String trimFields[] = new String[fields.length];
-			for (int i = 0; i < fields.length; i++) {
-				trimFields[i] = fields[i].trim();
+		ObjectInputStream in = null;
+		Profesor p = null;
+		try {
+			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("profesori.raw")));
+			while (true) {
+				p = (Profesor) in.readObject();
+				DodavanjeObjecta(p);
 			}
-
-			dodajPredmet(trimFields);
-			ProfesoriTable.getInstance().refresTable();
-
-			// dodati jos ucitavanje predmeta na kojima predaje profesor
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			if(in != null) {
+				try {
+					in.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
 		}
-
-		br.close();
 
 	}
 
+	private void DodavanjeObjecta(Profesor p) {
+		brojUnetihProfesora++;
+		sviProfesori.add(p);
+	}
+	
 	private boolean dodajPredmet(String[] kolone) {
 		brojUnetihProfesora++;
 		String key = kolone[7];
@@ -212,18 +234,17 @@ public class BazaProfesora {
 
 	}
 
-	public boolean DodajProf(String[] p){
+	public boolean DodajProf(String[] p) {
 		String brLicneKarte = p[7];
-			if(profesorSaKljucemNePostoji(brLicneKarte)) {
-				brojUnetihProfesora++;
-				Profesor profesor = new Profesor(p[0], p[1], p[2], p[3], p[4],	p[5], p[6],p[7], p[8], p[9]);
-				sviProfesori.add(profesor);
-				return true;
-			}
+		if (profesorSaKljucemNePostoji(brLicneKarte)) {
+			brojUnetihProfesora++;
+			Profesor profesor = new Profesor(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9]);
+			sviProfesori.add(profesor);
+			return true;
+		}
 		return false;
 	}
-	
-	
+
 	public boolean profesorSaKljucemNePostoji(String key) {
 		for (Profesor p : sviProfesori) {
 			if (key.equals(p.getBrojLicneKarte())) {
@@ -315,7 +336,6 @@ public class BazaProfesora {
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
 
 		if (podelaUnosa.length > 1) {
 			for (int i = 1; i < podelaUnosa.length; i++) {
@@ -396,65 +416,63 @@ public class BazaProfesora {
 			}
 
 		}
-		
-		
+
 		brojProfesoraKojiSuUPretrazi = rezultatPretrage.size();
-		
-		if(rezultatPretrage.size() == 0) {
+
+		if (rezultatPretrage.size() == 0) {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Neuspesna pretraga!", "Greska",
 					JOptionPane.ERROR_MESSAGE);
 		}
-		
 
 	}
 
 	public boolean dodajPredmetNaProfesora(String text) {
 		int selectedRow = PredmetiTablePane.getSelectedRow();
 		Predmet predmet;
-		if(BazaPredmeta.getBrojPredmetaKojiSuUPretrazi()==0) {
+		if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
 			predmet = PredmetiController.getInstance().getPredmetPoIndeksu(selectedRow);
 		} else {
 			predmet = BazaPredmeta.getInstance().getRazultatPretrage().get(selectedRow);
 		}
 		Profesor profesor = getProfesora(text.trim());
-		
-		for(Predmet p : profesor.getPredajeNaPredmetima()) {
-			if(p.getSifra().equals(predmet.getSifra())) {
+
+		for (Predmet p : profesor.getPredajeNaPredmetima()) {
+			if (p.getSifra().equals(predmet.getSifra())) {
 				return false;
 			}
 		}
-		
+
 		profesor.getPredajeNaPredmetima().add(predmet);
-		
+
 		return true;
 	}
 
 	public void obrisiPredmetSaProfesora() {
 		int selectedProfesor = ProfesoriNaPredmetuTable.getInstance().getSelectedRow();
 		int selectedPredmet = PredmetiTablePane.getSelectedRow();
-		
+
 		Predmet predmet = BazaPredmeta.getInstance().getSviPredmeti().get(selectedPredmet);
 		Profesor profesor = predmet.getPredmetniProf().get(selectedProfesor);
-		
-		for(Predmet p : profesor.getPredajeNaPredmetima()) {
-			if(p.getSifra().equals(predmet.getSifra())) {
+
+		for (Predmet p : profesor.getPredajeNaPredmetima()) {
+			if (p.getSifra().equals(predmet.getSifra())) {
 				profesor.getPredajeNaPredmetima().remove(p);
 				break;
 			}
 		}
-		
+
 	}
 
 	public void obrisiPredmetSaProfesora(String sifraPredmeta) {
-		for(Profesor profesor : sviProfesori) {
-			for(Predmet predmet : profesor.getPredajeNaPredmetima()) {
-				if(sifraPredmeta.equals(predmet.getSifra())) {
+		for (Profesor profesor : sviProfesori) {
+			for (Predmet predmet : profesor.getPredajeNaPredmetima()) {
+				if (sifraPredmeta.equals(predmet.getSifra())) {
 					profesor.getPredajeNaPredmetima().remove(predmet);
 					break;
 				}
 			}
 		}
-		
+
 	}
 
 	public void smanjiBrojProfesoraKojiSuUPretrazi() {
@@ -463,17 +481,16 @@ public class BazaProfesora {
 
 	public void brisiPoLicnoj(String brojLicneKarte) {
 		int i = 0;
-		for(; i < sviProfesori.size(); i++) {
-			if(brojLicneKarte.equals(sviProfesori.get(i).getBrojLicneKarte())) {
+		for (; i < sviProfesori.size(); i++) {
+			if (brojLicneKarte.equals(sviProfesori.get(i).getBrojLicneKarte())) {
 				break;
 			}
 		}
-		
+
 		sviProfesori.remove(i);
-		
+
 		brojUnetihProfesora--;
-		
-		
+
 	}
 
 }

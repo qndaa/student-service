@@ -1,9 +1,15 @@
 package rs.ac.uns.ftn.oisis.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Profesor extends Osoba {
+public class Profesor extends Osoba implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7136644790666591969L;
+	
 	private String adresaKancelarije;
 	private String brojLicneKarte;
 	private String titula;

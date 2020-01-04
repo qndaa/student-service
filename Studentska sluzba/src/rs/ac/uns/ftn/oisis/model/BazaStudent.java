@@ -1,13 +1,18 @@
 package rs.ac.uns.ftn.oisis.model;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -77,32 +82,50 @@ public class BazaStudent {
 	}
 
 	public void sacuvajStudente() throws IOException {
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("studenti.txt")));
-
-		for (int i = 0; i < spisakStudenata.size(); i++) {
-			Student s = spisakStudenata.get(i);
-			String line = s.toString();
-			bw.write(line);
+		ObjectOutputStream out = null;
+		
+		try {
+			out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("studenti.raw")));
+			for (Student s : spisakStudenata) {
+				out.writeObject(s);
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(out != null) {
+				try {
+					out.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
 		}
-		bw.close();
+		
+		
 	}
 
 	public void otvoriFileStudenta() throws IOException {
-		BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream("studenti.txt")));
-		String line;
-
-		while ((line = bfr.readLine()) != null) {
-			String p[] = line.split("-");
-			String trimP[] = new String[p.length];
-			for (int i = 0; i < p.length; i++) {
-				trimP[i] = p[i].trim();
+		ObjectInputStream in = null;
+		Student s = null;
+		try {
+			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("studenti.raw")));
+			while (true) {
+				s = (Student) in.readObject();
+				DodavanjeObjecta(s);
 			}
-			Dodavanje(trimP);
-			StudentiTable.getInstance().OsveziTabelu();
-
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			if(in != null) {
+				try {
+					in.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
 		}
-
-		bfr.close();
 	}
 
 	public String getValueAt(int row, int column) {
@@ -153,6 +176,8 @@ public class BazaStudent {
 	public boolean Dodavanje(String[] p) {
 		String index = p[6];
 		double prosek = Double.parseDouble(p[10]);
+		Random rand = new Random();
+		prosek=rand.nextInt((10 -5) +1)+5;
 		if (ProveraIndeksa(index)) {
 			brStudenata++;
 			Student s = new Student(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[8], prosek, GodinaStudija.valueOf(p[7]),
@@ -163,6 +188,13 @@ public class BazaStudent {
 
 		return false;
 	}
+	
+	public void DodavanjeObjecta(Student s) {
+			brStudenata++;			
+			spisakStudenata.add(s);
+	}
+	
+	
 
 	public boolean ProveraIndeksa(String index) {
 		for (Student s : spisakStudenata) {

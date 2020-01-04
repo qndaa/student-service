@@ -1,8 +1,14 @@
 package rs.ac.uns.ftn.oisis.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Predmet {
+public class Predmet implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7443108558782057686L;
+	
 	private String sifra;
 	private String naziv;
 	private String semestar;

@@ -1,12 +1,19 @@
 package rs.ac.uns.ftn.oisis.model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 enum GodinaStudija {I , II, III, IV}
 	enum Status {B,S}
 
-public class Student extends Osoba{
+public class Student extends Osoba implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9164172609551995028L;
+	
+	
 	private String brIndeksa;
 	private String datumUpisa;
 	private double prosek;

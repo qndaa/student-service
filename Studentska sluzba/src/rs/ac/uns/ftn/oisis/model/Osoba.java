@@ -1,6 +1,13 @@
 package rs.ac.uns.ftn.oisis.model;
 
-public abstract class Osoba {
+import java.io.Serializable;
+
+public abstract class Osoba implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1009439025532894233L;
+	
 	private String ime;
 	private String prezime;
 	private String datumRodjenja;
