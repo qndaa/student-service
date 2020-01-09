@@ -377,32 +377,32 @@ public class DialogProfesor extends JDialog {
 		boolean ret = true;
 		String[] p = podaci();
 
-		if (!Pattern.matches("[A-Za-z_ ]*", p[0])) { // Ime
+		if (!Pattern.matches("[a-zA-Z\\u0080-\\uFFFF_ ]*", p[0])) { // Ime
 			txtField1.setBackground(Color.RED);
 			return false;
 		} else {
 			txtField1.setBackground(Color.WHITE);
 		}
-		if (!Pattern.matches("[A-Za-z_ ]*", p[1])) { // Prezime
+		if (!Pattern.matches("[a-zA-Z\\u0080-\\uFFFF_ ]*", p[1])) { // Prezime
 			txtField2.setBackground(Color.RED);
 			return false;
 		} else {
 			txtField2.setBackground(Color.WHITE);
 		}
 		if (p[2].length() != 0) { // datum rodjenja
-			if (!Pattern.matches("^(3[01]|[12][0-9]|0[1-9]).(1[0-2]|0[1-9]).[0-9]{4}$", p[2])) {
+			if (!Pattern.matches("^(3[01]|[12][0-9]|0[1-9]).(1[0-2]|0[1-9]).[0-9]{4}.$", p[2])) {
 				txtField3.setBackground(Color.RED);
 				return false;
 			}
 		}
 		if (p[3].length() != 0) { // adresa stanovanja
-			if (!Pattern.matches("[A-Za-z0-9,._ ]*", p[3])) {
+			if (!Pattern.matches("^(.+),(.+)$", p[3])) {
 				txtField4.setBackground(Color.RED);
 				return false;
 			}
 		}
 		if (p[4].length() != 0) {// broj telefona
-			if (!Pattern.matches("^[0-9]*", p[4])) {
+			if (!Pattern.matches("[0-9]{3}/[0-9]{3,4}-[0-9]{3}", p[4])) {
 				txtField5.setBackground(Color.RED);
 				return false;
 			} else if (p[4].length() > 16) {
@@ -418,7 +418,7 @@ public class DialogProfesor extends JDialog {
 		}
 
 		if (p[6].length() != 0) { // adresa stanovanja
-			if (!Pattern.matches("[A-Za-z0-9,._ ]*", p[6])) {
+			if (!Pattern.matches("^(.+),(.+)$", p[6])) {
 				txtField7.setBackground(Color.RED);
 				return false;
 			}

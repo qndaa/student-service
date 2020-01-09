@@ -26,7 +26,7 @@ public class DodavanjeListener implements ActionListener {
 			dialog.setVisible(true);
 			ToolBar.getInstance().setSelectedButton();
 		} else if (TabbedPane.activeTab == 2) {
-			DodavanjeProfesoraDialog dialog = new DodavanjeProfesoraDialog(MainFrame.getInstance(), "Dodavanje predmeta",
+			DodavanjeProfesoraDialog dialog = new DodavanjeProfesoraDialog(MainFrame.getInstance(), "Dodavanje profesora",
 					true);
 			dialog.setVisible(true);
 		}

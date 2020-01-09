@@ -60,9 +60,8 @@ public class IzmenaStudentaDialog extends DialogStudent {
 			public void actionPerformed(ActionEvent e) {
 				String pod[] = podaci();
 
-				if (!s.getBrIndeksa().contentEquals(pod[6])) {// proverimo da li je isti indeks ako jeste ne ulazi
-					if (!BazaStudent.getInstance().ProveraIndeksa(pod[6])) {// sad proveramo da li u bazi vec ima taj
-																			// ist
+				if (!s.getBrIndeksa().contentEquals(pod[6])) {
+					if (!BazaStudent.getInstance().ProveraIndeksa(pod[6])) {
 						JOptionPane.showMessageDialog(MainFrame.getInstance(), "Stduent sa istim idneskom postoji",
 								"EROR", JOptionPane.ERROR_MESSAGE);
 						return;

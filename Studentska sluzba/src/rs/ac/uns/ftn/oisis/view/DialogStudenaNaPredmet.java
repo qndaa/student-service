@@ -86,17 +86,10 @@ public class DialogStudenaNaPredmet extends JDialog {
 				String p = brIndeksa();
 
 				int row = PredmetiTablePane.getSelectedRow();
-				Predmet pred = PredmetiController.getInstance().getPredmetPoIndeksu(row); // vraca Predmet selektovan
-				Student s = StudentiController.getInstance().getStudentPoIndeksu(p);// vraca studenta sa prosledjenim
-																					// indeksom
-				boolean IndeksPostoji = StudentiController.getInstance().IndeksPostoji(p);// vraca true ako postoji
-																							// student sa prosledjenim
-																							// indeksom
-				boolean StudentNapredmetuPostoji = PredmetiController.getInstance().PostojiStudentSaIndeksom(p, row);// vraca
-																														// false
-																														// //
-																														// predmetu
-			
+				Predmet pred = PredmetiController.getInstance().getPredmetPoIndeksu(row);
+				Student s = StudentiController.getInstance().getStudentPoIndeksu(p);
+				boolean IndeksPostoji = StudentiController.getInstance().IndeksPostoji(p);
+				boolean StudentNapredmetuPostoji = PredmetiController.getInstance().PostojiStudentSaIndeksom(p, row);			
 				boolean odgovarajucaGodina = false;
 				if (s != null) {
 					if (pred.getGodIzv().equals(s.getGodinaS())) {
@@ -114,7 +107,7 @@ public class DialogStudenaNaPredmet extends JDialog {
 					dispose();
 	
 					PredmetiController.getInstance().DodavanjeStudentaNaPredmet(s, row,pred);
-					StudentiController.getInstance().DodavanjePredmetaStudentu(pred, p); // dodali smo predmet studentu
+					StudentiController.getInstance().DodavanjePredmetaStudentu(pred, p); 
 					JOptionPane.showMessageDialog((Component) e.getSource(), "Uspesno ste dodali studenta na predmet");
 					return;
 				} else {
@@ -178,7 +171,7 @@ public class DialogStudenaNaPredmet extends JDialog {
 		String brIn = brIndeksa();
 
 		if (brIn.length() != 0) { // indeks
-			if (!Pattern.matches("[A-Z]{2,3}/[0-9]{1,3}/[0-9]{4}", brIn)) {
+			if (!Pattern.matches("[A-Z]{2,3} [0-9]{1,3}/[0-9]{4}", brIn)) {
 				indeks.setBackground(Color.RED);
 				return false;
 			}

@@ -15,22 +15,20 @@ public class AbstractListaStudenataTable extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 
-		return 1;
+		return 3;
 	}
 
 	@Override
 	public int getRowCount() {
 		int selektovan = PredmetiTablePane.getSelectedRow();
 		Predmet p;
-		
-			if(BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
-				p = BazaPredmeta.getInstance().getSviPredmeti().get(selektovan);
 
-			}else {
-				p = BazaPredmeta.getInstance().getRazultatPretrage().get(selektovan);
-			}
-			
-		
+		if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+			p = BazaPredmeta.getInstance().getSviPredmeti().get(selektovan);
+
+		} else {
+			p = BazaPredmeta.getInstance().getRazultatPretrage().get(selektovan);
+		}
 
 		return p.getStudenti().size();
 	}
@@ -42,20 +40,52 @@ public class AbstractListaStudenataTable extends AbstractTableModel {
 			BazaPredmeta.getInstance();
 			if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
 				Predmet p = BazaPredmeta.getInstance().getSviPredmeti().get(selektovan);
-				return p.getStudenti().get(rowIndex).getBrIndeksa();
-			}else {
-				Predmet p = BazaPredmeta.getInstance().getRazultatPretrage().get(selektovan);
-				return p.getStudenti().get(rowIndex).getBrIndeksa();
-				
-			}
-		}
+				if (rowIndex < p.getStudenti().size()) {
+					switch (columnIndex) {
+					case 0:
+						return p.getStudenti().get(rowIndex).getBrIndeksa();
+					case 1:
+						return p.getStudenti().get(rowIndex).getIme();
+					case 2:
+						return p.getStudenti().get(rowIndex).getPrezime();
+					default:
+						break;
+					}
 
+				}
+
+			} else {
+				Predmet p = BazaPredmeta.getInstance().getRazultatPretrage().get(selektovan);
+				if (rowIndex < p.getStudenti().size()) {
+					switch (columnIndex) {
+					case 0:
+						return p.getStudenti().get(rowIndex).getBrIndeksa();
+					case 1:
+						return p.getStudenti().get(rowIndex).getIme();
+					case 2:
+						return p.getStudenti().get(rowIndex).getPrezime();
+					default:
+						break;
+					}
+
+				}
+			}
+
+		}
 		return null;
 	}
 
 	public String getColumnName(int column) {
-
-		return "Br.Indeksa";
+		switch (column) {
+		case 0:
+			return "Broj indeksa";
+		case 1:
+			return "Ime";
+		case 2:
+			return "Prezime";
+			default:
+				return null;
+		}
 	}
 
 }

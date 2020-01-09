@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 import rs.ac.uns.ftn.oisis.model.BazaStudent;
 import rs.ac.uns.ftn.oisis.model.Predmet;
 import rs.ac.uns.ftn.oisis.model.Student;
@@ -55,14 +56,40 @@ public class StudentiController {
 	public void BrisanjeStudenta() {
 		int row = StudentiTablePane.getSelektovanaVrsta();
 
-		// ako je selektovana kolona veca ili jedanko od 0 i ako u bazi ima sutudenata
-		// izbirsi
 		if (row >= 0 && row < BazaStudent.getBrStudenata() && BazaStudent.getBrStudenataPretga() == 0) {
 			int pritisnuo = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 					"Da li ste sigurni da zelite da obrisete studenta?", "Brisanje Studenta",
 					JOptionPane.YES_NO_OPTION);
 			if (pritisnuo == JOptionPane.YES_OPTION) {
-				BazaStudent.getInstance().BrisanjeStudenta(row);
+				if (BazaStudent.getInstance().getSpisakStudenata().get(row).getSpisakPredmeta().size() == 0) {
+
+					BazaStudent.getInstance().BrisanjeStudenta(row);
+				} else {
+
+					for (Predmet predmet : BazaStudent.getInstance().getSpisakStudenata().get(row)
+							.getSpisakPredmeta()) {
+
+						for (int i = 0; i < BazaPredmeta.getInstance().getSviPredmeti().size(); i++) {
+							if (BazaPredmeta.getInstance().getSviPredmeti().get(i).getSifra()
+									.equals(predmet.getSifra())) {
+
+								for (int j = 0; j < BazaPredmeta.getInstance().getSviPredmeti().get(i).getStudenti()
+										.size(); j++) {
+
+									if (BazaPredmeta.getInstance().getSviPredmeti().get(i).getStudenti().get(j)
+											.getBrIndeksa().equals(BazaStudent.getInstance().getSpisakStudenata()
+													.get(row).getBrIndeksa())) {
+										BazaPredmeta.getInstance().getSviPredmeti().get(i).getStudenti().remove(j);
+
+									}
+
+								}
+							}
+						}
+					}
+					BazaStudent.getInstance().BrisanjeStudenta(row);
+				}
+
 			}
 
 		} else if (row >= 0 && row < BazaStudent.getBrStudenataPretga()) {
@@ -72,11 +99,40 @@ public class StudentiController {
 					JOptionPane.YES_NO_OPTION);
 			if (pritisnuo == JOptionPane.YES_OPTION) {
 				// izbrisi studenta selektovanog u pretrazis
-				Student s = BazaStudent.getInstance().getRezPretrage().get(row);
-				BazaStudent.getInstance().getRezPretrage().remove(row);
-				BazaStudent.getInstance().SmanjiBrPretrage();
-				BazaStudent.getInstance().BrisanjePoIndeksu(s.getBrIndeksa());
-				;// izbrisi po indesku iz svih studenata
+				if (BazaStudent.getInstance().getRezPretrage().get(row).getSpisakPredmeta().size() == 0) {
+					Student s = BazaStudent.getInstance().getRezPretrage().get(row);
+					BazaStudent.getInstance().getRezPretrage().remove(row);
+					BazaStudent.getInstance().SmanjiBrPretrage();
+					BazaStudent.getInstance().BrisanjePoIndeksu(s.getBrIndeksa());
+				} else {
+
+					for (Predmet predmet : BazaStudent.getInstance().getRezPretrage().get(row).getSpisakPredmeta()) {
+
+						for (int i = 0; i < BazaPredmeta.getInstance().getSviPredmeti().size(); i++) {
+							if (BazaPredmeta.getInstance().getSviPredmeti().get(i).getSifra()
+									.equals(predmet.getSifra())) {
+
+								for (int j = 0; j < BazaPredmeta.getInstance().getSviPredmeti().get(i).getStudenti()
+										.size(); j++) {
+
+									if (BazaPredmeta.getInstance().getSviPredmeti().get(i).getStudenti().get(j)
+											.getBrIndeksa().equals(BazaStudent.getInstance().getRezPretrage().get(row)
+													.getBrIndeksa())) {
+										BazaPredmeta.getInstance().getSviPredmeti().get(i).getStudenti().remove(j);
+
+									}
+
+								}
+							}
+						}
+					}
+
+					Student s = BazaStudent.getInstance().getRezPretrage().get(row);
+					BazaStudent.getInstance().getRezPretrage().remove(row);
+					BazaStudent.getInstance().SmanjiBrPretrage();
+					BazaStudent.getInstance().BrisanjePoIndeksu(s.getBrIndeksa());
+
+				}
 
 			}
 

@@ -43,7 +43,7 @@ public class AbstractListaPredmetaTable extends AbstractTableModel {
 				return s.getSpisakPredmeta().get(rowIndex).getSifra();
 			} else {
 				s = BazaStudent.getInstance().getRezPretrage().get(selektovan);
-				s.getSpisakPredmeta().get(rowIndex).getSifra();
+				return s.getSpisakPredmeta().get(rowIndex).getSifra();
 			}
 		}
 

@@ -258,20 +258,16 @@ public class BazaStudent {
 	}
 
 	public void PretragaStud(String ulaz) {
-		// proveravam da li je unetio nesto ako nije ne ulazi u fun
+		
 		if (ulaz.trim().length() == 0) {
 			rezPretrage.clear();
 			brStudenataPretga = 0;
 			return;
 		}
 
-		// resetuje se sve pre pretrage
+
 		rezPretrage.clear();
 		brStudenataPretga = 0;
-
-		// sad moram da parsiram, kad podelim po ;
-		// sad moze biit jedna od 11 mogucnosti to proveravam na osnovu :
-		// prvo proveravamo da li je unet samo 1 od mogucnosti za pretragu
 		String prvaPodela[] = ulaz.trim().split(";");
 		String prvi = prvaPodela[0];
 		String drugaPodela[] = prvi.trim().split(":");
