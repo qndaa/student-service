@@ -425,10 +425,10 @@ public class DialogProfesor extends JDialog {
 		}
 
 		if (p[7].length() != 0) { // brLinke
-			if (!Pattern.matches("[0-9]*", p[7])) {
+			if (!Pattern.matches("[0-9\"]*", p[7])) {
 				txtField8.setBackground(Color.RED);
 				return false;
-			} else if (p[7].length() != 9) {
+			} else if (p[7].length() != 11) {
 				txtField8.setBackground(Color.RED);
 				return false;
 			}

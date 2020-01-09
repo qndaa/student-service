@@ -161,9 +161,17 @@ public class MenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DodavanjeProfesoraNaPredmetDialog dialog = new DodavanjeProfesoraNaPredmetDialog(
-						MainFrame.getInstance(), "Dodavanje profesora na predmet", true);
-				dialog.setVisible(true);
+				
+				if (PredmetiTablePane.getSelectedRow() > -1) {
+					DodavanjeProfesoraNaPredmetDialog dialog = new DodavanjeProfesoraNaPredmetDialog(
+							MainFrame.getInstance(), "Dodavanje profesora na predmet", true);
+					dialog.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Predmet nije selektovan!", "Greska",
+							JOptionPane.ERROR_MESSAGE);
+					ToolBar.getInstance().setSelectedButton();
+				}
+				
 
 			}
 		});

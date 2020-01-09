@@ -52,8 +52,7 @@ public class PredmetiTablePane extends JPanel {
 		add(left, BorderLayout.WEST);
 		add(right, BorderLayout.EAST);
 		
-		//predmetiTable.setPreferredSize(new Dimension(screenHeight/4, screenWidth/4*3-20));
-				// ucitava postojece podatke iz predmeti.txt
+
 		try {
 			PredmetiController.getInstance().loadData();
 		} catch (IOException e) {
@@ -62,8 +61,7 @@ public class PredmetiTablePane extends JPanel {
 		}
 		
 		predmetiTable = PredmetiTable.getInstance();
-		//predmetiTable.setPreferredSize(new Dimension(screenHeight/4, screenWidth/4*3-20));
-		// ucitava postojece podatke iz predmeti.txt
+	
 		
 		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(predmetiTable.getModel());
 		predmetiTable.setRowSorter(sorter);

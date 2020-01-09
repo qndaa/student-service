@@ -13,7 +13,7 @@ public class Predmet implements Serializable{
 	private String naziv;
 	private String semestar;
 	private String godIzv;
-	private ArrayList<Profesor> predmetniProf;
+	private Profesor predmetniProf;
 	private ArrayList<Student> studenti;
 
 	public Predmet(String sifra, String naziv, String semestar, String godIzv) {
@@ -22,7 +22,7 @@ public class Predmet implements Serializable{
 		this.naziv = naziv;
 		this.semestar = semestar;
 		this.godIzv = godIzv;
-		this.predmetniProf = new ArrayList<Profesor>();
+		this.predmetniProf = null;
 		this.studenti = new ArrayList<Student>();
 	}
 
@@ -58,11 +58,11 @@ public class Predmet implements Serializable{
 		this.godIzv = godIzv;
 	}
 
-	public ArrayList<Profesor> getPredmetniProf() {
+	public Profesor getPredmetniProf() {
 		return predmetniProf;
 	}
 
-	public void setPredmetniProf(ArrayList<Profesor> predmetniProf) {
+	public void setPredmetniProf(Profesor predmetniProf) {
 		this.predmetniProf = predmetniProf;
 	}
 
@@ -77,24 +77,19 @@ public class Predmet implements Serializable{
 	@Override
 	public String toString() {
 		String s = sifra + " - " + naziv + " - " + semestar + " - " + godIzv + "-/";
-		for (Profesor p : predmetniProf) {
-			s += p.getBrojLicneKarte();
-			s += "/";
-		}
-
 		s += "\n";
 		return s;
 	}
 
 	public boolean dodajProfesoraNaPredmet(Profesor profesor) {
-		for (Profesor p : predmetniProf) {
-			if (p.getBrojLicneKarte().equals(profesor.getBrojLicneKarte())) {
-				return false;
-			}
+		
+		if(predmetniProf == null) {
+			predmetniProf = profesor;
+			return true;
 		}
-
-		predmetniProf.add(profesor);
-		return true;
+		
+		return false;
+		
 
 	}
 

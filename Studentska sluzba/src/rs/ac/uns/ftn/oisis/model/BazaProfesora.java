@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTablePane;
-import rs.ac.uns.ftn.oisis.view.ProfesoriNaPredmetuTable;
 
 public class BazaProfesora {
 
@@ -35,7 +34,7 @@ public class BazaProfesora {
 	private ArrayList<Profesor> sviProfesori;
 	private ArrayList<Profesor> rezultatPretrage;
 
-	//private File fileProfesori = new File("profesori.txt");
+	// private File fileProfesori = new File("profesori.txt");
 
 	private BazaProfesora() {
 		super();
@@ -194,11 +193,11 @@ public class BazaProfesora {
 				p = (Profesor) in.readObject();
 				DodavanjeObjecta(p);
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
-		}finally {
-			if(in != null) {
+		} finally {
+			if (in != null) {
 				try {
 					in.close();
 				} catch (Exception e2) {
@@ -213,8 +212,7 @@ public class BazaProfesora {
 		brojUnetihProfesora++;
 		sviProfesori.add(p);
 	}
-	
-	
+
 	public boolean DodajProf(String[] p) {
 		String brLicneKarte = p[7];
 		if (profesorSaKljucemNePostoji(brLicneKarte)) {
@@ -429,11 +427,10 @@ public class BazaProfesora {
 	}
 
 	public void obrisiPredmetSaProfesora() {
-		int selectedProfesor = ProfesoriNaPredmetuTable.getInstance().getSelectedRow();
 		int selectedPredmet = PredmetiTablePane.getSelectedRow();
 
 		Predmet predmet = BazaPredmeta.getInstance().getSviPredmeti().get(selectedPredmet);
-		Profesor profesor = predmet.getPredmetniProf().get(selectedProfesor);
+		Profesor profesor = predmet.getPredmetniProf();
 
 		for (Predmet p : profesor.getPredajeNaPredmetima()) {
 			if (p.getSifra().equals(predmet.getSifra())) {

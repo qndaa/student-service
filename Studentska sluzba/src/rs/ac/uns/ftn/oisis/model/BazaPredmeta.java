@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 
 import rs.ac.uns.ftn.oisis.view.MainFrame;
 import rs.ac.uns.ftn.oisis.view.PredmetiTablePane;
-import rs.ac.uns.ftn.oisis.view.ProfesoriNaPredmetuTable;
 
 public class BazaPredmeta {
 
@@ -46,7 +45,7 @@ public class BazaPredmeta {
 		nazivKolona.add("Naziv");
 		nazivKolona.add("Semestar");
 		nazivKolona.add("Godina izvodjenja");
-		nazivKolona.add("Spisak profesora");
+		nazivKolona.add("Predmetni profesor");
 		nazivKolona.add("Spisak studenata");
 
 	}
@@ -377,21 +376,16 @@ public class BazaPredmeta {
 
 	public void obrisiProfesoraSaPredmeta() {
 		int selectedPredmet = PredmetiTablePane.getSelectedRow();
-		int selectedProfesor = ProfesoriNaPredmetuTable.getInstance().getSelectedRow();
 		Predmet predmet = sviPredmeti.get(selectedPredmet);
-		predmet.getPredmetniProf().remove(selectedProfesor);
+		predmet.setPredmetniProf(null);
 	}
 
 	public void obrisiProfesoraSaPredmeta(String licna) {
 		for (Predmet predmet : sviPredmeti) {
-			for (Profesor profesor : predmet.getPredmetniProf()) {
-				if (profesor.getBrojLicneKarte().equals(licna)) {
-					predmet.getPredmetniProf().remove(profesor);
-					break;
-				}
+			if (predmet.getPredmetniProf().getBrojLicneKarte().equals(licna)) {
+				predmet.setPredmetniProf(null);
 			}
 		}
-
 	}
 
 	public String[] IzbrisiStudentaSaPredmeta(int sleketovanPredmet, int selektovanStudent) {

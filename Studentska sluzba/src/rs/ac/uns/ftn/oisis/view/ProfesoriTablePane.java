@@ -50,7 +50,18 @@ public class ProfesoriTablePane extends JPanel {
 		add(left, BorderLayout.WEST);
 		add(right, BorderLayout.EAST);
 
+
+		try {
+			ProfesoriController.getInstance().loadData();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		profesoriTable = ProfesoriTable.getInstance();
+		
+		
 		
 		TableRowSorter<TableModel> sort = new TableRowSorter<TableModel>(profesoriTable.getModel());
 		profesoriTable.setRowSorter(sort);
@@ -93,13 +104,6 @@ public class ProfesoriTablePane extends JPanel {
 			}
 		});
 		
-		try {
-			ProfesoriController.getInstance().loadData();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		scrollPane = new JScrollPane(profesoriTable);
 		add(scrollPane, BorderLayout.CENTER);

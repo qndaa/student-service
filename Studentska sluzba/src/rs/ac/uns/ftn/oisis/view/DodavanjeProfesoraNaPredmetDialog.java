@@ -113,11 +113,12 @@ public class DodavanjeProfesoraNaPredmetDialog extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (isValideInput()) {
+				if (isValideCheck()) {
 					potvrdaBtn.setEnabled(true);
 					licnaKartaUnos.setBackground(Color.WHITE);
+				} else if (isValideInput()) {
+					licnaKartaUnos.setBackground(Color.WHITE);
 				} else {
-					potvrdaBtn.setEnabled(false);
 					licnaKartaUnos.setBackground(Color.RED);
 				}
 
@@ -155,10 +156,21 @@ public class DodavanjeProfesoraNaPredmetDialog extends JDialog {
 	private boolean isValideInput() {
 		String input = licnaKartaUnos.getText();
 
-		if (Pattern.matches("[0-9]+", input)) {
+		if (Pattern.matches("[0-9\"]+", input)) {
 			return true;
 		}
 		return false;
+	}
+	
+	private boolean isValideCheck() {
+		String input = licnaKartaUnos.getText();
+
+		if (Pattern.matches("\"[0-9]{9}\"", input)) {
+			return true;
+		}
+		return false;
+		
+		
 	}
 
 }

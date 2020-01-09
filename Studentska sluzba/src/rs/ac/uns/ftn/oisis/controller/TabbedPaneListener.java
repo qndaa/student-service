@@ -18,8 +18,6 @@ public class TabbedPaneListener implements ChangeListener {
 		ToolBar.getInstance().getSearchField().setText("");
 		PredmetiController.getInstance().pretragaPredmeta();
 		MenuBar.getInstance().PromenaDugmica(TabbedPane.activeTab);
-		
-
 	}
 
 }

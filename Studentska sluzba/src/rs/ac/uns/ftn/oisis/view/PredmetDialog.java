@@ -230,11 +230,11 @@ public class PredmetDialog extends JDialog{
 		String unos [] = prikupiUnos();
 		boolean ret = true;
 		
-		if (!Pattern.matches("[a-zA-Z0-9]*", unos[0])) {
+		if (!Pattern.matches("[a-zA-Z0-9šđčćž]*", unos[0])) {
 			txtSifrePredmeta.setBackground(Color.RED);
 			return false;
 		}
-		if (!Pattern.matches("[a-zA-Z0-9_ ]*", unos[1])) {
+		if (!Pattern.matches("[a-zA-Z0-9šđčćž_ ]*", unos[1])) {
 			txtNazivPredmeta.setBackground(Color.RED);
 			return false;
 		}

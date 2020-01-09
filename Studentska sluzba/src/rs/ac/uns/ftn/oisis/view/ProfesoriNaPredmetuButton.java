@@ -4,12 +4,15 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+
+import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
+import rs.ac.uns.ftn.oisis.model.Profesor;
 
 public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
 
@@ -33,14 +36,28 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 
 		this.edirotButton.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedPredmet = PredmetiTablePane.getSelectedRow();
+				Profesor profesor;
+				if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+					profesor = BazaPredmeta.getInstance().getSviPredmeti().get(selectedPredmet).getPredmetniProf();
+				} else {
+					profesor = BazaPredmeta.getInstance().getRazultatPretrage().get(selectedPredmet).getPredmetniProf();
+				}
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
+				if (profesor == null) {
+					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Predmetu nije dodeljen profesor!",
+							"Upozorenje!", JOptionPane.WARNING_MESSAGE);
+
+				} else {
+
 					ProfesoriNaPredmetuDialog dialog = new ProfesoriNaPredmetuDialog(MainFrame.getInstance(),
-							"Profesori sa predmeta", true);
+							"Predmetni profesor", true, profesor);
 					dialog.setVisible(true);
 				}
-			
+			}
+
 		});
 
 		this.isEditorActive = false;
@@ -56,7 +73,7 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
-		
+
 		return renderButton;
 	}
 

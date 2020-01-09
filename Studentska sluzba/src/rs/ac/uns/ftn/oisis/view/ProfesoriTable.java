@@ -42,7 +42,6 @@ public class ProfesoriTable extends JTable {
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
-		
 		if (isRowSelected(row)) {
 			c.setBackground(Color.GRAY);
 		} else {
@@ -50,9 +49,9 @@ public class ProfesoriTable extends JTable {
 				c.setBackground(new Color(224, 235, 255));
 			} else {
 				c.setBackground(Color.WHITE);
+
 			}
 		}
 		return c;
 	}
-	
 }

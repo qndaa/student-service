@@ -25,7 +25,7 @@ public class AbstractPredmetTable extends AbstractTableModel {
 		if (column < 4) {
 			return BazaPredmeta.getInstance().getValueAt(row, column);
 		} else if (column == 4) {
-			JButton btn = new JButton("Profesori");
+			JButton btn = new JButton("Profesor");
 
 			btn.setOpaque(false);
 			return btn;
