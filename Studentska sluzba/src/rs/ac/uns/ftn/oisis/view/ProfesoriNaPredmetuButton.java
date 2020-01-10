@@ -3,6 +3,8 @@ package rs.ac.uns.ftn.oisis.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
@@ -14,7 +16,8 @@ import javax.swing.table.TableCellRenderer;
 import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
 import rs.ac.uns.ftn.oisis.model.Profesor;
 
-public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
+public class ProfesoriNaPredmetuButton extends AbstractCellEditor
+		implements TableCellEditor, TableCellRenderer, MouseListener {
 
 	private static final long serialVersionUID = 927738645791978946L;
 
@@ -34,11 +37,15 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 		this.renderButton = new JButton("Profesori");
 		this.edirotButton = new JButton("Profesori");
 
+		this.table.addMouseListener(this);
+
 		this.edirotButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				int selectedPredmet = PredmetiTablePane.getSelectedRow();
+
 				Profesor profesor;
 				if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
 					profesor = BazaPredmeta.getInstance().getSviPredmeti().get(selectedPredmet).getPredmetniProf();
@@ -79,6 +86,7 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+
 		return edirotButton;
 	}
 
@@ -112,5 +120,40 @@ public class ProfesoriNaPredmetuButton extends AbstractCellEditor implements Tab
 
 	public void setEditorActive(boolean isEditorActive) {
 		this.isEditorActive = isEditorActive;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if (table.isEditing() && table.getCellEditor() == this) {
+			this.isEditorActive = true;
+		}
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if (isEditorActive && table.isEditing()) {
+			table.getCellEditor().stopCellEditing();
+		}
+		isEditorActive = false;
+
 	}
 }

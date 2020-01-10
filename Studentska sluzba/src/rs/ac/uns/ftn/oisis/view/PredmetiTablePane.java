@@ -63,8 +63,7 @@ public class PredmetiTablePane extends JPanel {
 		predmetiTable = PredmetiTable.getInstance();
 	
 		
-		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(predmetiTable.getModel());
-		predmetiTable.setRowSorter(sorter);
+		
 		
 		predmetiTable.addMouseListener(new MouseListener() {
 			
@@ -72,6 +71,7 @@ public class PredmetiTablePane extends JPanel {
 			public void mouseReleased(MouseEvent e) {
 				JTable table = (JTable) e.getComponent();
 				selectedRow = table.convertRowIndexToModel(table.getSelectedRow());
+				
 			}
 
 			@Override
@@ -82,7 +82,7 @@ public class PredmetiTablePane extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 
@@ -100,9 +100,12 @@ public class PredmetiTablePane extends JPanel {
 			
 		});
 		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(predmetiTable.getModel());
 		
 		
 		scrollPane = new JScrollPane(predmetiTable);
+	
+		predmetiTable.setRowSorter(sorter);
 		add(scrollPane, BorderLayout.CENTER);
 		
 	}

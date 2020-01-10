@@ -13,10 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import rs.ac.uns.ftn.oisis.controller.PredmetiController;
+import rs.ac.uns.ftn.oisis.model.BazaPredmeta;
+import rs.ac.uns.ftn.oisis.model.Predmet;
 
 public class DodavanjeStudentaProfesoraNaPredmetDialog extends JDialog {
 
@@ -38,16 +41,15 @@ public class DodavanjeStudentaProfesoraNaPredmetDialog extends JDialog {
 		addStudenta.setBackground(Color.WHITE);
 		addStudenta.setIcon(new ImageIcon("images/student_na_predmet.png"));
 		addStudenta.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				PredmetiController.getInstance().DodavanjeStudNaPred();
 				PredmetiTable.getInstance().refreshTable();
-				
+
 			}
 		});
-		
-		
+
 		JButton addProfesor = new JButton();
 		addProfesor.setIcon(new ImageIcon("images/profesor_na_predmet.png"));
 		addProfesor.setBackground(Color.WHITE);
@@ -56,10 +58,26 @@ public class DodavanjeStudentaProfesoraNaPredmetDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				DodavanjeProfesoraNaPredmetDialog dialog = new DodavanjeProfesoraNaPredmetDialog(
-						MainFrame.getInstance(), "Dodavanje profesora na predmet", true);
-				dialog.setVisible(true);
 
+				int selectedRow = PredmetiTablePane.getSelectedRow();
+				Predmet predmet;
+				if (BazaPredmeta.getBrojPredmetaKojiSuUPretrazi() == 0) {
+					predmet = PredmetiController.getInstance().getPredmetPoIndeksu(selectedRow);
+				} else {
+					predmet = BazaPredmeta.getInstance().getRazultatPretrage().get(selectedRow);
+				}
+
+				if (predmet.getPredmetniProf() == null) {
+
+					DodavanjeProfesoraNaPredmetDialog dialog = new DodavanjeProfesoraNaPredmetDialog(
+							MainFrame.getInstance(), "Dodavanje profesora na predmet", true);
+					dialog.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(MainFrame.getInstance(),
+							"Selektovani predmet ima predmetnog profesora!", "Greska", JOptionPane.ERROR_MESSAGE);
+					ToolBar.getInstance().setSelectedButton();
+					
+				}
 			}
 		});
 

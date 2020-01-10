@@ -382,8 +382,10 @@ public class BazaPredmeta {
 
 	public void obrisiProfesoraSaPredmeta(String licna) {
 		for (Predmet predmet : sviPredmeti) {
-			if (predmet.getPredmetniProf().getBrojLicneKarte().equals(licna)) {
-				predmet.setPredmetniProf(null);
+			if (predmet.getPredmetniProf() != null) {
+				if (predmet.getPredmetniProf().getBrojLicneKarte().equals(licna)) {
+					predmet.setPredmetniProf(null);
+				}
 			}
 		}
 	}
