@@ -47,6 +47,7 @@ public class BazaProfesora {
 		naziviKolona.add("Dat. rodjenja");
 		naziviKolona.add("Adr. stanovanja");
 		naziviKolona.add("Telefon");
+		naziviKolona.add("Email");
 		naziviKolona.add("Adr. kancelarije");
 		naziviKolona.add("Titula");
 		naziviKolona.add("Zvanje");
@@ -93,12 +94,14 @@ public class BazaProfesora {
 			case 5:
 				return profesor.getKontaktTelefon();
 			case 6:
-				return profesor.getAdresaKancelarije();
+				return profesor.getEmail();
 			case 7:
-				return profesor.getTitula();
+				return profesor.getAdresaKancelarije();
 			case 8:
-				return profesor.getZvanje();
+				return profesor.getTitula();
 			case 9:
+				return profesor.getZvanje();
+			case 10:
 				return "Predmeti";
 			default:
 				return null;

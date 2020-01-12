@@ -34,6 +34,7 @@ public class DodavanjeStudentaDijalog extends DialogStudent {
 					JOptionPane.showMessageDialog((Component) e.getSource(), "Student sa unteim indeksom vec postoji", "Eror", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}
+				ToolBar.getInstance().setSelectedButton();
 			}
 		});
 		

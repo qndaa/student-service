@@ -43,7 +43,6 @@ public class PredmetiNaProfesoruButton extends AbstractCellEditor implements Tab
 				PredmetiNaProfesoruDialog dialog = new PredmetiNaProfesoruDialog(MainFrame.getInstance(),
 						"Predmeti na kojima predaje profesor", true);
 				dialog.setVisible(true);
-				//edirotButton.setEnabled(false);
 				
 			}
 		});

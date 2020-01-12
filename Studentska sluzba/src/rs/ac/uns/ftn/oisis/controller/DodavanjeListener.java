@@ -20,6 +20,7 @@ public class DodavanjeListener implements ActionListener {
 			DodavanjeStudentaDijalog dialog = new DodavanjeStudentaDijalog(MainFrame.getInstance(), "Dodavanje studenta",
 					true);
 			dialog.setVisible(true);
+			ToolBar.getInstance().setSelectedButton();
 		} else if (TabbedPane.activeTab == 1) {
 			DodavanjePredmetaDialog dialog = new DodavanjePredmetaDialog(MainFrame.getInstance(), "Dodavanje predmeta",
 					true);
@@ -29,6 +30,7 @@ public class DodavanjeListener implements ActionListener {
 			DodavanjeProfesoraDialog dialog = new DodavanjeProfesoraDialog(MainFrame.getInstance(), "Dodavanje profesora",
 					true);
 			dialog.setVisible(true);
+			ToolBar.getInstance().setSelectedButton();
 		}
 		
 

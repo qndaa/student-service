@@ -30,7 +30,7 @@ public class ProfesoriTable extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractProfesoriTable());
 		this.setRowHeight(20);
-		new PredmetiNaProfesoruButton(this, 9);
+		new PredmetiNaProfesoruButton(this, 10);
 	}
 	
 	public void refresTable() {

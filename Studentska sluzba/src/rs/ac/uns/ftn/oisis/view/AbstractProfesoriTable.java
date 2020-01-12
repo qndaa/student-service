@@ -23,7 +23,7 @@ public class AbstractProfesoriTable extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		if (column < 9) {
+		if (column < 10) {
 			return BazaProfesora.getInstance().getValueAt(row, column);
 		} else {
 			JButton btn = new JButton("Predmeti");
@@ -55,6 +55,8 @@ public class AbstractProfesoriTable extends AbstractTableModel {
 		case 8:
 			return String.class;
 		case 9:
+			return String.class;
+		case 10:
 			return JButton.class;
 		default:
 			return null;
@@ -68,7 +70,7 @@ public class AbstractProfesoriTable extends AbstractTableModel {
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex >= 9;
+		return columnIndex >= 10;
 	}
 
 }
